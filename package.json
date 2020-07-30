@@ -1,0 +1,38 @@
+{
+  "name": "react-xml-editor",
+  "version": "0.1.0",
+  "description": "React XML Editor",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc --build tsconfig.json",
+    "build-demo": "webpack --mode=production",
+    "tslint": "tslint 'src/*.tsx' 'src/*.ts'",
+    "test": "jest --coverage",
+    "watch": "tsc --build tsconfig.json --watch ",
+    "watch-demo": "webpack --mode=development --watch"
+  },
+  "author": "Colin Doig <colindoig@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "xml2js": "^0.4.23",
+    "xmlbuilder": "^15.1.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "@types/xml2js": "^0.4.5",
+    "jest": "^26.1.0",
+    "react-test-renderer": "^16.13.1",
+    "ts-loader": "^8.0.1",
+    "ts-node": "^8.10.2",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.7",
+    "webpack": "^4.44.0",
+    "webpack-cli": "^3.3.12"
+  }
+}

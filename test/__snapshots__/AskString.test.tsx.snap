@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AskString component ask long string renders properly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <textarea
+    className="textbox focusme"
+    name="val"
+    onChange={[Function]}
+    value="defaultValue"
+  />
+  <div
+    className="submitline"
+  >
+    <input
+      type="submit"
+      value="OK"
+    />
+  </div>
+</form>
+`;
+
+exports[`AskString component ask short string renders properly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <input
+    className="textbox focusme"
+    name="val"
+    onChange={[Function]}
+    value="defaultValue"
+  />
+  <input
+    type="submit"
+    value="OK"
+  />
+</form>
+`;
+
+exports[`AskString component change 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <input
+    className="textbox focusme"
+    name="val"
+    onChange={[Function]}
+    value="new value"
+  />
+  <input
+    type="submit"
+    value="OK"
+  />
+</form>
+`;
