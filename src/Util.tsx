@@ -22,7 +22,31 @@ export const newElementChild = async (xml: IXml, id: string, actionParameter: st
     });
 };
 
-export const newAttribute = (xml: IXml, id : string, actionParameter: {name: string; value: string}) => {
+const newElementSibling = async (xml: IXml, id: string, actionParameter: string, indexDelta: number) => {
+    const parser = new Parser();
+    const element = await parser.parseString(actionParameter);
+    const elementId = id.split('~');
+    const arrayIndex = parseInt(elementId.splice(-1, 1)[0], 10);
+    if (!isNaN(arrayIndex)) {
+        return modifyXml(elementId, xml, (parent) => {
+            if (Array.isArray(parent)) {
+                parent.splice(arrayIndex + indexDelta, 0, element[Object.keys(element)[0]]);
+            }
+            return parent;
+        });
+    }
+    throw new Error(`Invalid id: ${id}`);
+};
+
+export const newElementBefore = (xml: IXml, id: string, actionParameter: string) => {
+    return newElementSibling(xml, id, actionParameter, 0);
+};
+
+export const newElementAfter = async (xml: IXml, id: string, actionParameter: string) => {
+    return newElementSibling(xml, id, actionParameter, 1);
+};
+
+export const newAttribute = (xml: IXml, id: string, actionParameter: {name: string; value: string}) => {
     return modifyXml(id.split('~'), xml, (parent) => {
         if (!parent.$) {
             parent.$ = {};
@@ -32,16 +56,23 @@ export const newAttribute = (xml: IXml, id : string, actionParameter: {name: str
     });
 };
 
+export const deleteElement = (xml: IXml, id: string) => {
+    return deleteNode(xml, id);
+};
+
 export const deleteAttribute = (xml: IXml, id: string) => {
-    const attributesId = id.split('~');
-    const attrName = attributesId.splice(-1, 1);
-    return modifyXml(attributesId, xml, (parent) => {
-        delete (parent as any)[attrName[0]];
+    return deleteNode(xml, id);
+};
+
+export const deleteNode = (xml: IXml, id: string) => {
+    const nodeId = id.split('~');
+    const nodeKey = nodeId.splice(-1, 1);
+    return modifyXml(nodeId, xml, (parent) => {
+        delete (parent as any)[nodeKey[0]];
         return parent;
     });
 };
 
-// ('_' | '$' | '$$' | '#collapsed' | '#name')
 const modifyXml = (id: string[], xml: any, modifier: (xml: IElement) => any): IXml => {
     if (id.length > 1) {
         const first = id.splice(0, 1);

@@ -4,7 +4,10 @@ import * as ReactDOM from 'react-dom';
 import XmlEditor from '../lib/XmlEditor';
 import {
     askString,
+    deleteElement,
     newAttribute,
+    newElementAfter,
+    newElementBefore,
     newElementChild,
     deleteAttribute,
 } from '../lib/Util';
@@ -34,6 +37,18 @@ ReactDOM.render(
                             value: 'default value',
                         },
                         caption: 'Add attribute "label"',
+                    },{
+                        action: deleteElement,
+                        caption: 'Delete this <item />',
+                    },{
+                        action: newElementBefore,
+                        caption: 'New <item /> before this',
+                        actionParameter: '<item />',
+                    },
+                    {
+                        action: newElementAfter,
+                        caption: 'New <item /> after this',
+                        actionParameter: '<item />',
                     }]
                 },
             }

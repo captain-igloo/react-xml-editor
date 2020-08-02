@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modify XML functions askLongString() should return <AskString /> component 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <textarea
+    className="textbox focusme"
+    name="val"
+    onChange={[Function]}
+    value="defaultValue"
+  />
+  <div
+    className="submitline"
+  >
+    <input
+      type="submit"
+      value="OK"
+    />
+  </div>
+</form>
+`;
+
+exports[`Modify XML functions askString() should return <AskString /> component 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <input
+    className="textbox focusme"
+    name="val"
+    onChange={[Function]}
+    value="defaultValue"
+  />
+  <input
+    type="submit"
+    value="OK"
+  />
+</form>
+`;

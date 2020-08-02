@@ -152,7 +152,6 @@ export default class Element extends React.Component<IProps> {
             bubbleOptions.top = rect.top;
         }
         actions.showBubble(bubbleOptions);
-        // event.stopPropagation();
     }
 
     /* private onClickText(id: string, value: string) {
@@ -168,14 +167,12 @@ export default class Element extends React.Component<IProps> {
             bubbleOptions.left = rect.left;
             bubbleOptions.top = rect.top;
         }
-        console.log('bubbleOptions', bubbleOptions);
         actions.showBubble(bubbleOptions);
     } */
 
     private onCollapse() {
         const { actions, collapsed, id, xml } = this.props;
         const collapseId = `${id}~#collapsed`;
-        // actions.updateNode(collapseId.split('~'), !collapsed);
         actions.setXml(updateNode(xml, collapseId, !collapsed));
     }
 
