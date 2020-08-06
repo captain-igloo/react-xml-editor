@@ -6,6 +6,9 @@ module.exports = {
     path: path.resolve(__dirname, 'demo'),
     filename: 'demo.bundle.js'
   },
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx'],
+  },
   module: {
     rules: [{
       test: /\.ts(x?)$/,

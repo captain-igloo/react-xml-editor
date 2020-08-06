@@ -7,6 +7,7 @@ import { EBubbleType, IActions, IBubbleOptions, IDocSpec, IXml } from './types';
 
 interface IProps {
     docSpec: IDocSpec;
+    ref: React.RefObject<XmlEditor>;
     xml: string;
 }
 

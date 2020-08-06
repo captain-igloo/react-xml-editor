@@ -63,21 +63,11 @@ export default class Element extends React.Component<IProps> {
                             text={ childElement._ }
                         />
                     );
-                    /* elements.push(
-                        <div
-                            className="textnode focusable"
-                            onClick={ () => { this.onClickText(`${id}~\$\$~${index}~_`, childElement._ as string); } }
-                            key={index}
-                        >
-                            { childElement._ }
-                        </div>
-                    ); */
                 }
             });
         }
 
         let childrenContainer;
-        // if (elements.length > 0) {
         childrenContainer = (
             <React.Fragment>
                 <span className="prominentChildren"/>
@@ -89,9 +79,6 @@ export default class Element extends React.Component<IProps> {
                 </div>
             </React.Fragment>
         );
-        // }
-
-        // <span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('xonomy1')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span>
 
         let elementClass = '';
         if (elements.length === 0) {
@@ -153,22 +140,6 @@ export default class Element extends React.Component<IProps> {
         }
         actions.showBubble(bubbleOptions);
     }
-
-    /* private onClickText(id: string, value: string) {
-        const { actions, name } = this.props;
-        const bubbleOptions: Partial<IBubbleOptions> = {
-            id,
-            element: name,
-            show: true,
-            value,
-        };
-        if (this.ref.current) {
-            const rect = this.ref.current.getBoundingClientRect();
-            bubbleOptions.left = rect.left;
-            bubbleOptions.top = rect.top;
-        }
-        actions.showBubble(bubbleOptions);
-    } */
 
     private onCollapse() {
         const { actions, collapsed, id, xml } = this.props;
