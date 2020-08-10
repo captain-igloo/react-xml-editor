@@ -1,5 +1,4 @@
-import {describe, expect, jest, test} from '@jest/globals';
-
+import {describe, expect, test} from '@jest/globals';
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 
@@ -12,6 +11,7 @@ describe('Attributes component', () => {
             <Attributes 
                 actions={actions as any}
                 attributes={{a: 'b'}}
+                element="element"
                 id="id"
             />
         );

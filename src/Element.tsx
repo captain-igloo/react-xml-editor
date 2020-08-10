@@ -14,7 +14,6 @@ interface IProps {
     collapsed?: boolean;
     id: string;
     name: string;
-    text?: string;
     xml: IXml;
 }
 

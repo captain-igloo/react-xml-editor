@@ -12,10 +12,10 @@ describe('Attribute component', () => {
         const component = renderer.create(
             <Attribute
                 actions={ actions as any }
-                element="asdf"
-                id="asdf"
-                name="asdf"
-                value="asdf"
+                element="element"
+                id="id"
+                name="name"
+                value="value"
             />
         );
         let tree = component.toJSON();
@@ -34,7 +34,7 @@ describe('Attribute component', () => {
                 actions={ actions as any }
                 element="element"
                 id={id}
-                name="asdf"
+                name="name"
                 value={value}
             />,{
                 createNodeMock: () => {
@@ -51,7 +51,7 @@ describe('Attribute component', () => {
         tree.children[1].props.onClick();
         expect(showBubble.mock.calls.length).toBe(1);
         expect(showBubble.mock.calls[0][0]).toEqual({
-            attribute: 'asdf',
+            attribute: 'name',
             element: 'element',
             id,
             left: 88,
