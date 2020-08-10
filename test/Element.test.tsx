@@ -47,11 +47,12 @@ describe('Element component', () => {
         expect(component.toJSON()).toMatchSnapshot();
     });
 
-    test('click collapse button should collapse element', () => {
+    test('click collapse button should collapse element and hide bubble', () => {
         const setXml = jest.fn();
+        const showBubble = jest.fn();
         const component = renderer.create(
             <Element
-                actions={{ setXml } as any}
+                actions={{ setXml, showBubble } as any}
                 collapsed={ false }
                 name="root"
                 id="root"
@@ -64,6 +65,9 @@ describe('Element component', () => {
                 '#collapsed': true,
                 '#name': 'root',
             },
+        });
+        expect(showBubble.mock.calls[0][0]).toEqual({
+            show: false,
         });
     });
 

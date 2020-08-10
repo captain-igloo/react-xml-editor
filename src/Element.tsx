@@ -143,6 +143,9 @@ export default class Element extends React.Component<IProps> {
     private onCollapse() {
         const { actions, collapsed, id, xml } = this.props;
         const collapseId = `${id}~#collapsed`;
+        actions.showBubble({
+            show: false,
+        });
         actions.setXml(updateNode(xml, collapseId, !collapsed));
     }
 
