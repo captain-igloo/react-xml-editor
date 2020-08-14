@@ -12,7 +12,6 @@ import {
     newElementChild,
     updateNode,
 } from '../src/Util';
-import { IActions } from '../src/types';
 
 describe('Modify XML functions', () => {
     test('updateNode() should set value in xml', () => {

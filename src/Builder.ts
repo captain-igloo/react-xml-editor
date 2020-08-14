@@ -1,8 +1,8 @@
 import * as builder from 'xmlbuilder';
 
-import { IXml } from './types';
+import { Xml } from './types';
 
-export interface IBuilderOptions {
+export interface BuilderOptions {
     doctype?: {
         pubID?: string;
         sysID?: string;
@@ -34,7 +34,7 @@ export default class Builder {
         sysID?: string;
     };
 
-    public constructor(options: IBuilderOptions) {
+    public constructor(options: BuilderOptions) {
         this.headless = options.headless || false;
         this.xmldec = options.xmldec || {
             encoding: 'UTF-8',
@@ -44,7 +44,7 @@ export default class Builder {
         this.doctype = options.doctype;
     }
 
-    public buildObject(rootObj: IXml): string {
+    public buildObject(rootObj: Xml): string {
         let rootName;
 
         if (Object.keys(rootObj).length === 1) {

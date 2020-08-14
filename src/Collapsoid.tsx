@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import { IElement } from './Parser';
+import { Element } from './types';
 
-interface IProps {
-    elements: IElement[];
+interface Props {
+    elements: Element[];
 }
 
-export default class Collapsoid extends React.Component<IProps> {
+export default class Collapsoid extends React.Component<Props> {
     private static maxLength: number = 35;
 
     public render(): React.ReactNode {
@@ -14,9 +14,9 @@ export default class Collapsoid extends React.Component<IProps> {
         return this.renderElements(elements);
     }
 
-    private renderElements(elements: IElement[]): string {
+    private renderElements(elements: Element[]): string {
         let collapsoid = '';
-        elements.every((element: IElement) => {
+        elements.every((element: Element) => {
             if (element._ && element['#name'] === '__text__') {
                 collapsoid += element._ + ' ';
             }

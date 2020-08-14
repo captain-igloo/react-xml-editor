@@ -1,17 +1,17 @@
 import * as React from 'react';
 
-import { IActions, IBubbleOptions } from './types';
+import { Actions, BubbleOptions } from './types';
 
-interface IProps {
-    actions: IActions;
+interface Props {
+    actions: Actions;
     id: string;
     text: string;
 }
 
-export default class Element extends React.Component<IProps> {
+export default class TextNode extends React.Component<Props> {
     private ref: React.RefObject<HTMLDivElement>;
 
-    public constructor(props: IProps) {
+    public constructor(props: Props) {
         super(props);
         this.onClick = this.onClick.bind(this);
         this.ref = React.createRef();
@@ -32,7 +32,7 @@ export default class Element extends React.Component<IProps> {
 
     private onClick(): void {
         const { actions, id, text } = this.props;
-        const bubbleOptions: Partial<IBubbleOptions> = {
+        const bubbleOptions: Partial<BubbleOptions> = {
             id,
             element: name,
             show: true,
@@ -43,7 +43,6 @@ export default class Element extends React.Component<IProps> {
             bubbleOptions.left = rect.left;
             bubbleOptions.top = rect.top;
         }
-        // console.log('SHOW BUBBLE bubbleOptions', bubbleOptions);
         actions.showBubble(bubbleOptions);
     }
 }

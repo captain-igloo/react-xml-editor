@@ -1,27 +1,27 @@
 import * as React from 'react';
 
-import { IActions, IXml } from './types';
+import { Actions, Xml } from './types';
 import { updateNode } from './Util';
 
-export enum EAskStringType {
+export enum AskStringType {
     LONG,
     SHORT,
 }
 
-interface IProps {
-    actions: IActions;
+interface Props {
+    actions: Actions;
     defaultValue: string;
     id: string;
-    type: EAskStringType;
-    xml: IXml;
+    type: AskStringType;
+    xml: Xml;
 }
 
-interface IState {
+interface State {
     value: string;
 }
 
-export default class AskString extends React.Component<IProps, IState> {
-    public constructor(props: IProps) {
+export default class AskString extends React.Component<Props, State> {
+    public constructor(props: Props) {
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -34,7 +34,7 @@ export default class AskString extends React.Component<IProps, IState> {
         const { type } = this.props;
         return (
             <form onSubmit={ this.onSubmit }>
-                { type === EAskStringType.LONG ? this.getLongString() : this.getShortString() }
+                { type === AskStringType.LONG ? this.getLongString() : this.getShortString() }
             </form>
         );
     }

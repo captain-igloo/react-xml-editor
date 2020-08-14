@@ -1,63 +1,71 @@
-export interface IMenuItemSpec {
-    action: any;
-    actionParameter?: any;
+interface MenuItemSpecBase {
     caption: string;
+    hideIf?: (a: any) => boolean;
 }
 
-export interface IAttributeSpec {
-    asker?: (options: IAskerOptions) => React.ReactNode;
-    menu?: IMenuItemSpec[];
+export interface MenuItemSpecWithParameter<T> extends MenuItemSpecBase {
+    action: (xml: Xml, id: string, actionParameter: T) => Xml | Promise<Xml>;
+    actionParameter: T;
 }
 
-export interface IElementsSpec {
-    attributes: {[key: string]: IAttributeSpec};
-    menu?: IMenuItemSpec[];
+export interface MenuItemSpecNoParameter extends MenuItemSpecBase {
+    action: (xml: Xml, id: string) => Xml | Promise<Xml>;
 }
 
-export interface IDocSpec {
-    elements?: {[key: string]: IElementsSpec};
+export type MenuItemSpecGeneric<T> = MenuItemSpecWithParameter<T> | MenuItemSpecNoParameter;
+
+export type MenuItemSpec = MenuItemSpecGeneric<string> | MenuItemSpecGeneric<{name: string; value: string}>;
+
+export interface AttributeSpec {
+    asker?: (options: AskerOptions) => React.ReactNode;
+    menu?: MenuItemSpec[];
 }
 
-export interface IXml {
-    [key: string]: IElement;
+export interface ElementsSpec {
+    attributes: {[key: string]: AttributeSpec};
+    menu?: MenuItemSpec[];
 }
 
-export enum EBubbleType {
+export interface DocSpec {
+    elements?: {[key: string]: ElementsSpec};
+}
+
+export interface Xml {
+    [key: string]: Element;
+}
+
+export enum BubbleType {
     ASKER,
     MENU,
 }
 
-export interface IBubbleOptions {
-    // actions: IActions;
+export interface BubbleOptions {
     attribute: string;
     element: string;
     id: string;
     left: number;
     show: boolean;
-    type: EBubbleType;
+    type: BubbleType;
     top: number;
     value: string;
 }
 
-export interface IActions {
-    setXml: (xml: IXml) => void;
-    showBubble: (askOptions: Partial<IBubbleOptions>) => void;
-    // updateNode: (xml: IXml, id: string, value: string | boolean) => void;
+export interface Actions {
+    setXml: (xml: Xml) => void;
+    showBubble: (askOptions: Partial<BubbleOptions>) => void;
 }
 
-export interface IAskerOptions {
-    actions: IActions;
+export interface AskerOptions {
+    actions: Actions;
     defaultValue: string;
     id: string;
-    xml: IXml;
+    xml: Xml;
 }
 
-export interface IElement {
+export interface Element {
     _?: string;
     $?: {[key: string]: string};
-    $$?: IElement[];
+    $$?: Element[];
     '#collapsed'?: boolean;
     '#name': string;
 }
-
-export type TAsker = (options: IAskerOptions) => React.ReactNode;

@@ -3,21 +3,21 @@ import * as React from 'react';
 import Bubble from './Bubble';
 import Element from './Element';
 import Parser from './Parser';
-import { EBubbleType, IActions, IBubbleOptions, IDocSpec, IXml } from './types';
+import { BubbleType, Actions, BubbleOptions, DocSpec, Xml } from './types';
 
-interface IProps {
-    docSpec: IDocSpec;
+interface Props {
+    docSpec: DocSpec;
     ref: React.RefObject<XmlEditor>;
     xml: string;
 }
 
-interface IState {
-    bubble: IBubbleOptions;
-    xml?: IXml;
+interface State {
+    bubble: BubbleOptions;
+    xml?: Xml;
 }
 
-export default class XmlEditor extends React.Component<IProps, IState> {
-    public constructor(props: IProps) {
+export default class XmlEditor extends React.Component<Props, State> {
+    public constructor(props: Props) {
         super(props);
         this.setXml = this.setXml.bind(this);
         this.showBubble = this.showBubble.bind(this);
@@ -29,7 +29,7 @@ export default class XmlEditor extends React.Component<IProps, IState> {
                 left: 0,
                 show: false,
                 top: 0,
-                type: EBubbleType.ASKER,
+                type: BubbleType.ASKER,
                 value: '',
             },
         };
@@ -60,19 +60,19 @@ export default class XmlEditor extends React.Component<IProps, IState> {
         return this.state.xml;
     }
 
-    private setXml(xml: IXml) {
+    private setXml(xml: Xml) {
         this.setState({
             xml,
         });
     }
 
-    private showBubble(askOptions: Partial<IBubbleOptions>): void {
-        this.setState((prevState: IState) => ({
+    private showBubble(askOptions: Partial<BubbleOptions>): void {
+        this.setState((prevState: State) => ({
             bubble: Object.assign(prevState.bubble, askOptions),
         }));
     }
 
-    private getActions(): IActions {
+    private getActions(): Actions {
         return {
             setXml: this.setXml,
             showBubble: this.showBubble,

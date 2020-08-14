@@ -1,19 +1,19 @@
 import * as React from 'react';
 
-import { EBubbleType, IActions, IBubbleOptions } from './types';
+import { BubbleType, Actions, BubbleOptions } from './types';
 
-interface IProps {
-    actions: IActions;
+interface Props {
+    actions: Actions;
     element: string;
     id: string;
     name: string;
     value: string;
 }
 
-export default class Attribute extends React.Component<IProps> {
+export default class Attribute extends React.Component<Props> {
     private ref: React.RefObject<HTMLSpanElement>;
 
-    public constructor(props: IProps) {
+    public constructor(props: Props) {
         super(props);
         this.ref = React.createRef();
         this.onClickName = this.onClickName.bind(this);
@@ -39,12 +39,12 @@ export default class Attribute extends React.Component<IProps> {
 
     private onClickName(): void {
         const { actions, element, id, name, value } = this.props;
-        const bubbleOptions: Partial<IBubbleOptions> = {
+        const bubbleOptions: Partial<BubbleOptions> = {
             attribute: name,
             element,
             id,
             show: true,
-            type: EBubbleType.MENU,
+            type: BubbleType.MENU,
             value,
         };
         if (this.ref.current) {
@@ -57,12 +57,12 @@ export default class Attribute extends React.Component<IProps> {
 
     private onClickValue(): void {
         const { actions, element, id, name, value } = this.props;
-        const bubbleOptions: Partial<IBubbleOptions> = {
+        const bubbleOptions: Partial<BubbleOptions> = {
             attribute: name,
             element,
             id,
             show: true,
-            type: EBubbleType.ASKER,
+            type: BubbleType.ASKER,
             value,
         };
         if (this.ref.current) {

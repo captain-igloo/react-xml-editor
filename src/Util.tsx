@@ -1,16 +1,22 @@
 import * as React from 'react';
 
-import AskString, { EAskStringType } from './AskString';
+import AskString, { AskStringType } from './AskString';
 import Parser from './Parser';
-import { IAskerOptions, IElement, IXml } from './types';
+import {
+    AskerOptions,
+    Element,
+    MenuItemSpecNoParameter,
+    MenuItemSpecWithParameter,
+    Xml,
+} from './types';
 
-export const updateNode = (xml: IXml, id: string, value: string | boolean) => {
+export const updateNode = (xml: Xml, id: string, value: string | boolean) => {
     return modifyXml(id.split('~'), xml, () => {
         return value;
     });
 };
 
-export const newElementChild = async (xml: IXml, id: string, actionParameter: string) => {
+export const newElementChild = async (xml: Xml, id: string, actionParameter: string): Promise<Xml> => {
     const parser = new Parser();
     const child = await parser.parseString(actionParameter);
     return modifyXml(id.split('~'), xml, (parent) => {
@@ -22,7 +28,13 @@ export const newElementChild = async (xml: IXml, id: string, actionParameter: st
     });
 };
 
-const newElementSibling = async (xml: IXml, id: string, actionParameter: string, indexDelta: number) => {
+export const hasActionParameter = (
+    menuItemSpec: MenuItemSpecWithParameter<any> | MenuItemSpecNoParameter
+): menuItemSpec is MenuItemSpecWithParameter<any> => {
+    return (menuItemSpec as MenuItemSpecWithParameter<any>).actionParameter !== undefined;
+}
+
+const newElementSibling = async (xml: Xml, id: string, actionParameter: string, indexDelta: number) => {
     const parser = new Parser();
     const element = await parser.parseString(actionParameter);
     const elementId = id.split('~');
@@ -38,15 +50,15 @@ const newElementSibling = async (xml: IXml, id: string, actionParameter: string,
     throw new Error(`Invalid id: ${id}`);
 };
 
-export const newElementBefore = (xml: IXml, id: string, actionParameter: string) => {
+export const newElementBefore = (xml: Xml, id: string, actionParameter: string) => {
     return newElementSibling(xml, id, actionParameter, 0);
 };
 
-export const newElementAfter = async (xml: IXml, id: string, actionParameter: string) => {
+export const newElementAfter = async (xml: Xml, id: string, actionParameter: string) => {
     return newElementSibling(xml, id, actionParameter, 1);
 };
 
-export const newAttribute = (xml: IXml, id: string, actionParameter: {name: string; value: string}) => {
+export const newAttribute = (xml: Xml, id: string, actionParameter: {name: string; value: string}) => {
     return modifyXml(id.split('~'), xml, (parent) => {
         if (!parent.$) {
             parent.$ = {};
@@ -56,15 +68,15 @@ export const newAttribute = (xml: IXml, id: string, actionParameter: {name: stri
     });
 };
 
-export const deleteElement = (xml: IXml, id: string) => {
+export const deleteElement = (xml: Xml, id: string) => {
     return deleteNode(xml, id);
 };
 
-export const deleteAttribute = (xml: IXml, id: string) => {
+export const deleteAttribute = (xml: Xml, id: string) => {
     return deleteNode(xml, id);
 };
 
-export const deleteNode = (xml: IXml, id: string) => {
+export const deleteNode = (xml: Xml, id: string) => {
     const nodeId = id.split('~');
     const nodeKey = nodeId.splice(-1, 1);
     return modifyXml(nodeId, xml, (parent) => {
@@ -73,7 +85,7 @@ export const deleteNode = (xml: IXml, id: string) => {
     });
 };
 
-const modifyXml = (id: string[], xml: any, modifier: (xml: IElement) => any): IXml => {
+const modifyXml = (id: string[], xml: any, modifier: (xml: Element) => any): Xml => {
     if (id.length > 1) {
         const first = id.splice(0, 1);
         xml[first[0]] = modifyXml(id, xml[first[0]], modifier);
@@ -83,25 +95,33 @@ const modifyXml = (id: string[], xml: any, modifier: (xml: IElement) => any): IX
     return xml;
 };
 
-export const askString = (options: IAskerOptions) => {
+export const getXmlNode = (id: string[], xml: any): any => {
+    if (id.length > 1) {
+        const first = id.splice(0, 1);
+        return getXmlNode(id, xml[first[0]]);
+    }
+    return xml[id[0]];
+};
+
+export const askString = (options: AskerOptions) => {
     return (
         <AskString
             actions={ options.actions }
             defaultValue={ options.defaultValue }
             id={ options.id }
-            type={ EAskStringType.SHORT }
+            type={ AskStringType.SHORT }
             xml={ options.xml }
         />
     );
 };
 
-export const askLongString = (options: IAskerOptions) => {
+export const askLongString = (options: AskerOptions) => {
     return (
         <AskString
             actions={ options.actions }
             defaultValue={ options.defaultValue }
             id={ options.id }
-            type={ EAskStringType.LONG }
+            type={ AskStringType.LONG }
             xml={ options.xml }
         />
     );

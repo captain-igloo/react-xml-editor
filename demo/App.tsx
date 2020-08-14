@@ -3,8 +3,9 @@ import * as React from 'react';
 import XmlEditor from '../lib/XmlEditor';
 import * as Util from '../lib/Util';
 import Builder from '../lib/Builder';
+import { DocSpec } from '../lib/types';
 
-const docSpec = {
+const docSpec: DocSpec = {
     elements: {
         item: {
             attributes: {
@@ -27,6 +28,9 @@ const docSpec = {
                     value: 'default value',
                 },
                 caption: 'Add attribute "label"',
+                hideIf: (element) => {
+                    return element && element.$ && typeof element.$.label !== 'undefined';
+                },
             },{
                 action: Util.deleteElement,
                 caption: 'Delete this <item />',
@@ -34,8 +38,7 @@ const docSpec = {
                 action: Util.newElementBefore,
                 caption: 'New <item /> before this',
                 actionParameter: '<item />',
-            },
-            {
+            },{
                 action: Util.newElementAfter,
                 caption: 'New <item /> after this',
                 actionParameter: '<item />',

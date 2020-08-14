@@ -2,25 +2,24 @@ import * as React from 'react';
 
 import Attributes from './Attributes';
 import Collapsoid from './Collapsoid';
-import { IElement } from './Parser';
 import TextNode from './TextNode';
-import { IActions, IBubbleOptions, IXml } from './types';
+import { Actions, BubbleOptions, Element as ElementConfig, Xml } from './types';
 import { updateNode } from './Util';
 
-interface IProps {
-    actions: IActions;
+interface Props {
+    actions: Actions;
     attributes?: {[key: string]: string};
-    childElements?: IElement[];
+    childElements?: ElementConfig[];
     collapsed?: boolean;
     id: string;
     name: string;
-    xml: IXml;
+    xml: Xml;
 }
 
-export default class Element extends React.Component<IProps> {
+export default class Element extends React.Component<Props> {
     private ref: React.RefObject<HTMLDivElement>;
 
-    public constructor(props: IProps) {
+    public constructor(props: Props) {
         super(props);
         this.onCollapse = this.onCollapse.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -39,7 +38,7 @@ export default class Element extends React.Component<IProps> {
 
         const elements: React.ReactNode[] = [];
         if (childElements) {
-            childElements.forEach((childElement: IElement, index: number) => {
+            childElements.forEach((childElement: ElementConfig, index: number) => {
                 if (childElement['#name'] !== '__text__') {
                     elements.push(
                         <Element
@@ -126,7 +125,7 @@ export default class Element extends React.Component<IProps> {
 
     private onClick() {
         const { actions, id, name } = this.props;
-        const bubbleOptions: Partial<IBubbleOptions> = {
+        const bubbleOptions: Partial<BubbleOptions> = {
             id,
             element: name,
             show: true,

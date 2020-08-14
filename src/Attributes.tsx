@@ -1,16 +1,16 @@
 import * as React from 'react';
 
 import Attribute from './Attribute';
-import { IActions } from './types';
+import { Actions } from './types';
 
-interface IProps {
-    actions: IActions;
+interface Props {
+    actions: Actions;
     attributes: {[key: string]: string};
     id: string;
     element: string;
 }
 
-export default class Attributes extends React.Component<IProps> {
+export default class Attributes extends React.Component<Props> {
     public render(): React.ReactNode {
         const { actions, attributes, element, id } = this.props;
         return (

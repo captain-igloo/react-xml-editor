@@ -1,14 +1,6 @@
 import * as xml2js from 'xml2js';
 
-import { IXml } from './types';
-
-export interface IElement {
-    _?: string;
-    $?: {[key: string]: string};
-    $$?: IElement[];
-    '#collapsed'?: boolean;
-    '#name': string;
-}
+import { Xml } from './types';
 
 export default class Parser {
     private parser: xml2js.Parser;
@@ -21,7 +13,7 @@ export default class Parser {
         });
     }
 
-    public parseString(xml: string): Promise<IXml> {
+    public parseString(xml: string): Promise<Xml> {
         return this.parser.parseStringPromise(xml);
     }
 }

@@ -1,10 +1,10 @@
-import {describe, expect, jest, test} from '@jest/globals';
+import {describe, expect, test} from '@jest/globals';
 import renderer from 'react-test-renderer';
 
 import * as React from 'react';
 
 import Bubble from '../src/Bubble';
-import { EBubbleType } from '../src/types';
+import { BubbleType } from '../src/types';
 
 describe('Bubble component', () => {
     test('renders properly', () => {
@@ -19,7 +19,7 @@ describe('Bubble component', () => {
                 left={0}
                 show
                 top={0}
-                type={EBubbleType.ASKER}
+                type={BubbleType.ASKER}
                 value="value"
                 xml={{}}
             />

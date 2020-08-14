@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import * as React from 'react';
 
 import Attribute from '../src/Attribute';
-import { EBubbleType } from '../src/types';
+import { BubbleType } from '../src/types';
 
 describe('Attribute component', () => {
     test('renders properly', () => {
@@ -57,7 +57,7 @@ describe('Attribute component', () => {
             left: 88,
             show: true,
             top: 99,
-            type: EBubbleType.MENU,
+            type: BubbleType.MENU,
             value,
         });
     });
@@ -97,7 +97,7 @@ describe('Attribute component', () => {
             left: 88,
             show: true,
             top: 99,
-            type: EBubbleType.ASKER,
+            type: BubbleType.ASKER,
             value,
         });
     });

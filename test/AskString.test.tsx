@@ -2,18 +2,18 @@ import {describe, expect, jest, test} from '@jest/globals';
 import renderer from 'react-test-renderer';
 import * as React from 'react';
 
-import AskString, { EAskStringType } from '../src/AskString';
-import { IActions, IXml } from '../src/types';
+import AskString, { AskStringType } from '../src/AskString';
+import { Actions, Xml } from '../src/types';
 
 describe('AskString component', () => {
     test('ask short string renders properly', () => {
         const component = renderer.create(
             <AskString
-                actions={{} as IActions} 
+                actions={{} as Actions}
                 defaultValue="defaultValue"
                 id="id"
-                type={ EAskStringType.SHORT }
-                xml={ {} as IXml }
+                type={ AskStringType.SHORT }
+                xml={ {} as Xml }
             />
         );
         let tree = component.toJSON();
@@ -26,8 +26,8 @@ describe('AskString component', () => {
                 actions={{} as any} 
                 defaultValue="defaultValue"
                 id="id"
-                type={ EAskStringType.SHORT }
-                xml={ {} as IXml }
+                type={ AskStringType.SHORT }
+                xml={ {} as Xml }
             />
         );  
         let tree = component.toJSON();
@@ -52,8 +52,8 @@ describe('AskString component', () => {
                 actions={actions as any} 
                 defaultValue="defaultValue"
                 id="id"
-                type={ EAskStringType.SHORT }
-                xml={ {} as IXml }
+                type={ AskStringType.SHORT }
+                xml={ {} as Xml }
             />
         );
         const tree = component.toJSON();
@@ -73,11 +73,11 @@ describe('AskString component', () => {
     test('ask long string renders properly', () => {
         const component = renderer.create(
             <AskString
-                actions={{} as IActions} 
+                actions={{} as Actions}
                 defaultValue="defaultValue"
                 id="id"
-                type={ EAskStringType.LONG }
-                xml={ {} as IXml }
+                type={ AskStringType.LONG }
+                xml={ {} as Xml }
             />
         );
         let tree = component.toJSON();

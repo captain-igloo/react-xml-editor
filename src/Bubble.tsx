@@ -1,24 +1,24 @@
 import * as React from 'react';
 
-import { EBubbleType, IActions, IDocSpec, IMenuItemSpec, IXml } from './types';
-import { askLongString, updateNode } from './Util';
+import { BubbleType, Actions, DocSpec, MenuItemSpecNoParameter, Xml } from './types';
+import { askLongString, getXmlNode, hasActionParameter, updateNode } from './Util';
 
-interface IProps {
-    actions: IActions;
+interface Props {
+    actions: Actions;
     attribute: string;
-    docSpec: IDocSpec;
+    docSpec: DocSpec;
     element: string;
     id: string;
     left: number;
     show: boolean;
     top: number;
-    type: EBubbleType;
+    type: BubbleType;
     value: string;
-    xml: IXml;
+    xml: Xml;
 }
 
-export default class Bubble extends React.Component<IProps> {
-    public constructor(props: IProps) {
+export default class Bubble extends React.Component<Props> {
+    public constructor(props: Props) {
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -67,18 +67,27 @@ export default class Bubble extends React.Component<IProps> {
 
         if (docSpec.elements && docSpec.elements[element] && docSpec.elements[element].menu) {
             const menu = docSpec.elements[element].menu;
-            const menuItems = (menu as IMenuItemSpec[]).map((menuItemSpec, index) => (
-                <div
-                    className="menuItem focusme"
-                    key={ index }
-                    onClick={ async () => {
-                        actions.setXml(await menuItemSpec.action(xml, id, menuItemSpec.actionParameter));
-                        actions.showBubble({ show: false });
-                    } }
-                >
-                    { menuItemSpec.caption }
-                </div>
-            ));
+            const menuItems = menu?.map((menuItemSpec, index) => {
+                if (!menuItemSpec.hideIf || !menuItemSpec.hideIf(getXmlNode(id.split('~'), xml))) {
+                    return (
+                        <div
+                            className="menuItem focusme"
+                            key={ index }
+                            onClick={ async () => {
+                                if (hasActionParameter(menuItemSpec)) {
+                                    actions.setXml(await menuItemSpec.action(xml, id, menuItemSpec.actionParameter));
+                                } else {
+                                    actions.setXml(await (menuItemSpec as MenuItemSpecNoParameter).action(xml, id));
+                                }
+                                actions.showBubble({ show: false });
+                            } }
+                        >
+                            { menuItemSpec.caption }
+                        </div>
+                    );
+                }
+                return null;
+            });
             return (
                 <div className="nerd" id="xonomyBubble" style={{ left, top, display: 'block' }}>
                     <div className="inside">
@@ -107,7 +116,7 @@ export default class Bubble extends React.Component<IProps> {
             value,
             xml,
         } = this.props;
-        if (type === EBubbleType.ASKER) {
+        if (type === BubbleType.ASKER) {
             if (docSpec.elements &&
                 docSpec.elements[element] &&
                 docSpec.elements[element].attributes &&
@@ -128,20 +137,24 @@ export default class Bubble extends React.Component<IProps> {
                     </div>
                 );
             }
-        } else if (type === EBubbleType.MENU) {
+        } else if (type === BubbleType.MENU) {
             if (docSpec.elements &&
                 docSpec.elements[element] &&
                 docSpec.elements[element].attributes &&
                 docSpec.elements[element].attributes[attribute] &&
                 docSpec.elements[element].attributes[attribute].menu) {
                     const menu = docSpec.elements[element].attributes[attribute].menu;
-                    const menuItems = (menu as IMenuItemSpec[]).map((menuItemSpec, index) => (
+                    const menuItems = menu?.map((menuItemSpec, index) => (
                         <div
                             className="menuItem focusme"
                             key={ index }
                             onClick={ async () => {
-                                // setXml(menuItemSpec.action(xml, menuItemSpec.actionParameter));
-                                actions.setXml(await menuItemSpec.action(xml, id, menuItemSpec.actionParameter));
+                                if (hasActionParameter(menuItemSpec)) {
+                                    actions.setXml(await menuItemSpec.action(xml, id, menuItemSpec.actionParameter));
+                                } else {
+                                    actions.setXml(await (menuItemSpec as MenuItemSpecNoParameter).action(xml, id));
+                                }
+                                
                                 actions.showBubble({ show: false });
                             } }
                         >
