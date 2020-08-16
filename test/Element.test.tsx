@@ -91,7 +91,10 @@ describe('Element component', () => {
                 }
             }
         );
-        component.toJSON().children[1].children[1].props.onClick();
+        const stopPropagation = jest.fn();
+        component.toJSON().children[1].children[1].props.onClick({
+            stopPropagation,
+        });
         expect(showBubble.mock.calls[0][0]).toEqual({
             element: 'root',
             id: 'root',
@@ -100,5 +103,6 @@ describe('Element component', () => {
             top: 99,
             value: 'root',
         });
+        expect(stopPropagation.mock.calls.length).toBe(1);
     });
 });

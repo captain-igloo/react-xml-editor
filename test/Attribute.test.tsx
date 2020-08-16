@@ -48,7 +48,10 @@ describe('Attribute component', () => {
             }
         );
         let tree = component.toJSON();
-        tree.children[1].props.onClick();
+        const stopPropagation = jest.fn();
+        tree.children[1].props.onClick({
+            stopPropagation,
+        });
         expect(showBubble.mock.calls.length).toBe(1);
         expect(showBubble.mock.calls[0][0]).toEqual({
             attribute: 'name',
@@ -60,6 +63,7 @@ describe('Attribute component', () => {
             type: BubbleType.MENU,
             value,
         });
+        expect(stopPropagation.mock.calls.length).toBe(1);
     });
 
     test('click value should open bubble', () => {
@@ -74,7 +78,7 @@ describe('Attribute component', () => {
                 actions={ actions as any }
                 element="element"
                 id={id}
-                name="asdf"
+                name="name"
                 value={value}
             />,{
                 createNodeMock: () => {
@@ -87,11 +91,14 @@ describe('Attribute component', () => {
                 }
             }
         );
-        let tree = component.toJSON();
-        tree.children[3].props.onClick();
+        const tree = component.toJSON();
+        const stopPropagation = jest.fn();
+        tree.children[3].props.onClick({
+            stopPropagation,
+        });
         expect(showBubble.mock.calls.length).toBe(1);
         expect(showBubble.mock.calls[0][0]).toEqual({
-            attribute: 'asdf',
+            attribute: 'name',
             element: 'element',
             id,
             left: 88,
@@ -100,6 +107,7 @@ describe('Attribute component', () => {
             type: BubbleType.ASKER,
             value,
         });
+        expect(stopPropagation.mock.calls.length).toBe(1);
     });
 });
 

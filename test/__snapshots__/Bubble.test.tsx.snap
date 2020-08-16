@@ -1,3 +1,114 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Bubble component renders properly 1`] = `null`;
+exports[`Bubble component attribute asker bubble renders properly 1`] = `
+<div
+  className="nerd"
+  id="xonomyBubble"
+  style={
+    Object {
+      "display": "block",
+      "left": 0,
+      "top": 0,
+    }
+  }
+>
+  <div
+    className="inside"
+  >
+    <div
+      id="xonomyBubbleContent"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <input
+          className="textbox focusme"
+          name="val"
+          onChange={[Function]}
+          value="value"
+        />
+        <input
+          type="submit"
+          value="OK"
+        />
+      </form>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Bubble component attribute menu bubble renders properly 1`] = `
+<div
+  className="nerd"
+  id="xonomyBubble"
+  style={
+    Object {
+      "display": "block",
+      "left": 0,
+      "top": 0,
+    }
+  }
+>
+  <div
+    className="inside"
+  >
+    <div
+      id="xonomyBubbleContent"
+    >
+      <div
+        className="menu"
+      >
+        <div
+          className="menuItem focusme"
+          onClick={[Function]}
+        >
+          Delete this &lt;item /&gt;
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Bubble component element bubble renders properly 1`] = `null`;
+
+exports[`Bubble component text bubble renders properly 1`] = `
+<div
+  className="nerd"
+  id="xonomyBubble"
+  style={
+    Object {
+      "display": "block",
+      "left": 0,
+      "top": 0,
+    }
+  }
+>
+  <div
+    className="inside"
+  >
+    <div
+      id="xonomyBubbleContent"
+    >
+      <form
+        onSubmit={[Function]}
+      >
+        <textarea
+          className="textbox focusme"
+          name="val"
+          onChange={[Function]}
+          value="value"
+        />
+        <div
+          className="submitline"
+        >
+          <input
+            type="submit"
+            value="OK"
+          />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+`;

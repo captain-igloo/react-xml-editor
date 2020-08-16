@@ -123,7 +123,7 @@ export default class Element extends React.Component<Props> {
         );
     }
 
-    private onClick() {
+    private onClick(event: React.MouseEvent) {
         const { actions, id, name } = this.props;
         const bubbleOptions: Partial<BubbleOptions> = {
             id,
@@ -137,6 +137,7 @@ export default class Element extends React.Component<Props> {
             bubbleOptions.top = rect.top;
         }
         actions.showBubble(bubbleOptions);
+        event.stopPropagation();
     }
 
     private onCollapse() {

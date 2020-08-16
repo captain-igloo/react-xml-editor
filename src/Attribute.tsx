@@ -37,7 +37,7 @@ export default class Attribute extends React.Component<Props> {
         );
     }
 
-    private onClickName(): void {
+    private onClickName(event: React.MouseEvent): void {
         const { actions, element, id, name, value } = this.props;
         const bubbleOptions: Partial<BubbleOptions> = {
             attribute: name,
@@ -53,9 +53,10 @@ export default class Attribute extends React.Component<Props> {
             bubbleOptions.top = rect.top;
         }
         actions.showBubble(bubbleOptions);
+        event.stopPropagation();
     }
 
-    private onClickValue(): void {
+    private onClickValue(event: React.MouseEvent): void {
         const { actions, element, id, name, value } = this.props;
         const bubbleOptions: Partial<BubbleOptions> = {
             attribute: name,
@@ -71,6 +72,6 @@ export default class Attribute extends React.Component<Props> {
             bubbleOptions.top = rect.top;
         }
         actions.showBubble(bubbleOptions);
-        // event.stopPropagation();
+        event.stopPropagation();
     }
 }

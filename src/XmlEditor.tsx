@@ -21,6 +21,7 @@ export default class XmlEditor extends React.Component<Props, State> {
         super(props);
         this.setXml = this.setXml.bind(this);
         this.showBubble = this.showBubble.bind(this);
+        this.onClick = this.onClick.bind(this);
         this.state = {
             bubble: {
                 attribute: '',
@@ -48,7 +49,7 @@ export default class XmlEditor extends React.Component<Props, State> {
     public render(): React.ReactNode {
         return (
             <React.Fragment>
-                <div className="xonomy nerd">
+                <div className="xonomy nerd" onClick={ this.onClick }>
                     { this.getRootNode() }
                 </div>
                 { this.getBubble() }
@@ -58,6 +59,12 @@ export default class XmlEditor extends React.Component<Props, State> {
 
     public getXml() {
         return this.state.xml;
+    }
+
+    private onClick() {
+        this.showBubble({
+            show: false,
+        });
     }
 
     private setXml(xml: Xml) {

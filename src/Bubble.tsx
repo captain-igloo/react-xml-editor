@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { BubbleType, Actions, DocSpec, MenuItemSpecNoParameter, Xml } from './types';
+import { BubbleType, Actions, DocSpec, MenuItemSpec, MenuItemSpecNoParameter, Xml } from './types';
 import { askLongString, getXmlNode, hasActionParameter, updateNode } from './Util';
 
 interface Props {
@@ -22,6 +22,7 @@ export default class Bubble extends React.Component<Props> {
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.showMenuItem = this.showMenuItem.bind(this);
     }
 
     public render(): React.ReactNode {
@@ -66,28 +67,24 @@ export default class Bubble extends React.Component<Props> {
         const { actions, docSpec, element, id, left, top, xml } = this.props;
 
         if (docSpec.elements && docSpec.elements[element] && docSpec.elements[element].menu) {
-            const menu = docSpec.elements[element].menu;
-            const menuItems = menu?.map((menuItemSpec, index) => {
-                if (!menuItemSpec.hideIf || !menuItemSpec.hideIf(getXmlNode(id.split('~'), xml))) {
-                    return (
-                        <div
-                            className="menuItem focusme"
-                            key={ index }
-                            onClick={ async () => {
-                                if (hasActionParameter(menuItemSpec)) {
-                                    actions.setXml(await menuItemSpec.action(xml, id, menuItemSpec.actionParameter));
-                                } else {
-                                    actions.setXml(await (menuItemSpec as MenuItemSpecNoParameter).action(xml, id));
-                                }
-                                actions.showBubble({ show: false });
-                            } }
-                        >
-                            { menuItemSpec.caption }
-                        </div>
-                    );
-                }
-                return null;
-            });
+            const menu = docSpec.elements[element].menu as MenuItemSpec[];
+            const menuItems = menu.filter(this.showMenuItem).map((menuItemSpec, index) => (
+                <div
+                    className="menuItem focusme"
+                    key={ index }
+                    onClick={ async () => {
+                        if (hasActionParameter(menuItemSpec)) {
+                            actions.setXml(await menuItemSpec.action(xml, id, menuItemSpec.actionParameter));
+                        } else {
+                            actions.setXml(await (menuItemSpec as MenuItemSpecNoParameter).action(xml, id));
+                        }
+                        actions.showBubble({ show: false });
+                    } }
+                >
+                    { menuItemSpec.caption }
+                </div>
+            ));
+
             return (
                 <div className="nerd" id="xonomyBubble" style={{ left, top, display: 'block' }}>
                     <div className="inside">
@@ -117,16 +114,13 @@ export default class Bubble extends React.Component<Props> {
             xml,
         } = this.props;
         if (type === BubbleType.ASKER) {
-            if (docSpec.elements &&
-                docSpec.elements[element] &&
-                docSpec.elements[element].attributes &&
-                docSpec.elements[element].attributes[attribute] &&
-                docSpec.elements[element].attributes[attribute].asker) {
+            const asker = docSpec.elements?.[element].attributes?.[attribute].asker;
+            if (asker) {
                 return (
                     <div className="nerd" id="xonomyBubble" style={{ left, top, display: 'block' }}>
                         <div className="inside">
                             <div id="xonomyBubbleContent">
-                            { (docSpec.elements[element].attributes[attribute].asker as any)({
+                            { asker({
                                 actions,
                                 defaultValue: value,
                                 id,
@@ -138,41 +132,36 @@ export default class Bubble extends React.Component<Props> {
                 );
             }
         } else if (type === BubbleType.MENU) {
-            if (docSpec.elements &&
-                docSpec.elements[element] &&
-                docSpec.elements[element].attributes &&
-                docSpec.elements[element].attributes[attribute] &&
-                docSpec.elements[element].attributes[attribute].menu) {
-                    const menu = docSpec.elements[element].attributes[attribute].menu;
-                    const menuItems = menu?.map((menuItemSpec, index) => (
-                        <div
-                            className="menuItem focusme"
-                            key={ index }
-                            onClick={ async () => {
-                                if (hasActionParameter(menuItemSpec)) {
-                                    actions.setXml(await menuItemSpec.action(xml, id, menuItemSpec.actionParameter));
-                                } else {
-                                    actions.setXml(await (menuItemSpec as MenuItemSpecNoParameter).action(xml, id));
-                                }
-                                
-                                actions.showBubble({ show: false });
-                            } }
-                        >
-                            { menuItemSpec.caption }
-                        </div>
-                    ));
+            const menu = docSpec.elements?.[element].attributes?.[attribute].menu;
+            if (menu) {
+                const menuItems = menu.filter(this.showMenuItem).map((menuItemSpec, index) => (
+                    <div
+                        className="menuItem focusme"
+                        key={ index }
+                        onClick={ async () => {
+                            if (hasActionParameter(menuItemSpec)) {
+                                actions.setXml(await menuItemSpec.action(xml, id, menuItemSpec.actionParameter));
+                            } else {
+                                actions.setXml(await (menuItemSpec as MenuItemSpecNoParameter).action(xml, id));
+                            }
+                            actions.showBubble({ show: false });
+                        } }
+                    >
+                        { menuItemSpec.caption }
+                    </div>
+                ));
 
-                    return (
-                        <div className="nerd" id="xonomyBubble" style={{ left, top, display: 'block' }}>
-                            <div className="inside">
-                                <div id="xonomyBubbleContent">
-                                    <div className="menu">
-                                        {menuItems}
-                                    </div>
+                return (
+                    <div className="nerd" id="xonomyBubble" style={{ left, top, display: 'block' }}>
+                        <div className="inside">
+                            <div id="xonomyBubbleContent">
+                                <div className="menu">
+                                    {menuItems}
                                 </div>
                             </div>
                         </div>
-                    );
+                    </div>
+                );
             }
         }
         return null;
@@ -192,5 +181,13 @@ export default class Bubble extends React.Component<Props> {
         actions.showBubble({
             value: (event.target as HTMLInputElement).value,
         });
+    }
+
+    private showMenuItem(menuItemSpec: MenuItemSpec): boolean {
+        const { id, xml } = this.props;
+        if (menuItemSpec.hideIf) {
+            return !menuItemSpec.hideIf(getXmlNode(id.split('~'), xml));
+        }
+        return true;
     }
 }

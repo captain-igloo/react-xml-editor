@@ -30,7 +30,7 @@ export default class TextNode extends React.Component<Props> {
         );
     }
 
-    private onClick(): void {
+    private onClick(event: React.MouseEvent): void {
         const { actions, id, text } = this.props;
         const bubbleOptions: Partial<BubbleOptions> = {
             id,
@@ -44,5 +44,6 @@ export default class TextNode extends React.Component<Props> {
             bubbleOptions.top = rect.top;
         }
         actions.showBubble(bubbleOptions);
+        event.stopPropagation();
     }
 }
