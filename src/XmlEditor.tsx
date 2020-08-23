@@ -26,7 +26,7 @@ export default class XmlEditor extends React.Component<Props, State> {
             bubble: {
                 attribute: '',
                 element: '',
-                id: '',
+                id: [],
                 left: 0,
                 show: false,
                 top: 0,
@@ -119,7 +119,7 @@ export default class XmlEditor extends React.Component<Props, State> {
                     attributes={ xml[key].$ }
                     childElements={ xml[key].$$ }
                     collapsed={ xml[key]['#collapsed'] }
-                    id={ `${key}` }
+                    id={ [key] }
                     name={ key }
                     xml={ xml }
                 />

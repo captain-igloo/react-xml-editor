@@ -12,7 +12,7 @@ describe('Element component', () => {
                 childElements={[{'#name': 'child'}, {'#name': '__text__', _: 'text'}]}
                 collapsed={ false }
                 name="root"
-                id="root"
+                id={['root']}
                 xml={{ root: { '#name': 'root' } }}
             />
         );
@@ -26,7 +26,7 @@ describe('Element component', () => {
                 childElements={[{'#name': 'child'}, {'#name': '__text__', _: 'text'}]}
                 collapsed
                 name="root"
-                id="root"
+                id={['root']}
                 xml={{ root: { '#name': 'root' } }}
             />
         );
@@ -40,7 +40,7 @@ describe('Element component', () => {
                 attributes={{a: 'b'}}
                 collapsed={ false }
                 name="root"
-                id="root"
+                id={['root']}
                 xml={{ root: { $: {a: 'b'}, '#name': 'root' } }}
             />
         );
@@ -55,7 +55,7 @@ describe('Element component', () => {
                 actions={{ setXml, showBubble } as any}
                 collapsed={ false }
                 name="root"
-                id="root"
+                id={['root']}
                 xml={{ root: { '#name': 'root' } }}
             />
         );
@@ -78,7 +78,7 @@ describe('Element component', () => {
                 actions={{ showBubble } as any}
                 collapsed={ false }
                 name="root"
-                id="root"
+                id={['root']}
                 xml={{ root: { '#name': 'root' } }}
             />,{
                 createNodeMock: () => {
@@ -97,7 +97,7 @@ describe('Element component', () => {
         });
         expect(showBubble.mock.calls[0][0]).toEqual({
             element: 'root',
-            id: 'root',
+            id: ['root'],
             left: 88,
             show: true,
             top: 99,

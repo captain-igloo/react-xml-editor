@@ -4,14 +4,14 @@ import Attributes from './Attributes';
 import Collapsoid from './Collapsoid';
 import TextNode from './TextNode';
 import { Actions, BubbleOptions, Element as ElementConfig, Xml } from './types';
-import { updateNode } from './Util';
+import { push, updateNode } from './Util';
 
 interface Props {
     actions: Actions;
     attributes?: {[key: string]: string};
     childElements?: ElementConfig[];
     collapsed?: boolean;
-    id: string;
+    id: string[];
     name: string;
     xml: Xml;
 }
@@ -46,7 +46,7 @@ export default class Element extends React.Component<Props> {
                             attributes={childElement.$}
                             childElements={childElement.$$}
                             collapsed={childElement['#collapsed']}
-                            id={`${id}~\$\$~${index}`}
+                            id={push(id, '$$', `${index}`)}
                             key={index}
                             name={childElement['#name']}
                             xml={xml}
@@ -56,7 +56,7 @@ export default class Element extends React.Component<Props> {
                     elements.push(
                         <TextNode
                             actions={actions}
-                            id={ `${id}~\$\$~${index}~_` }
+                            id={ push(id, '$$', `${index}`, '_') }
                             key={index}
                             text={ childElement._ }
                         />
@@ -142,7 +142,7 @@ export default class Element extends React.Component<Props> {
 
     private onCollapse() {
         const { actions, collapsed, id, xml } = this.props;
-        const collapseId = `${id}~#collapsed`;
+        const collapseId = push(id, '#collapsed');
         actions.showBubble({
             show: false,
         });

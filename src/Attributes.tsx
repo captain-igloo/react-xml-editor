@@ -2,11 +2,12 @@ import * as React from 'react';
 
 import Attribute from './Attribute';
 import { Actions } from './types';
+import { push } from './Util';
 
 interface Props {
     actions: Actions;
     attributes: {[key: string]: string};
-    id: string;
+    id: string[];
     element: string;
 }
 
@@ -19,7 +20,7 @@ export default class Attributes extends React.Component<Props> {
                     <Attribute
                         actions={ actions }
                         element={ element }
-                        id={ `${id}~\$~${name}` }
+                        id={ push(id, '$', name) }
                         key={ name }
                         name={ name }
                         value={ this.props.attributes[name] }

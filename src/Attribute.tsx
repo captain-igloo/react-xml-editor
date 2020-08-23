@@ -5,7 +5,7 @@ import { BubbleType, Actions, BubbleOptions } from './types';
 interface Props {
     actions: Actions;
     element: string;
-    id: string;
+    id: string[];
     name: string;
     value: string;
 }

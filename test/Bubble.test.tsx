@@ -1,11 +1,11 @@
-import {describe, expect, test} from '@jest/globals';
+import {describe, expect, jest, test} from '@jest/globals';
 import renderer from 'react-test-renderer';
 
 import * as React from 'react';
 
 import Bubble from '../src/Bubble';
-import { BubbleType, DocSpec } from '../src/types';
-import { askString, deleteElement } from '../src/Util';
+import { BubbleType } from '../src/types';
+import { askString, deleteAttribute, deleteElement } from '../src/Util';
 
 describe('Bubble component', () => {
     test('attribute asker bubble renders properly', () => {
@@ -27,7 +27,7 @@ describe('Bubble component', () => {
                 attribute="attribute"
                 docSpec={docSpec}
                 element="root"
-                id="root~$~attribute"
+                id={['root', '$', 'attribute']}
                 left={0}
                 show
                 top={0}
@@ -39,18 +39,62 @@ describe('Bubble component', () => {
         expect(component.toJSON()).toMatchSnapshot();
     });
 
-    test('attribute menu bubble renders properly', () => {
+    test('attribute menu bubble renders properly', async () => {
         const docSpec = {
             elements: {
                 root: {
                     attributes: {
                         attribute: {
                             menu: [{
-                                action: deleteElement,
-                                caption: 'Delete this <item />',
+                                action: deleteAttribute,
+                                caption: 'Delete this attribute',
                             }],
                         },
                     },
+                },
+            },
+        };
+
+        const setXml = jest.fn();
+        const showBubble = jest.fn();
+
+        const component = renderer.create(
+            <Bubble
+                actions={{ setXml, showBubble } as any}
+                attribute="attribute"
+                docSpec={docSpec}
+                element="root"
+                id={['root', '$', 'attribute']}
+                left={0}
+                show
+                top={0}
+                type={BubbleType.MENU}
+                value="value"
+                xml={{root: {'#name': 'root', $: {'attribute': 'value'}}}}
+            />
+        );
+        const tree = component.toJSON();
+        expect(tree).toMatchSnapshot();
+        await tree.children[0].children[0].children[0].children[0].props.onClick();
+        expect(setXml.mock.calls[0][0]).toEqual({
+            root: {
+                '#name': 'root',
+                $: {},
+            },
+        });
+        expect(showBubble.mock.calls[0][0]).toEqual({
+            show: false,
+        });
+    });
+
+    test('element bubble renders properly', () => {
+        const docSpec = {
+            elements: {
+                element: {
+                    menu: [{
+                        action: deleteElement,
+                        caption: 'Delete this <element />',
+                    }],
                 },
             },
         };
@@ -60,12 +104,12 @@ describe('Bubble component', () => {
                 actions={{} as any}
                 attribute="attribute"
                 docSpec={docSpec}
-                element="root"
-                id="root~$~attribute"
+                element="element"
+                id={['root', '$$', '0']}
                 left={0}
                 show
                 top={0}
-                type={BubbleType.MENU}
+                type={BubbleType.ASKER}
                 value="value"
                 xml={{}}
             />
@@ -73,14 +117,14 @@ describe('Bubble component', () => {
         expect(component.toJSON()).toMatchSnapshot();
     });
 
-    test('element bubble renders properly', () => {
+    test('element bubble without menu renders properly', () => {
         const component = renderer.create(
             <Bubble
                 actions={{} as any}
                 attribute="attribute"
                 docSpec={{}}
                 element="element"
-                id="root~$$~0"
+                id={['root', '$$', '0']}
                 left={0}
                 show
                 top={0}
@@ -99,7 +143,7 @@ describe('Bubble component', () => {
                 attribute="attribute"
                 docSpec={{}}
                 element="element"
-                id="root~_"
+                id={['root', '_']}
                 left={0}
                 show
                 top={0}
@@ -118,7 +162,7 @@ describe('Bubble component', () => {
                 attribute="attribute"
                 docSpec={{}}
                 element="element"
-                id="invalid"
+                id={['invalid']}
                 left={0}
                 show
                 top={0}
@@ -137,7 +181,7 @@ describe('Bubble component', () => {
                 attribute="attribute"
                 docSpec={{}}
                 element="element"
-                id="id"
+                id={['id']}
                 left={0}
                 show={false}
                 top={0}
@@ -147,5 +191,35 @@ describe('Bubble component', () => {
             />
         );
         expect(component.toJSON()).toBeNull();
+    });
+
+    test('menu item should be hidden if hideIf() returns true', () => {
+        const docSpec = {
+            elements: {
+                element: {
+                    menu: [{
+                        action: deleteElement,
+                        caption: 'Delete this <element />',
+                        hideIf: () => true,
+                    }],
+                },
+            },
+        };
+        const component = renderer.create(
+            <Bubble
+                actions={{} as any}
+                attribute="attribute"
+                docSpec={docSpec}
+                element="element"
+                id={['root', '$$', '0']}
+                left={0}
+                show
+                top={0}
+                type={BubbleType.MENU}
+                value="value"
+                xml={{root: {'#name': 'root', $$: [{'#name': 'element'}]}}}
+            />
+        );
+        expect(component.toJSON()).toMatchSnapshot();
     });
 });

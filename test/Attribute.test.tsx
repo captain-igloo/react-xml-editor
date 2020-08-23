@@ -13,7 +13,7 @@ describe('Attribute component', () => {
             <Attribute
                 actions={ actions as any }
                 element="element"
-                id="id"
+                id={['id']}
                 name="name"
                 value="value"
             />
@@ -33,7 +33,7 @@ describe('Attribute component', () => {
             <Attribute
                 actions={ actions as any }
                 element="element"
-                id={id}
+                id={[id]}
                 name="name"
                 value={value}
             />,{
@@ -56,7 +56,7 @@ describe('Attribute component', () => {
         expect(showBubble.mock.calls[0][0]).toEqual({
             attribute: 'name',
             element: 'element',
-            id,
+            id: [id],
             left: 88,
             show: true,
             top: 99,
@@ -77,7 +77,7 @@ describe('Attribute component', () => {
             <Attribute
                 actions={ actions as any }
                 element="element"
-                id={id}
+                id={[id]}
                 name="name"
                 value={value}
             />,{
@@ -100,7 +100,7 @@ describe('Attribute component', () => {
         expect(showBubble.mock.calls[0][0]).toEqual({
             attribute: 'name',
             element: 'element',
-            id,
+            id: [id],
             left: 88,
             show: true,
             top: 99,

@@ -21,7 +21,7 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml = updateNode(xml, 'item~#collapsed', true);
+        const newXml = updateNode(xml, ['item', '#collapsed'], true);
         expect(JSON.stringify(newXml)).toEqual('{"item":{"#collapsed":true,"#name":"item"}}');
     });
 
@@ -31,7 +31,7 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml = await newElementChild(xml, 'item', '<child />');
+        const newXml = await newElementChild(xml, ['item'], '<child />');
         expect(JSON.stringify(newXml)).toEqual('{"item":{"#name":"item","$$":[{"#name":"child"}]}}');
     });
 
@@ -44,7 +44,7 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml = await newElementChild(xml, 'item', '<child2 />');
+        const newXml = await newElementChild(xml, ['item'], '<child2 />');
         expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"child1"},{"#name":"child2"}],"#name":"item"}}');
     });
 
@@ -57,7 +57,7 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml= await newElementBefore(xml, 'item~$$~0', '<sibling />');
+        const newXml= await newElementBefore(xml, ['item', '$$', '0'], '<sibling />');
         expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"sibling"},{"#name":"child1"}],"#name":"item"}}');
     });
 
@@ -70,7 +70,7 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml= await newElementAfter(xml, 'item~$$~0', '<sibling />');
+        const newXml= await newElementAfter(xml, ['item', '$$', '0'], '<sibling />');
         expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"child1"},{"#name":"sibling"}],"#name":"item"}}');
     });
 
@@ -84,7 +84,7 @@ describe('Modify XML functions', () => {
             },
         };
         expect.assertions(1);
-        await expect(newElementAfter(xml, 'item~$$', '<sibling />')).rejects.toThrow();
+        await expect(newElementAfter(xml, ['item', '$$'], '<sibling />')).rejects.toThrow();
     });
 
     test('newAttribute() should add attribute', () => {
@@ -96,7 +96,7 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml = newAttribute(xml, 'item~$$~0', {
+        const newXml = newAttribute(xml, ['item', '$$', '0'], {
             name: 'name',
             value: 'value',
         });
@@ -112,7 +112,7 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml = deleteElement(xml, 'item~$$~0');
+        const newXml = deleteElement(xml, ['item', '$$', '0']);
         expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[null],"#name":"item"}}');
     });
 
@@ -125,7 +125,7 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml = deleteAttribute(xml, 'item~$~name');
+        const newXml = deleteAttribute(xml, ['item', '$', 'name']);
         expect(JSON.stringify(newXml)).toEqual('{\"item\":{\"$\":{},\"#name\":\"item\"}}');
     });
 
@@ -134,7 +134,7 @@ describe('Modify XML functions', () => {
             askString({
                 actions: {} as any,
                 defaultValue: 'defaultValue',
-                id: 'id',
+                id: ['id'],
                 xml: {},
             })
         );
@@ -146,7 +146,7 @@ describe('Modify XML functions', () => {
             askLongString({
                 actions: {} as any,
                 defaultValue: 'defaultValue',
-                id: 'id',
+                id: ['id'],
                 xml: {},
             })
         );

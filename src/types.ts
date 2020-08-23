@@ -4,25 +4,31 @@ interface MenuItemSpecBase {
 }
 
 export interface MenuItemSpecWithParameter<T> extends MenuItemSpecBase {
-    action: (xml: Xml, id: string, actionParameter: T) => Xml | Promise<Xml>;
+    action: (xml: Xml, id: string[], actionParameter: T) => Xml | Promise<Xml>;
     actionParameter: T;
 }
 
 export interface MenuItemSpecNoParameter extends MenuItemSpecBase {
-    action: (xml: Xml, id: string) => Xml | Promise<Xml>;
+    action: (xml: Xml, id: string[]) => Xml | Promise<Xml>;
 }
 
 export type MenuItemSpecGeneric<T> = MenuItemSpecWithParameter<T> | MenuItemSpecNoParameter;
 
 export type MenuItemSpec = MenuItemSpecGeneric<string> | MenuItemSpecGeneric<{name: string; value: string}>;
 
+export type AskerParameter = {
+    caption: string;
+    value: string
+}[];
+
 export interface AttributeSpec {
     asker?: (options: AskerOptions) => React.ReactNode;
+    askerParameter?: AskerParameter;
     menu?: MenuItemSpec[];
 }
 
 export interface ElementsSpec {
-    attributes: {[key: string]: AttributeSpec};
+    attributes?: {[key: string]: AttributeSpec};
     menu?: MenuItemSpec[];
 }
 
@@ -42,7 +48,7 @@ export enum BubbleType {
 export interface BubbleOptions {
     attribute: string;
     element: string;
-    id: string;
+    id: string[];
     left: number;
     show: boolean;
     type: BubbleType;
@@ -58,7 +64,8 @@ export interface Actions {
 export interface AskerOptions {
     actions: Actions;
     defaultValue: string;
-    id: string;
+    id: string[];
+    parameter?: AskerParameter;
     xml: Xml;
 }
 

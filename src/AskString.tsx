@@ -11,7 +11,7 @@ export enum AskStringType {
 interface Props {
     actions: Actions;
     defaultValue: string;
-    id: string;
+    id: string[];
     type: AskStringType;
     xml: Xml;
 }

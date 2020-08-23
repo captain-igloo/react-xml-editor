@@ -16,6 +16,14 @@ const docSpec: DocSpec = {
                         caption: 'Delete attribute',
                     }],
                 },
+                type: {
+                    asker: Util.askPicklist,
+                    askerParameter: [{
+                        value: 'short', caption: 'short'
+                    },{
+                        value: 'long', caption: 'long',
+                    }],
+                },
             },
             menu: [{
                 action: Util.newElementChild,
@@ -47,7 +55,7 @@ const docSpec: DocSpec = {
     }
 };
 
-const xml = '<list><item label="one">text 1</item><item label="two">text 2</item></list>';
+const xml = '<list><item label="one" type="short">text 1</item><item label="two">text 2</item></list>';
 
 export default class App extends React.Component<{}, {xml: string}> {
     private ref: React.RefObject<XmlEditor>;

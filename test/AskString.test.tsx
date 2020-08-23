@@ -11,7 +11,7 @@ describe('AskString component', () => {
             <AskString
                 actions={{} as Actions}
                 defaultValue="defaultValue"
-                id="id"
+                id={['id']}
                 type={ AskStringType.SHORT }
                 xml={ {} as Xml }
             />
@@ -25,7 +25,7 @@ describe('AskString component', () => {
             <AskString
                 actions={{} as any} 
                 defaultValue="defaultValue"
-                id="id"
+                id={['id']}
                 type={ AskStringType.SHORT }
                 xml={ {} as Xml }
             />
@@ -51,7 +51,7 @@ describe('AskString component', () => {
             <AskString
                 actions={actions as any} 
                 defaultValue="defaultValue"
-                id="id"
+                id={['id']}
                 type={ AskStringType.SHORT }
                 xml={ {} as Xml }
             />
@@ -75,7 +75,7 @@ describe('AskString component', () => {
             <AskString
                 actions={{} as Actions}
                 defaultValue="defaultValue"
-                id="id"
+                id={['id']}
                 type={ AskStringType.LONG }
                 xml={ {} as Xml }
             />

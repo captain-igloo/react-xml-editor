@@ -12,7 +12,7 @@ describe('Attributes component', () => {
                 actions={actions as any}
                 attributes={{a: 'b'}}
                 element="element"
-                id="id"
+                id={['id']}
             />
         );
         let tree = component.toJSON();
