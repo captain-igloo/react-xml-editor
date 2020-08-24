@@ -4,6 +4,7 @@ import { Actions, BubbleOptions } from './types';
 
 interface Props {
     actions: Actions;
+    element: string;
     id: string[];
     text: string;
 }
@@ -31,10 +32,10 @@ export default class TextNode extends React.Component<Props> {
     }
 
     private onClick(event: React.MouseEvent): void {
-        const { actions, id, text } = this.props;
+        const { actions, element, id, text } = this.props;
         const bubbleOptions: Partial<BubbleOptions> = {
             id,
-            element: name,
+            element,
             show: true,
             value: text,
         };

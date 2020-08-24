@@ -44,12 +44,13 @@ export default class Bubble extends React.Component<Props> {
     }
 
     private getTextBubble(): React.ReactNode {
-        const { actions, id, left, top, value, xml } = this.props;
+        const { actions, docSpec, element, id, left, top, value, xml } = this.props;
+        const asker = docSpec.elements?.[element]?.asker || askLongString;
         return (
             <div className="nerd" id="xonomyBubble" style={{ left, top, display: 'block' }}>
                 <div className="inside">
                     <div id="xonomyBubbleContent">
-                        { askLongString({
+                        { asker({
                             actions,
                             defaultValue: value,
                             id,
@@ -108,7 +109,7 @@ export default class Bubble extends React.Component<Props> {
 
     private getAttributeMenuBubble(): React.ReactNode {
         const { actions, attribute, docSpec, element, id, left, top, xml } = this.props;
-        const menu = docSpec.elements?.[element].attributes?.[attribute].menu;
+        const menu = docSpec.elements?.[element]?.attributes?.[attribute]?.menu;
         if (menu) {
             const menuItems = menu.filter(this.showMenuItem).map((menuItemSpec, index) => (
                 <div
@@ -139,11 +140,12 @@ export default class Bubble extends React.Component<Props> {
                 </div>
             );
         }
+        return null;
     }
 
     private getAttributeAskerBubble(): React.ReactNode {
         const { actions, attribute, docSpec, element, id, left, top, value, xml } = this.props;
-        const attributeSpec = docSpec.elements?.[element].attributes?.[attribute];
+        const attributeSpec = docSpec.elements?.[element]?.attributes?.[attribute];
         if (attributeSpec && attributeSpec.asker) {
             const asker = attributeSpec.asker;
             const parameter = attributeSpec.askerParameter;
@@ -163,6 +165,7 @@ export default class Bubble extends React.Component<Props> {
                 </div>
             );
         }
+        return null;
     }
 
     private onSubmit(event: React.FormEvent<HTMLFormElement>): void {

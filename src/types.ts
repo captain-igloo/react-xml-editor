@@ -16,18 +16,21 @@ export type MenuItemSpecGeneric<T> = MenuItemSpecWithParameter<T> | MenuItemSpec
 
 export type MenuItemSpec = MenuItemSpecGeneric<string> | MenuItemSpecGeneric<{name: string; value: string}>;
 
+export type Asker = (options: AskerOptions) => React.ReactNode;
+
 export type AskerParameter = {
     caption: string;
     value: string
 }[];
 
 export interface AttributeSpec {
-    asker?: (options: AskerOptions) => React.ReactNode;
+    asker?: Asker;
     askerParameter?: AskerParameter;
     menu?: MenuItemSpec[];
 }
 
 export interface ElementsSpec {
+    asker?: Asker;
     attributes?: {[key: string]: AttributeSpec};
     menu?: MenuItemSpec[];
 }

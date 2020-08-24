@@ -56,9 +56,10 @@ export default class Element extends React.Component<Props> {
                     elements.push(
                         <TextNode
                             actions={actions}
-                            id={ push(id, '$$', `${index}`, '_') }
+                            element={name}
+                            id={push(id, '$$', `${index}`, '_')}
                             key={index}
-                            text={ childElement._ }
+                            text={childElement._}
                         />
                     );
                 }
