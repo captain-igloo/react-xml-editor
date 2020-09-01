@@ -1,31 +1,21 @@
-interface MenuItemSpecBase {
+export interface MenuItemSpec {
+    action: (xml: Xml, id: string[]) => Xml | Promise<Xml>;
     caption: string;
     hideIf?: (a: any) => boolean;
 }
 
-export interface MenuItemSpecWithParameter<T> extends MenuItemSpecBase {
-    action: (xml: Xml, id: string[], actionParameter: T) => Xml | Promise<Xml>;
-    actionParameter: T;
-}
-
-export interface MenuItemSpecNoParameter extends MenuItemSpecBase {
-    action: (xml: Xml, id: string[]) => Xml | Promise<Xml>;
-}
-
-export type MenuItemSpecGeneric<T> = MenuItemSpecWithParameter<T> | MenuItemSpecNoParameter;
-
-export type MenuItemSpec = MenuItemSpecGeneric<string> | MenuItemSpecGeneric<{name: string; value: string}>;
-
 export type Asker = (options: AskerOptions) => React.ReactNode;
 
-export type AskerParameter = {
+export interface AskPicklistCaptionMenuItem {
     caption: string;
     value: string
-}[];
+};
 
+export type AskPicklistMenuItem = AskPicklistCaptionMenuItem | string;
+
+export type AskerParameter = AskPicklistMenuItem[];
 export interface AttributeSpec {
     asker?: Asker;
-    askerParameter?: AskerParameter;
     menu?: MenuItemSpec[];
 }
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { BubbleType, Actions, DocSpec, MenuItemSpec, MenuItemSpecNoParameter, Xml } from './types';
-import { askLongString, getXmlNode, hasActionParameter, updateNode } from './Util';
+import { BubbleType, Actions, DocSpec, MenuItemSpec, Xml } from './types';
+import { askLongString, getXmlNode, updateNode } from './Util';
 
 interface Props {
     actions: Actions;
@@ -72,11 +72,7 @@ export default class Bubble extends React.Component<Props> {
                     className="menuItem focusme"
                     key={ index }
                     onClick={ async () => {
-                        if (hasActionParameter(menuItemSpec)) {
-                            actions.setXml(await menuItemSpec.action(xml, id, menuItemSpec.actionParameter));
-                        } else {
-                            actions.setXml(await (menuItemSpec as MenuItemSpecNoParameter).action(xml, id));
-                        }
+                        actions.setXml(await menuItemSpec.action(xml, id));
                         actions.showBubble({ show: false });
                     } }
                 >
@@ -116,11 +112,7 @@ export default class Bubble extends React.Component<Props> {
                     className="menuItem focusme"
                     key={ index }
                     onClick={ async () => {
-                        if (hasActionParameter(menuItemSpec)) {
-                            actions.setXml(await menuItemSpec.action(xml, id, menuItemSpec.actionParameter));
-                        } else {
-                            actions.setXml(await (menuItemSpec as MenuItemSpecNoParameter).action(xml, id));
-                        }
+                        actions.setXml(await menuItemSpec.action(xml, id));
                         actions.showBubble({ show: false });
                     } }
                 >
@@ -148,7 +140,6 @@ export default class Bubble extends React.Component<Props> {
         const attributeSpec = docSpec.elements?.[element]?.attributes?.[attribute];
         if (attributeSpec && attributeSpec.asker) {
             const asker = attributeSpec.asker;
-            const parameter = attributeSpec.askerParameter;
             return (
                 <div className="nerd" id="xonomyBubble" style={{ left, top, display: 'block' }}>
                     <div className="inside">
@@ -157,7 +148,6 @@ export default class Bubble extends React.Component<Props> {
                             actions,
                             defaultValue: value,
                             id,
-                            parameter,
                             xml,
                         }) }
                         </div>

@@ -1,34 +1,53 @@
 import * as React from 'react';
 
-import { Actions, Xml } from './types';
+import {
+    Actions,
+    AskerParameter,
+    AskPicklistCaptionMenuItem,
+    AskPicklistMenuItem,
+    Xml,
+} from './types';
 import { updateNode } from './Util';
 
 interface Props {
     actions: Actions;
     id: string[];
-    parameter: any;
+    parameter: AskerParameter;
     xml: Xml;
 }
+
+const hasCaption = (menuItem: AskPicklistMenuItem): menuItem is AskPicklistCaptionMenuItem => {
+    return (menuItem as AskPicklistCaptionMenuItem).caption !== undefined;
+};
 
 export default class AskPicklist extends React.Component<Props> {
 
     public render(): React.ReactNode {
         const { parameter } = this.props;
 
-        const menuItems = parameter.map((menuItem: any) => {
+        const menuItems = parameter.map((menuItem) => {
+            let caption;
+            let value: string;
+            if (hasCaption(menuItem)) {
+                caption = <span className="explainer">{ menuItem.caption }</span>;
+                value = menuItem.value;
+            } else {
+                value = menuItem;
+            }
+
             return (
                 <div
                     className="menuItem focusme techno"
-                    key={ menuItem.value }
+                    key={ value }
                     onClick={(e: React.MouseEvent) => {
-                        this.onClick(menuItem.value);
+                        this.onClick(value);
                         e.preventDefault();
                     }}
                 >
                     <span className="punc">"</span>
-                    { menuItem.value }
+                    { value }
                     <span className="punc">"</span>
-                    <span className="explainer">{ menuItem.caption }</span>
+                    { caption }
                 </div>
             );
         });

@@ -17,24 +17,21 @@ const docSpec: DocSpec = {
                     }],
                 },
                 type: {
-                    asker: Util.askPicklist,
-                    askerParameter: [{
+                    asker: Util.askPicklist([{
                         value: 'short', caption: 'short'
                     },{
-                        value: 'long', caption: 'long',
-                    }],
+                        value: 'medium', caption: 'medium',
+                    }, 'long']),
                 },
             },
             menu: [{
-                action: Util.newElementChild,
-                actionParameter: '<child />',
+                action: Util.newElementChild('<child />'),
                 caption: 'Append child <child />',
             },{
-                action: Util.newAttribute,
-                actionParameter: {
+                action: Util.newAttribute({
                     name: 'label',
                     value: 'default value',
-                },
+                }),
                 caption: 'Add attribute "label"',
                 hideIf: (element) => {
                     return element && element.$ && typeof element.$.label !== 'undefined';
@@ -43,13 +40,11 @@ const docSpec: DocSpec = {
                 action: Util.deleteElement,
                 caption: 'Delete this <item />',
             },{
-                action: Util.newElementBefore,
+                action: Util.newElementBefore('<item />'),
                 caption: 'New <item /> before this',
-                actionParameter: '<item />',
             },{
-                action: Util.newElementAfter,
+                action: Util.newElementAfter('<item />'),
                 caption: 'New <item /> after this',
-                actionParameter: '<item />',
             }]
         },
     }

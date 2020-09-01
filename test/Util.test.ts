@@ -11,6 +11,7 @@ import {
     newElementBefore,
     newElementChild,
     updateNode,
+    askPicklist,
 } from '../src/Util';
 
 describe('Modify XML functions', () => {
@@ -31,7 +32,7 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml = await newElementChild(xml, ['item'], '<child />');
+        const newXml = await newElementChild('<child />')(xml, ['item']);
         expect(JSON.stringify(newXml)).toEqual('{"item":{"#name":"item","$$":[{"#name":"child"}]}}');
     });
 
@@ -44,7 +45,7 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml = await newElementChild(xml, ['item'], '<child2 />');
+        const newXml = await newElementChild('<child2 />')(xml, ['item']);
         expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"child1"},{"#name":"child2"}],"#name":"item"}}');
     });
 
@@ -57,7 +58,7 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml= await newElementBefore(xml, ['item', '$$', '0'], '<sibling />');
+        const newXml= await newElementBefore('<sibling />')(xml, ['item', '$$', '0']);
         expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"sibling"},{"#name":"child1"}],"#name":"item"}}');
     });
 
@@ -70,7 +71,7 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml= await newElementAfter(xml, ['item', '$$', '0'], '<sibling />');
+        const newXml= await newElementAfter('<sibling />')(xml, ['item', '$$', '0']);
         expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"child1"},{"#name":"sibling"}],"#name":"item"}}');
     });
 
@@ -84,7 +85,7 @@ describe('Modify XML functions', () => {
             },
         };
         expect.assertions(1);
-        await expect(newElementAfter(xml, ['item', '$$'], '<sibling />')).rejects.toThrow();
+        await expect(newElementAfter('<sibling />')(xml, ['item', '$$'])).rejects.toThrow();
     });
 
     test('newAttribute() should add attribute', () => {
@@ -96,10 +97,10 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml = newAttribute(xml, ['item', '$$', '0'], {
+        const newXml = newAttribute({
             name: 'name',
             value: 'value',
-        });
+        })(xml, ['item', '$$', '0']);
         expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"child1","$":{"name":"value"}}],"#name":"item"}}');
     })
 
@@ -146,6 +147,22 @@ describe('Modify XML functions', () => {
             askLongString({
                 actions: {} as any,
                 defaultValue: 'defaultValue',
+                id: ['id'],
+                xml: {},
+            })
+        );
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+
+    test('askPicklist() should return <AskPicklist /> component', () => {
+        const component = renderer.create(
+            askPicklist([{
+                value: 'short', caption: 'short'
+            },{
+                value: 'long', caption: 'long',
+            }])({
+                actions: {} as any,
+                defaultValue: '',
                 id: ['id'],
                 xml: {},
             })

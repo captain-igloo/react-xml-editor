@@ -16,8 +16,7 @@ describe('AskString component', () => {
                 xml={ {} as Xml }
             />
         );
-        let tree = component.toJSON();
-        expect(tree).toMatchSnapshot();
+        expect(component.toJSON()).toMatchSnapshot();
     });
 
     test('change', () => {

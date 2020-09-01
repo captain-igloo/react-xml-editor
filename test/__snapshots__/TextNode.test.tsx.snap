@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextNode component text node renders properly 1`] = `
+<div
+  className="textnode focusable"
+  onClick={[Function]}
+>
+  text
+</div>
+`;
