@@ -100,7 +100,7 @@ export default class Element extends React.Component<Props> {
         let closingTag;
         if (elements.length > 0) {
             closingTag = (
-                <span className="tag">
+                <span className="tag closing">
                     <span className="punc">&lt;</span>
                     <span className="punc slash">/</span>
                     <span className="name">{ name }</span>

@@ -29,6 +29,7 @@ describe('Bubble component', () => {
                 element="root"
                 id={['root', '$', 'attribute']}
                 left={0}
+                mode="nerd"
                 show
                 top={0}
                 type={BubbleType.ASKER}
@@ -66,6 +67,7 @@ describe('Bubble component', () => {
                 element="root"
                 id={['root', '$', 'attribute']}
                 left={0}
+                mode="nerd"
                 show
                 top={0}
                 type={BubbleType.MENU}
@@ -107,6 +109,7 @@ describe('Bubble component', () => {
                 element="element"
                 id={['root', '$$', '0']}
                 left={0}
+                mode="nerd"
                 show
                 top={0}
                 type={BubbleType.ASKER}
@@ -126,6 +129,7 @@ describe('Bubble component', () => {
                 element="element"
                 id={['root', '$$', '0']}
                 left={0}
+                mode="nerd"
                 show
                 top={0}
                 type={BubbleType.ASKER}
@@ -145,6 +149,7 @@ describe('Bubble component', () => {
                 element="element"
                 id={['root', '_']}
                 left={0}
+                mode="nerd"
                 show
                 top={0}
                 type={BubbleType.ASKER}
@@ -164,6 +169,7 @@ describe('Bubble component', () => {
                 element="element"
                 id={['invalid']}
                 left={0}
+                mode="nerd"
                 show
                 top={0}
                 type={BubbleType.ASKER}
@@ -183,6 +189,7 @@ describe('Bubble component', () => {
                 element="element"
                 id={['id']}
                 left={0}
+                mode="nerd"
                 show={false}
                 top={0}
                 type={BubbleType.ASKER}
@@ -213,6 +220,7 @@ describe('Bubble component', () => {
                 element="element"
                 id={['root', '$$', '0']}
                 left={0}
+                mode="nerd"
                 show
                 top={0}
                 type={BubbleType.MENU}

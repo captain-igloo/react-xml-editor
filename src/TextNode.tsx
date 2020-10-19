@@ -26,7 +26,7 @@ export default class TextNode extends React.Component<Props> {
                 onClick={this.onClick}
                 ref={this.ref}
             >
-                { text }
+                <span className="value">{ text }</span>
             </div>
         );
     }

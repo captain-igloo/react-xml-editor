@@ -2,8 +2,7 @@
 
 exports[`Bubble component attribute asker bubble renders properly 1`] = `
 <div
-  className="nerd"
-  id="xonomyBubble"
+  className="xonomyBubble nerd"
   style={
     Object {
       "display": "block",
@@ -16,7 +15,7 @@ exports[`Bubble component attribute asker bubble renders properly 1`] = `
     className="inside"
   >
     <div
-      id="xonomyBubbleContent"
+      className="xonomyBubbleContent"
     >
       <form
         onSubmit={[Function]}
@@ -39,8 +38,7 @@ exports[`Bubble component attribute asker bubble renders properly 1`] = `
 
 exports[`Bubble component attribute menu bubble renders properly 1`] = `
 <div
-  className="nerd"
-  id="xonomyBubble"
+  className="xonomyBubble nerd"
   style={
     Object {
       "display": "block",
@@ -53,7 +51,7 @@ exports[`Bubble component attribute menu bubble renders properly 1`] = `
     className="inside"
   >
     <div
-      id="xonomyBubbleContent"
+      className="xonomyBubbleContent"
     >
       <div
         className="menu"
@@ -72,8 +70,7 @@ exports[`Bubble component attribute menu bubble renders properly 1`] = `
 
 exports[`Bubble component element bubble renders properly 1`] = `
 <div
-  className="nerd"
-  id="xonomyBubble"
+  className="xonomyBubble nerd"
   style={
     Object {
       "display": "block",
@@ -86,7 +83,7 @@ exports[`Bubble component element bubble renders properly 1`] = `
     className="inside"
   >
     <div
-      id="xonomyBubbleContent"
+      className="xonomyBubbleContent"
     >
       <div
         className="menu"
@@ -107,8 +104,7 @@ exports[`Bubble component element bubble without menu renders properly 1`] = `nu
 
 exports[`Bubble component menu item should be hidden if hideIf() returns true 1`] = `
 <div
-  className="nerd"
-  id="xonomyBubble"
+  className="xonomyBubble nerd"
   style={
     Object {
       "display": "block",
@@ -121,7 +117,7 @@ exports[`Bubble component menu item should be hidden if hideIf() returns true 1`
     className="inside"
   >
     <div
-      id="xonomyBubbleContent"
+      className="xonomyBubbleContent"
     >
       <div
         className="menu"
@@ -133,8 +129,7 @@ exports[`Bubble component menu item should be hidden if hideIf() returns true 1`
 
 exports[`Bubble component text bubble renders properly 1`] = `
 <div
-  className="nerd"
-  id="xonomyBubble"
+  className="xonomyBubble nerd"
   style={
     Object {
       "display": "block",
@@ -147,7 +142,7 @@ exports[`Bubble component text bubble renders properly 1`] = `
     className="inside"
   >
     <div
-      id="xonomyBubbleContent"
+      className="xonomyBubbleContent"
     >
       <form
         onSubmit={[Function]}

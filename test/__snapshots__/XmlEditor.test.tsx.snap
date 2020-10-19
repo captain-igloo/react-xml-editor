@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`XmlEditor component xml editor renders properly 1`] = `
+<div
+  className="xonomy nerd"
+  onClick={[Function]}
+/>
+`;

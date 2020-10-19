@@ -5,6 +5,10 @@ exports[`TextNode component text node renders properly 1`] = `
   className="textnode focusable"
   onClick={[Function]}
 >
-  text
+  <span
+    className="value"
+  >
+    text
+  </span>
 </div>
 `;

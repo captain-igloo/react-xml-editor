@@ -106,11 +106,15 @@ exports[`Element component collapsed element renders properly 1`] = `
       className="textnode focusable"
       onClick={[Function]}
     >
-      text
+      <span
+        className="value"
+      >
+        text
+      </span>
     </div>
   </div>
   <span
-    className="tag"
+    className="tag closing"
   >
     <span
       className="punc"
@@ -339,11 +343,15 @@ exports[`Element component expanded element renders properly 1`] = `
       className="textnode focusable"
       onClick={[Function]}
     >
-      text
+      <span
+        className="value"
+      >
+        text
+      </span>
     </div>
   </div>
   <span
-    className="tag"
+    className="tag closing"
   >
     <span
       className="punc"

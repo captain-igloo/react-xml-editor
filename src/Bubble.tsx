@@ -10,6 +10,7 @@ interface Props {
     element: string;
     id: string[];
     left: number;
+    mode: 'laic' | 'nerd';
     show: boolean;
     top: number;
     type: BubbleType;
@@ -44,12 +45,15 @@ export default class Bubble extends React.Component<Props> {
     }
 
     private getTextBubble(): React.ReactNode {
-        const { actions, docSpec, element, id, left, top, value, xml } = this.props;
+        const { actions, docSpec, element, id, left, mode, top, value, xml } = this.props;
         const asker = docSpec.elements?.[element]?.asker || askLongString;
         return (
-            <div className="nerd" id="xonomyBubble" style={{ left, top, display: 'block' }}>
+            <div
+                className={`xonomyBubble ${mode}`}
+                style={{ left, top, display: 'block' }}
+            >
                 <div className="inside">
-                    <div id="xonomyBubbleContent">
+                    <div className="xonomyBubbleContent">
                         { asker({
                             actions,
                             defaultValue: value,
@@ -63,7 +67,7 @@ export default class Bubble extends React.Component<Props> {
     }
 
     private getElementBubble(): React.ReactNode {
-        const { actions, docSpec, element, id, left, top, xml } = this.props;
+        const { actions, docSpec, element, id, left, mode, top, xml } = this.props;
 
         const menu = docSpec.elements?.[element]?.menu;
         if (menu) {
@@ -81,9 +85,12 @@ export default class Bubble extends React.Component<Props> {
             ));
 
             return (
-                <div className="nerd" id="xonomyBubble" style={{ left, top, display: 'block' }}>
+                <div
+                    className={`xonomyBubble ${mode}`}
+                    style={{ left, top, display: 'block' }}
+                >
                     <div className="inside">
-                        <div id="xonomyBubbleContent">
+                        <div className="xonomyBubbleContent">
                             <div className="menu">
                                 {menuItems}
                             </div>
@@ -104,7 +111,7 @@ export default class Bubble extends React.Component<Props> {
     }
 
     private getAttributeMenuBubble(): React.ReactNode {
-        const { actions, attribute, docSpec, element, id, left, top, xml } = this.props;
+        const { actions, attribute, docSpec, element, id, left, mode, top, xml } = this.props;
         const menu = docSpec.elements?.[element]?.attributes?.[attribute]?.menu;
         if (menu) {
             const menuItems = menu.filter(this.showMenuItem).map((menuItemSpec, index) => (
@@ -121,9 +128,9 @@ export default class Bubble extends React.Component<Props> {
             ));
 
             return (
-                <div className="nerd" id="xonomyBubble" style={{ left, top, display: 'block' }}>
+                <div className={`xonomyBubble ${mode}`} style={{ left, top, display: 'block' }}>
                     <div className="inside">
-                        <div id="xonomyBubbleContent">
+                        <div className="xonomyBubbleContent">
                             <div className="menu">
                                 {menuItems}
                             </div>
@@ -136,14 +143,14 @@ export default class Bubble extends React.Component<Props> {
     }
 
     private getAttributeAskerBubble(): React.ReactNode {
-        const { actions, attribute, docSpec, element, id, left, top, value, xml } = this.props;
+        const { actions, attribute, docSpec, element, id, left, mode, top, value, xml } = this.props;
         const attributeSpec = docSpec.elements?.[element]?.attributes?.[attribute];
         if (attributeSpec && attributeSpec.asker) {
             const asker = attributeSpec.asker;
             return (
-                <div className="nerd" id="xonomyBubble" style={{ left, top, display: 'block' }}>
+                <div className={`xonomyBubble ${mode}`} style={{ left, top, display: 'block' }}>
                     <div className="inside">
-                        <div id="xonomyBubbleContent">
+                        <div className="xonomyBubbleContent">
                         { asker({
                             actions,
                             defaultValue: value,

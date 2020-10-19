@@ -5,19 +5,27 @@ import Element from './Element';
 import Parser from './Parser';
 import { BubbleType, Actions, BubbleOptions, DocSpec, Xml } from './types';
 
-interface Props {
+type DefaultProps = {
+    mode: 'laic' | 'nerd';
+}
+
+type Props = {
     docSpec: DocSpec;
     ref: React.RefObject<XmlEditor>;
     xml: string;
-}
+} & Partial<DefaultProps>;
 
 interface State {
     bubble: BubbleOptions;
     xml?: Xml;
 }
 
-export default class XmlEditor extends React.Component<Props, State> {
-    public constructor(props: Props) {
+export default class XmlEditor extends React.Component<Props & DefaultProps, State> {
+    static defaultProps: DefaultProps = {
+        mode: 'nerd',
+    };
+
+    public constructor(props: Props & DefaultProps) {
         super(props);
         this.setXml = this.setXml.bind(this);
         this.showBubble = this.showBubble.bind(this);
@@ -47,9 +55,10 @@ export default class XmlEditor extends React.Component<Props, State> {
     }
 
     public render(): React.ReactNode {
+        const { mode } = this.props;
         return (
             <React.Fragment>
-                <div className="xonomy nerd" onClick={ this.onClick }>
+                <div className={`xonomy ${mode}`} onClick={ this.onClick }>
                     { this.getRootNode() }
                 </div>
                 { this.getBubble() }
@@ -87,7 +96,7 @@ export default class XmlEditor extends React.Component<Props, State> {
     }
 
     private getBubble(): React.ReactNode {
-        const { docSpec } = this.props;
+        const { docSpec, mode } = this.props;
         const { bubble, xml} = this.state;
         if (xml) {
             return (
@@ -98,6 +107,7 @@ export default class XmlEditor extends React.Component<Props, State> {
                     element={ bubble.element }
                     id={ bubble.id }
                     left={ bubble.left }
+                    mode={ mode }
                     show={ bubble.show }
                     top={ bubble.top }
                     type={ bubble.type }
