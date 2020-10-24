@@ -18,6 +18,51 @@ interface Props {
     xml: Xml;
 }
 
+const formatCaption = (caption: string) => {
+    let key = 1;
+    return caption.split(/((?:<\/?[^>]+\/?>)|(?:@[^ =]+(?:="[^"]*")?))/).map((piece) => {
+        const elementMatches = piece.match(/<(\/?)([^>\/]+)(\/?)>/);
+        const attrMatches = piece.match(/@(?:([^ ="]+))?=?(?:"([^"]*)")?/);
+        if (elementMatches) {
+            return (
+                <span className="techno" key={ key++ }>
+                    <span className="punc">&lt;{ elementMatches[1] }</span>
+                    <span className="elName">{ elementMatches[2] }</span>
+                    <span className="punc">{ elementMatches[3] }&gt;</span>
+                </span>
+            );
+        } else if (attrMatches) {
+            let name;
+            if (attrMatches[1]) {
+                name = <span className="atName">{ attrMatches[1] }</span>;
+            }
+            let value;
+            if (typeof attrMatches[2] !== 'undefined') {
+                let equals;
+                if (name) {
+                    equals = <span className="punc equals">=</span>;
+                }
+                value = (
+                    <React.Fragment>
+                        { equals }
+                        <span className="punc">"</span>
+                        {attrMatches[2] && <span className="atValue">{ attrMatches[2] }</span>}
+                        <span className="punc">"</span>
+                    </React.Fragment>
+                );
+            }
+
+            return (
+                <span className="techno" key={ key++ }>
+                    { name }
+                    { value }
+                </span>
+            );
+        }
+        return piece;
+    });
+};
+
 export default class Bubble extends React.Component<Props> {
     public constructor(props: Props) {
         super(props);
@@ -80,7 +125,7 @@ export default class Bubble extends React.Component<Props> {
                         actions.showBubble({ show: false });
                     } }
                 >
-                    { menuItemSpec.caption }
+                    { formatCaption(menuItemSpec.caption) }
                 </div>
             ));
 

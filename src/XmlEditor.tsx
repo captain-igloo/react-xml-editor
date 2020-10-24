@@ -11,6 +11,7 @@ type DefaultProps = {
 
 type Props = {
     docSpec: DocSpec;
+    onChange?: () => void;
     ref: React.RefObject<XmlEditor>;
     xml: string;
 } & Partial<DefaultProps>;
@@ -77,8 +78,14 @@ export default class XmlEditor extends React.Component<Props & DefaultProps, Sta
     }
 
     private setXml(xml: Xml) {
+        const { onChange } = this.props;
+
         this.setState({
             xml,
+        }, () => {
+            if (onChange) {
+                onChange();
+            }
         });
     }
 

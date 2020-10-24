@@ -68,6 +68,170 @@ exports[`Bubble component attribute menu bubble renders properly 1`] = `
 </div>
 `;
 
+exports[`Bubble component captions should be correctly formatted 1`] = `
+<div
+  className="xonomyBubble nerd"
+  style={
+    Object {
+      "display": "block",
+      "left": 0,
+      "top": 0,
+    }
+  }
+>
+  <div
+    className="inside"
+  >
+    <div
+      className="xonomyBubbleContent"
+    >
+      <div
+        className="menu"
+      >
+        <div
+          className="menuItem focusme"
+          onClick={[Function]}
+        >
+          
+          <span
+            className="techno"
+          >
+            <span
+              className="punc"
+            >
+              &lt;
+              
+            </span>
+            <span
+              className="elName"
+            >
+              element 
+            </span>
+            <span
+              className="punc"
+            >
+              /
+              &gt;
+            </span>
+          </span>
+          
+        </div>
+        <div
+          className="menuItem focusme"
+          onClick={[Function]}
+        >
+          
+          <span
+            className="techno"
+          >
+            <span
+              className="atName"
+            >
+              key
+            </span>
+            <span
+              className="punc equals"
+            >
+              =
+            </span>
+            <span
+              className="punc"
+            >
+              "
+            </span>
+            <span
+              className="atValue"
+            >
+              value
+            </span>
+            <span
+              className="punc"
+            >
+              "
+            </span>
+          </span>
+          
+        </div>
+        <div
+          className="menuItem focusme"
+          onClick={[Function]}
+        >
+          
+          <span
+            className="techno"
+          >
+            <span
+              className="atName"
+            >
+              key
+            </span>
+          </span>
+          
+        </div>
+        <div
+          className="menuItem focusme"
+          onClick={[Function]}
+        >
+          
+          <span
+            className="techno"
+          >
+            <span
+              className="atName"
+            >
+              key
+            </span>
+            <span
+              className="punc equals"
+            >
+              =
+            </span>
+            <span
+              className="punc"
+            >
+              "
+            </span>
+            
+            <span
+              className="punc"
+            >
+              "
+            </span>
+          </span>
+          
+        </div>
+        <div
+          className="menuItem focusme"
+          onClick={[Function]}
+        >
+          
+          <span
+            className="techno"
+          >
+            <span
+              className="punc"
+            >
+              "
+            </span>
+            <span
+              className="atValue"
+            >
+              value
+            </span>
+            <span
+              className="punc"
+            >
+              "
+            </span>
+          </span>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Bubble component element bubble renders properly 1`] = `
 <div
   className="xonomyBubble nerd"
@@ -92,7 +256,29 @@ exports[`Bubble component element bubble renders properly 1`] = `
           className="menuItem focusme"
           onClick={[Function]}
         >
-          Delete this &lt;element /&gt;
+          Delete this 
+          <span
+            className="techno"
+          >
+            <span
+              className="punc"
+            >
+              &lt;
+              
+            </span>
+            <span
+              className="elName"
+            >
+              element 
+            </span>
+            <span
+              className="punc"
+            >
+              /
+              &gt;
+            </span>
+          </span>
+          
         </div>
       </div>
     </div>

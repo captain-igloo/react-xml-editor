@@ -32,7 +32,7 @@ const docSpec: DocSpec = {
                     name: 'label',
                     value: 'default value',
                 }),
-                caption: 'Add attribute "label"',
+                caption: 'Add attribute @label',
                 hideIf: (element) => {
                     return element && element.$ && typeof element.$.label !== 'undefined';
                 },

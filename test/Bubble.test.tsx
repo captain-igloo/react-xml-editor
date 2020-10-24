@@ -200,6 +200,48 @@ describe('Bubble component', () => {
         expect(component.toJSON()).toBeNull();
     });
 
+    test('captions should be correctly formatted', () => {
+        const docSpec = {
+            elements: {
+                element: {
+                    menu: [{
+                        action: deleteElement,
+                        caption: '<element />',
+                    },{
+                        action: deleteElement,
+                        caption: '@key="value"',
+                    },{
+                        action: deleteElement,
+                        caption: '@key',
+                    },{
+                        action: deleteElement,
+                        caption: '@key=""',
+                    },{
+                        action: deleteElement,
+                        caption: '@"value"',
+                    }],
+                },
+            },
+        };
+        const component = renderer.create(
+            <Bubble
+                actions={{} as any}
+                attribute="attribute"
+                docSpec={docSpec}
+                element="element"
+                id={['root', '$$', '0']}
+                left={0}
+                mode="nerd"
+                show
+                top={0}
+                type={BubbleType.MENU}
+                value="value"
+                xml={{root: {'#name': 'root', $$: [{'#name': 'element'}]}}}
+            />
+        );
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+
     test('menu item should be hidden if hideIf() returns true', () => {
         const docSpec = {
             elements: {
