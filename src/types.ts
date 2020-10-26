@@ -2,6 +2,7 @@ export interface MenuItemSpec {
     action: (xml: Xml, id: string[]) => Xml | Promise<Xml>;
     caption: string;
     hideIf?: (a: any) => boolean;
+    icon?: string;
 }
 
 export type Asker = (options: AskerOptions) => React.ReactNode;

@@ -52,6 +52,20 @@ export const newElementAfter = (parameter: string) =>
     (xml: Xml, id: string[]) =>
         newElementSibling(xml, id, parameter, 1);
 
+export const duplicateElement = (xml: Xml, id: string[]) => {
+    const idClone = id.slice(0);
+    const arrayIndex = parseInt(idClone.splice(-1, 1)[0], 10);
+    if (!isNaN(arrayIndex)) {
+        return modifyXml(idClone, xml, (parent) => {
+            if (Array.isArray(parent)) {
+                parent.splice(arrayIndex + 1, 0, Object.assign({}, parent[arrayIndex]));
+            }
+            return parent;
+        });
+    }
+    throw new Error(`Invalid id: ${id}`);
+};
+
 export const newAttribute = (parameter: {name: string; value: string}) =>
     (xml: Xml, id: string[]) =>
         modifyXml(id, xml, (parent) => {
@@ -66,9 +80,7 @@ export const deleteElement = (xml: Xml, id: string[]) => {
     return deleteNode(xml, id);
 };
 
-export const deleteAttribute = (xml: Xml, id: string[]) => {
-    return deleteNode(xml, id);
-};
+export const deleteAttribute = (xml: Xml, id: string[]) => deleteNode(xml, id);
 
 export const deleteNode = (xml: Xml, id: string[]) => {
     const idClone = id.slice(0);

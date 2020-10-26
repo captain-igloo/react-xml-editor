@@ -6,6 +6,7 @@ import {
     askString,
     deleteAttribute,
     deleteElement,
+    duplicateElement,
     newAttribute,
     newElementAfter,
     newElementBefore,
@@ -75,7 +76,34 @@ describe('Modify XML functions', () => {
         expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"child1"},{"#name":"sibling"}],"#name":"item"}}');
     });
 
-    test('newElementSibling() should return xml unmodified if id is invalid', async () => {
+    test('duplicateElement() should add copy of element', () => {
+        const xml = {
+            item: {
+                $$: [{
+                    '#name': 'child1',
+                }],
+                '#name': 'item',
+            },
+        };
+        const newXml = duplicateElement(xml, ['item', '$$', '0']);
+        expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"child1"},{"#name":"child1"}],"#name":"item"}}');
+    });
+
+    test('duplicateElement() should throw if id is invalid', () => {
+        const xml = {
+            item: {
+                $$: [{
+                    '#name': 'child1',
+                }],
+                '#name': 'item',
+            },
+        };
+        expect(() => {
+            duplicateElement(xml, ['item', '$$']);
+        }).toThrow();
+    });
+
+    test('newElementSibling() should throw if id is invalid', async () => {
         const xml = {
             item: {
                 $$: [{

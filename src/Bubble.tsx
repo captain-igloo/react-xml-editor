@@ -116,18 +116,29 @@ export default class Bubble extends React.Component<Props> {
 
         const menu = docSpec.elements?.[element]?.menu;
         if (menu) {
-            const menuItems = menu.filter(this.showMenuItem).map((menuItemSpec, index) => (
-                <div
-                    className="menuItem focusme"
-                    key={ index }
-                    onClick={ async () => {
-                        actions.setXml(await menuItemSpec.action(xml, id));
-                        actions.showBubble({ show: false });
-                    } }
-                >
-                    { formatCaption(menuItemSpec.caption) }
-                </div>
-            ));
+            const menuItems = menu.filter(this.showMenuItem).map((menuItemSpec, index) => {
+                let icon;
+                if (menuItemSpec.icon) {
+                    icon = (
+                        <span className="icon">
+                            <img src={ menuItemSpec.icon } />
+                        </span>
+                    );
+                }
+                return (
+                    <div
+                        className="menuItem focusme"
+                        key={ index }
+                        onClick={ async () => {
+                            actions.setXml(await menuItemSpec.action(xml, id));
+                            actions.showBubble({ show: false });
+                        } }
+                    >
+                        { icon }
+                        { formatCaption(menuItemSpec.caption) }
+                    </div>
+                );
+            });
 
             return (
                 <div
