@@ -7,6 +7,8 @@ import {
     deleteAttribute,
     deleteElement,
     duplicateElement,
+    moveElementDown,
+    moveElementUp,
     newAttribute,
     newElementAfter,
     newElementBefore,
@@ -101,6 +103,36 @@ describe('Modify XML functions', () => {
         expect(() => {
             duplicateElement(xml, ['item', '$$']);
         }).toThrow();
+    });
+
+    test('moveElementUp() should move element up', () => {
+        const xml = {
+            item: {
+                $$: [{
+                    '#name': 'child1',
+                },{
+                    '#name': 'child2',
+                }],
+                '#name': 'item',
+            },
+        };
+        const newXml = moveElementUp(xml, ['item', '$$', '1']);
+        expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"child2"},{"#name":"child1"}],"#name":"item"}}');
+    });
+
+    test('moveElementDown() should move element down', () => {
+        const xml = {
+            item: {
+                $$: [{
+                    '#name': 'child1',
+                },{
+                    '#name': 'child2',
+                }],
+                '#name': 'item',
+            },
+        };
+        const newXml = moveElementDown(xml, ['item', '$$', '0']);
+        expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"child2"},{"#name":"child1"}],"#name":"item"}}');
     });
 
     test('newElementSibling() should throw if id is invalid', async () => {

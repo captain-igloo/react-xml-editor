@@ -45,12 +45,21 @@ const docSpec: DocSpec = {
             },{
                 action: Util.newElementAfter('<item />'),
                 caption: 'New <item /> after this',
+            },{
+                action: Util.duplicateElement,
+                caption: 'Copy <item />',
+            },{
+                action: Util.moveElementUp,
+                caption: 'Move <item /> up',
+            },{
+                action: Util.moveElementDown,
+                caption: 'Move <item /> down',
             }]
         },
     }
 };
 
-const xml = '<list><item label="one" type="short">text 1</item><item label="two">text 2</item></list>';
+const xml = '<list><item label="one" type="short">text 1</item><item label="two">text 2</item><!-- ABC --></list>';
 
 export default class App extends React.Component<{}, {xml: string}> {
     private ref: React.RefObject<XmlEditor>;

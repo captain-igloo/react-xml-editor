@@ -31,17 +31,10 @@ export const newElementChild = (parameter: string) => async (xml: Xml, id: strin
 const newElementSibling = async (xml: Xml, id: string[], sibling: string, indexDelta: number) => {
     const parser = new Parser();
     const element = await parser.parseString(sibling);
-    const idClone = id.slice(0);
-    const arrayIndex = parseInt(idClone.splice(-1, 1)[0], 10);
-    if (!isNaN(arrayIndex)) {
-        return modifyXml(idClone, xml, (parent) => {
-            if (Array.isArray(parent)) {
-                parent.splice(arrayIndex + indexDelta, 0, element[Object.keys(element)[0]]);
-            }
-            return parent;
-        });
-    }
-    throw new Error(`Invalid id: ${id}`);
+    return modifyElement(xml, id, (parent, arrayIndex) => {
+        parent.splice(arrayIndex + indexDelta, 0, element[Object.keys(element)[0]]);
+        return parent;
+    });
 };
 
 export const newElementBefore = (parameter: string) =>
@@ -52,19 +45,48 @@ export const newElementAfter = (parameter: string) =>
     (xml: Xml, id: string[]) =>
         newElementSibling(xml, id, parameter, 1);
 
-export const duplicateElement = (xml: Xml, id: string[]) => {
+const modifyElement = (xml: Xml, id: string[], modifier: (xml: Element[], arrayIndex: number) => Element[]) => {
     const idClone = id.slice(0);
     const arrayIndex = parseInt(idClone.splice(-1, 1)[0], 10);
     if (!isNaN(arrayIndex)) {
         return modifyXml(idClone, xml, (parent) => {
             if (Array.isArray(parent)) {
-                parent.splice(arrayIndex + 1, 0, Object.assign({}, parent[arrayIndex]));
+                return modifier(parent, arrayIndex);
             }
             return parent;
         });
     }
     throw new Error(`Invalid id: ${id}`);
 };
+
+export const duplicateElement = (xml: Xml, id: string[]) =>
+    modifyElement(xml, id, (parent: Element[], arrayIndex: number) => {
+        parent.splice(arrayIndex + 1, 0, Object.assign({}, parent[arrayIndex]));
+        return parent;
+    });
+
+const swap = (arr: Element[], index1: number, index2: number) => {
+    const temp = arr[index1];
+    arr[index1] = arr[index2];
+    arr[index2] = temp;
+};
+
+export const moveElementUp = (xml: Xml, id: string[]) =>
+    modifyElement(xml, id, (parent: Element[], arrayIndex) => {
+        if (arrayIndex > 0) {
+            swap(parent, arrayIndex - 1, arrayIndex);
+        }
+        return parent;
+    });
+
+
+export const moveElementDown = (xml: Xml, id: string[]) =>
+    modifyElement(xml, id, (parent: Element[], arrayIndex) => {
+        if (arrayIndex < parent.length - 1) {
+            swap(parent, arrayIndex + 1, arrayIndex);
+        }
+        return parent;
+    });
 
 export const newAttribute = (parameter: {name: string; value: string}) =>
     (xml: Xml, id: string[]) =>
