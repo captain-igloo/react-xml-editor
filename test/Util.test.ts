@@ -4,6 +4,8 @@ import renderer from 'react-test-renderer';
 import {
     askLongString,
     askString,
+    canMoveElementDown,
+    canMoveElementUp,
     deleteAttribute,
     deleteElement,
     duplicateElement,
@@ -133,6 +135,46 @@ describe('Modify XML functions', () => {
         };
         const newXml = moveElementDown(xml, ['item', '$$', '0']);
         expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"child2"},{"#name":"child1"}],"#name":"item"}}');
+    });
+
+    test('canMoveElementUp() should return true if element index > 0', () => {
+        expect(canMoveElementUp({}, ['1'])).toEqual(true);
+    });
+
+    test('canMoveElementUp() should return false if element index == 0', () => {
+        expect(canMoveElementUp({}, ['0'])).toEqual(false);
+    });
+
+    test('canMoveElementUp() should return false id is invalid', () => {
+        expect(canMoveElementUp({}, [])).toEqual(false);
+    });
+
+    test('canMoveElementDown() should return true if element is not last', () => {
+        const xml = {
+            item: {
+                $$: [{
+                    '#name': 'child1',
+                },{
+                    '#name': 'child2',
+                }],
+                '#name': 'item',
+            },
+        };
+        expect(canMoveElementDown(xml, ['item', '$$', '0'])).toEqual(true);
+    });
+
+    test('canMoveElementDown() should return false if element is last', () => {
+        const xml = {
+            item: {
+                $$: [{
+                    '#name': 'child1',
+                },{
+                    '#name': 'child2',
+                }],
+                '#name': 'item',
+            },
+        };
+        expect(canMoveElementDown(xml, ['item', '$$', '1'])).toEqual(false);
     });
 
     test('newElementSibling() should throw if id is invalid', async () => {

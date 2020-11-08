@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { BubbleType, Actions, DocSpec, MenuItemSpec, Xml } from './types';
-import { askLongString, getXmlNode, updateNode } from './Util';
+import { askLongString, updateNode } from './Util';
 
 interface Props {
     actions: Actions;
@@ -240,7 +240,7 @@ export default class Bubble extends React.Component<Props> {
     private showMenuItem(menuItemSpec: MenuItemSpec): boolean {
         const { id, xml } = this.props;
         if (menuItemSpec.hideIf) {
-            return !menuItemSpec.hideIf(getXmlNode(id, xml));
+            return !menuItemSpec.hideIf(xml, id);
         }
         return true;
     }

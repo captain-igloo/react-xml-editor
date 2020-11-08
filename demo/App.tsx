@@ -33,7 +33,8 @@ const docSpec: DocSpec = {
                     value: 'default value',
                 }),
                 caption: 'Add attribute @label',
-                hideIf: (element) => {
+                hideIf: (xml, id) => {
+                    const element = Util.getXmlNode(xml, id);
                     return element && element.$ && typeof element.$.label !== 'undefined';
                 },
             },{
@@ -51,9 +52,11 @@ const docSpec: DocSpec = {
             },{
                 action: Util.moveElementUp,
                 caption: 'Move <item /> up',
+                hideIf: (xml, id) => !Util.canMoveElementUp(xml, id),
             },{
                 action: Util.moveElementDown,
                 caption: 'Move <item /> down',
+                hideIf: (xml, id) => !Util.canMoveElementDown(xml, id),
             }]
         },
     }

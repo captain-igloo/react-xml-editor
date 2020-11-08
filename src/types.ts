@@ -1,7 +1,7 @@
 export interface MenuItemSpec {
     action: (xml: Xml, id: string[]) => Xml | Promise<Xml>;
     caption: string;
-    hideIf?: (a: any) => boolean;
+    hideIf?: (xml: Xml, id: string[]) => boolean;
     icon?: string;
 }
 

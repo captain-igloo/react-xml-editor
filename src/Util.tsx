@@ -11,7 +11,7 @@ import {
 } from './types';
 
 export const updateNode = (xml: Xml, id: string[], value: string | boolean) => {
-    return modifyXml(id, xml, () => {
+    return modifyXml(xml, id, () => {
         return value;
     });
 };
@@ -19,7 +19,7 @@ export const updateNode = (xml: Xml, id: string[], value: string | boolean) => {
 export const newElementChild = (parameter: string) => async (xml: Xml, id: string[]): Promise<Xml> => {
     const parser = new Parser();
     const child = await parser.parseString(parameter);
-    return modifyXml(id, xml, (parent) => {
+    return modifyXml(xml, id, (parent) => {
         if (!parent.$$) {
             parent.$$ = [];
         }
@@ -49,7 +49,7 @@ const modifyElement = (xml: Xml, id: string[], modifier: (xml: Element[], arrayI
     const idClone = id.slice(0);
     const arrayIndex = parseInt(idClone.splice(-1, 1)[0], 10);
     if (!isNaN(arrayIndex)) {
-        return modifyXml(idClone, xml, (parent) => {
+        return modifyXml(xml, idClone, (parent) => {
             if (Array.isArray(parent)) {
                 return modifier(parent, arrayIndex);
             }
@@ -79,6 +79,21 @@ export const moveElementUp = (xml: Xml, id: string[]) =>
         return parent;
     });
 
+export const canMoveElementUp = (xml: Xml, id: string[]): boolean => {
+    if (id.length > 0) {
+        return parseInt(id[id.length - 1], 10) > 0;
+    }
+    return false;
+};
+
+export const canMoveElementDown = (xml: Xml, id: string[]): boolean => {
+    const idClone = id.slice(0);
+    idClone.splice(-1, 1);
+    const parent = getXmlNode(xml, idClone);
+    return Array.isArray(parent) &&
+        id.length > 0 &&
+        parent.length - 1 > parseInt(id[id.length - 1], 10);
+};
 
 export const moveElementDown = (xml: Xml, id: string[]) =>
     modifyElement(xml, id, (parent: Element[], arrayIndex) => {
@@ -90,7 +105,7 @@ export const moveElementDown = (xml: Xml, id: string[]) =>
 
 export const newAttribute = (parameter: {name: string; value: string}) =>
     (xml: Xml, id: string[]) =>
-        modifyXml(id, xml, (parent) => {
+        modifyXml(xml, id, (parent) => {
             if (!parent.$) {
                 parent.$ = {};
             }
@@ -107,28 +122,28 @@ export const deleteAttribute = (xml: Xml, id: string[]) => deleteNode(xml, id);
 export const deleteNode = (xml: Xml, id: string[]) => {
     const idClone = id.slice(0);
     const nodeKey = idClone.splice(-1, 1);
-    return modifyXml(idClone, xml, (parent) => {
+    return modifyXml(xml, idClone, (parent) => {
         delete (parent as any)[nodeKey[0]];
         return parent;
     });
 };
 
-const modifyXml = (id: string[], xml: any, modifier: (xml: Element) => any): Xml => {
+const modifyXml = (xml: any, id: string[], modifier: (xml: Element) => any): Xml => {
     if (id.length > 1) {
         const idClone = id.slice(0);
         const first = idClone.splice(0, 1);
-        xml[first[0]] = modifyXml(idClone, xml[first[0]], modifier);
+        xml[first[0]] = modifyXml(xml[first[0]], idClone, modifier);
         return xml;
     }
     xml[id[0]] = modifier(xml[id[0]]);
     return xml;
 };
 
-export const getXmlNode = (id: string[], xml: any): any => {
+export const getXmlNode = (xml: any, id: string[]): any => {
     if (id.length > 1) {
         const idClone = id.slice(0);
         const first = idClone.splice(0, 1);
-        return getXmlNode(idClone, xml[first[0]]);
+        return getXmlNode(xml[first[0]], idClone);
     }
     return xml[id[0]];
 };
