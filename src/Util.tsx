@@ -28,6 +28,19 @@ export const newElementChild = (parameter: string) => async (xml: Xml, id: strin
     });
 };
 
+export const newTextChild = (parameter: string) => async (xml: Xml, id: string[]): Promise<Xml> => {
+    return modifyXml(xml, id, (parent) => {
+        if (!parent.$$) {
+            parent.$$ = [];
+        }
+        parent.$$.push({
+            '#name': '__text__',
+            _: parameter,
+        });
+        return parent;
+    });
+};
+
 const newElementSibling = async (xml: Xml, id: string[], sibling: string, indexDelta: number) => {
     const parser = new Parser();
     const element = await parser.parseString(sibling);
@@ -128,7 +141,7 @@ export const deleteNode = (xml: Xml, id: string[]) => {
     });
 };
 
-const modifyXml = (xml: any, id: string[], modifier: (xml: Element) => any): Xml => {
+export const modifyXml = (xml: any, id: string[], modifier: (xml: Element) => any): Xml => {
     if (id.length > 1) {
         const idClone = id.slice(0);
         const first = idClone.splice(0, 1);

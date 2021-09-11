@@ -15,6 +15,7 @@ import {
     newElementAfter,
     newElementBefore,
     newElementChild,
+    newTextChild,
     updateNode,
     askPicklist,
 } from '../src/Util';
@@ -39,6 +40,16 @@ describe('Modify XML functions', () => {
         };
         const newXml = await newElementChild('<child />')(xml, ['item']);
         expect(JSON.stringify(newXml)).toEqual('{"item":{"#name":"item","$$":[{"#name":"child"}]}}');
+    });
+
+    test('newTextChild() should add text child', async () => {
+        const xml = {
+            item: {
+                '#name': 'item',
+            },
+        };
+        const newXml = await newTextChild('text')(xml, ['item']);
+        expect(JSON.stringify(newXml)).toEqual('{"item":{"#name":"item","$$":[{"#name":"__text__","_":"text"}]}}');
     });
 
     test('newElementChild() should append child after other children', async () => {
