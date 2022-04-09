@@ -66,8 +66,6 @@ const formatCaption = (caption: string) => {
 export default class Bubble extends React.Component<Props> {
     public constructor(props: Props) {
         super(props);
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
         this.showMenuItem = this.showMenuItem.bind(this);
     }
 
@@ -219,22 +217,6 @@ export default class Bubble extends React.Component<Props> {
             );
         }
         return null;
-    }
-
-    private onSubmit(event: React.FormEvent<HTMLFormElement>): void {
-        const { actions, id, value, xml } = this.props;
-        actions.setXml(updateNode(xml, id, value));
-        actions.showBubble({
-            show: false,
-        });
-        event.preventDefault();
-    }
-
-    private onChange(event: React.FormEvent<HTMLInputElement>): void {
-        const { actions } = this.props;
-        actions.showBubble({
-            value: (event.target as HTMLInputElement).value,
-        });
     }
 
     private showMenuItem(menuItemSpec: MenuItemSpec): boolean {

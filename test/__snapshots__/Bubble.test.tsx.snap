@@ -36,6 +36,8 @@ exports[`Bubble component attribute asker bubble renders properly 1`] = `
 </div>
 `;
 
+exports[`Bubble component attribute asker bubble should be empty 1`] = `null`;
+
 exports[`Bubble component attribute menu bubble renders properly 1`] = `
 <div
   className="xonomyBubble nerd"
@@ -68,6 +70,8 @@ exports[`Bubble component attribute menu bubble renders properly 1`] = `
 </div>
 `;
 
+exports[`Bubble component attribute menu bubble should be empty 1`] = `null`;
+
 exports[`Bubble component captions should be correctly formatted 1`] = `
 <div
   className="xonomyBubble nerd"
@@ -92,7 +96,13 @@ exports[`Bubble component captions should be correctly formatted 1`] = `
           className="menuItem focusme"
           onClick={[Function]}
         >
-          
+          <span
+            className="icon"
+          >
+            <img
+              src="icon.png"
+            />
+          </span>
           <span
             className="techno"
           >
@@ -100,7 +110,6 @@ exports[`Bubble component captions should be correctly formatted 1`] = `
               className="punc"
             >
               &lt;
-              
             </span>
             <span
               className="elName"
@@ -114,13 +123,11 @@ exports[`Bubble component captions should be correctly formatted 1`] = `
               &gt;
             </span>
           </span>
-          
         </div>
         <div
           className="menuItem focusme"
           onClick={[Function]}
         >
-          
           <span
             className="techno"
           >
@@ -150,13 +157,11 @@ exports[`Bubble component captions should be correctly formatted 1`] = `
               "
             </span>
           </span>
-          
         </div>
         <div
           className="menuItem focusme"
           onClick={[Function]}
         >
-          
           <span
             className="techno"
           >
@@ -166,13 +171,11 @@ exports[`Bubble component captions should be correctly formatted 1`] = `
               key
             </span>
           </span>
-          
         </div>
         <div
           className="menuItem focusme"
           onClick={[Function]}
         >
-          
           <span
             className="techno"
           >
@@ -191,20 +194,17 @@ exports[`Bubble component captions should be correctly formatted 1`] = `
             >
               "
             </span>
-            
             <span
               className="punc"
             >
               "
             </span>
           </span>
-          
         </div>
         <div
           className="menuItem focusme"
           onClick={[Function]}
         >
-          
           <span
             className="techno"
           >
@@ -224,7 +224,6 @@ exports[`Bubble component captions should be correctly formatted 1`] = `
               "
             </span>
           </span>
-          
         </div>
       </div>
     </div>
@@ -264,7 +263,6 @@ exports[`Bubble component element bubble renders properly 1`] = `
               className="punc"
             >
               &lt;
-              
             </span>
             <span
               className="elName"
@@ -278,7 +276,6 @@ exports[`Bubble component element bubble renders properly 1`] = `
               &gt;
             </span>
           </span>
-          
         </div>
       </div>
     </div>

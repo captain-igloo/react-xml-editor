@@ -207,6 +207,7 @@ describe('Bubble component', () => {
                     menu: [{
                         action: deleteElement,
                         caption: '<element />',
+                        icon: 'icon.png',
                     },{
                         action: deleteElement,
                         caption: '@key="value"',
@@ -268,6 +269,46 @@ describe('Bubble component', () => {
                 type={BubbleType.MENU}
                 value="value"
                 xml={{root: {'#name': 'root', $$: [{'#name': 'element'}]}}}
+            />
+        );
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+
+    test('attribute menu bubble should be empty', async () => {
+        const component = renderer.create(
+            <Bubble
+                actions={{} as any}
+                attribute="attribute"
+                docSpec={{}}
+                element="root"
+                id={['root', '$', 'attribute']}
+                left={0}
+                mode="nerd"
+                show
+                top={0}
+                type={BubbleType.MENU}
+                value="value"
+                xml={{root: {'#name': 'root', $: {'attribute': 'value'}}}}
+            />
+        );
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+
+    test('attribute asker bubble should be empty', () => {
+        const component = renderer.create(
+            <Bubble
+                actions={{} as any}
+                attribute="attribute"
+                docSpec={{}}
+                element="root"
+                id={['root', '$', 'attribute']}
+                left={0}
+                mode="nerd"
+                show
+                top={0}
+                type={BubbleType.ASKER}
+                value="value"
+                xml={{}}
             />
         );
         expect(component.toJSON()).toMatchSnapshot();

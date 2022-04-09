@@ -40,6 +40,7 @@ const docSpec: DocSpec = {
             },{
                 action: Util.deleteElement,
                 caption: 'Delete this <item />',
+                icon: 'exclamation.png',
             },{
                 action: Util.newElementBefore('<item />'),
                 caption: 'New <item /> before this',
