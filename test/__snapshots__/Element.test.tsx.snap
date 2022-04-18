@@ -1,378 +1,375 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Element component collapsed element renders properly 1`] = `
-<div
-  className="element collapsed"
->
-  <span
-    className="connector"
-  >
-    <span
-      className="plusminus"
-      onClick={[Function]}
-    />
-    <span
-      className="draghandle"
-      draggable="true"
-    />
-  </span>
-  <span
-    className="tag opening"
-  >
-    <span
-      className="punc"
-    >
-      &lt;
-    </span>
-    <span
-      className="name"
-      onClick={[Function]}
-    >
-      root
-    </span>
-    <span
-      className="punc slash"
-    >
-      /
-    </span>
-    <span
-      className="punc"
-    >
-      &gt;
-    </span>
-  </span>
-  <span
-    className="prominentChildren"
-  />
-  <span
-    className="childrenCollapsed focusable"
-  >
-    text
-  </span>
+<div>
   <div
-    className="children"
+    class="element collapsed"
   >
-    <div
-      className="element noChildren"
+    <span
+      class="connector"
     >
       <span
-        className="connector"
-      >
-        <span
-          className="plusminus"
-          onClick={[Function]}
-        />
-        <span
-          className="draghandle"
-          draggable="true"
-        />
-      </span>
-      <span
-        className="tag opening"
-      >
-        <span
-          className="punc"
-        >
-          &lt;
-        </span>
-        <span
-          className="name"
-          onClick={[Function]}
-        >
-          child
-        </span>
-        <span
-          className="punc slash"
-        >
-          /
-        </span>
-        <span
-          className="punc"
-        >
-          &gt;
-        </span>
-      </span>
-      <span
-        className="prominentChildren"
+        class="plusminus"
+        title="Expand"
       />
       <span
-        className="childrenCollapsed focusable"
+        class="draghandle"
+        draggable="true"
       />
+    </span>
+    <span
+      class="tag opening"
+    >
+      <span
+        class="punc"
+      >
+        &lt;
+      </span>
+      <span
+        class="name"
+      >
+        root
+      </span>
+      <span
+        class="punc slash"
+      >
+        /
+      </span>
+      <span
+        class="punc"
+      >
+        &gt;
+      </span>
+    </span>
+    <span
+      class="prominentChildren"
+    />
+    <span
+      class="childrenCollapsed focusable"
+    >
+      text
+    </span>
+    <div
+      class="children"
+    >
       <div
-        className="children"
-      />
+        class="element noChildren"
+      >
+        <span
+          class="connector"
+        >
+          <span
+            class="plusminus"
+            title="Collapse"
+          />
+          <span
+            class="draghandle"
+            draggable="true"
+          />
+        </span>
+        <span
+          class="tag opening"
+        >
+          <span
+            class="punc"
+          >
+            &lt;
+          </span>
+          <span
+            class="name"
+          >
+            child
+          </span>
+          <span
+            class="punc slash"
+          >
+            /
+          </span>
+          <span
+            class="punc"
+          >
+            &gt;
+          </span>
+        </span>
+        <span
+          class="prominentChildren"
+        />
+        <span
+          class="childrenCollapsed focusable"
+        />
+        <div
+          class="children"
+        />
+      </div>
+      <div
+        class="textnode focusable"
+      >
+        <span
+          class="value"
+        >
+          text
+        </span>
+      </div>
     </div>
-    <div
-      className="textnode focusable"
-      onClick={[Function]}
+    <span
+      class="tag closing"
     >
       <span
-        className="value"
+        class="punc"
       >
-        text
+        &lt;
       </span>
-    </div>
+      <span
+        class="punc slash"
+      >
+        /
+      </span>
+      <span
+        class="name"
+      >
+        root
+      </span>
+      <span
+        class="punc"
+      >
+        &gt;
+      </span>
+    </span>
   </div>
-  <span
-    className="tag closing"
-  >
-    <span
-      className="punc"
-    >
-      &lt;
-    </span>
-    <span
-      className="punc slash"
-    >
-      /
-    </span>
-    <span
-      className="name"
-    >
-      root
-    </span>
-    <span
-      className="punc"
-    >
-      &gt;
-    </span>
-  </span>
 </div>
 `;
 
 exports[`Element component element with attribute renders properly 1`] = `
-<div
-  className="element noChildren"
->
-  <span
-    className="connector"
+<div>
+  <div
+    class="element noChildren"
   >
     <span
-      className="plusminus"
-      onClick={[Function]}
-    />
-    <span
-      className="draghandle"
-      draggable="true"
-    />
-  </span>
-  <span
-    className="tag opening"
-  >
-    <span
-      className="punc"
-    >
-      &lt;
-    </span>
-    <span
-      className="name"
-      onClick={[Function]}
-    >
-      root
-    </span>
-    <span
-      className="attributes"
+      class="connector"
     >
       <span
-        className="attribute"
+        class="plusminus"
+        title="Collapse"
+      />
+      <span
+        class="draghandle"
+        draggable="true"
+      />
+    </span>
+    <span
+      class="tag opening"
+    >
+      <span
+        class="punc"
+      >
+        &lt;
+      </span>
+      <span
+        class="name"
+      >
+        root
+      </span>
+      <span
+        class="attributes"
       >
         <span
-          className="punc"
-        >
-           
-        </span>
-        <span
-          className="name"
-          onClick={[Function]}
-        >
-          a
-        </span>
-        <span
-          className="punc"
-        >
-          =
-        </span>
-        <span
-          className="valueContainer"
-          onClick={[Function]}
+          class="attribute"
         >
           <span
-            className="punc"
+            class="punc"
           >
-            "
+             
           </span>
           <span
-            className="value"
+            class="name"
           >
-            b
+            a
           </span>
           <span
-            className="punc"
+            class="punc"
           >
-            "
+            =
+          </span>
+          <span
+            class="valueContainer"
+          >
+            <span
+              class="punc"
+            >
+              "
+            </span>
+            <span
+              class="value"
+            >
+              b
+            </span>
+            <span
+              class="punc"
+            >
+              "
+            </span>
           </span>
         </span>
       </span>
+      <span
+        class="punc slash"
+      >
+        /
+      </span>
+      <span
+        class="punc"
+      >
+        &gt;
+      </span>
     </span>
     <span
-      className="punc slash"
-    >
-      /
-    </span>
+      class="prominentChildren"
+    />
     <span
-      className="punc"
-    >
-      &gt;
-    </span>
-  </span>
-  <span
-    className="prominentChildren"
-  />
-  <span
-    className="childrenCollapsed focusable"
-  />
-  <div
-    className="children"
-  />
+      class="childrenCollapsed focusable"
+    />
+    <div
+      class="children"
+    />
+  </div>
 </div>
 `;
 
 exports[`Element component expanded element renders properly 1`] = `
-<div
-  className="element"
->
-  <span
-    className="connector"
-  >
-    <span
-      className="plusminus"
-      onClick={[Function]}
-    />
-    <span
-      className="draghandle"
-      draggable="true"
-    />
-  </span>
-  <span
-    className="tag opening"
-  >
-    <span
-      className="punc"
-    >
-      &lt;
-    </span>
-    <span
-      className="name"
-      onClick={[Function]}
-    >
-      root
-    </span>
-    <span
-      className="punc slash"
-    >
-      /
-    </span>
-    <span
-      className="punc"
-    >
-      &gt;
-    </span>
-  </span>
-  <span
-    className="prominentChildren"
-  />
-  <span
-    className="childrenCollapsed focusable"
-  >
-    text
-  </span>
+<div>
   <div
-    className="children"
+    class="element"
   >
-    <div
-      className="element noChildren"
+    <span
+      class="connector"
     >
       <span
-        className="connector"
-      >
-        <span
-          className="plusminus"
-          onClick={[Function]}
-        />
-        <span
-          className="draghandle"
-          draggable="true"
-        />
-      </span>
-      <span
-        className="tag opening"
-      >
-        <span
-          className="punc"
-        >
-          &lt;
-        </span>
-        <span
-          className="name"
-          onClick={[Function]}
-        >
-          child
-        </span>
-        <span
-          className="punc slash"
-        >
-          /
-        </span>
-        <span
-          className="punc"
-        >
-          &gt;
-        </span>
-      </span>
-      <span
-        className="prominentChildren"
+        class="plusminus"
+        title="Collapse"
       />
       <span
-        className="childrenCollapsed focusable"
+        class="draghandle"
+        draggable="true"
       />
+    </span>
+    <span
+      class="tag opening"
+    >
+      <span
+        class="punc"
+      >
+        &lt;
+      </span>
+      <span
+        class="name"
+      >
+        root
+      </span>
+      <span
+        class="punc slash"
+      >
+        /
+      </span>
+      <span
+        class="punc"
+      >
+        &gt;
+      </span>
+    </span>
+    <span
+      class="prominentChildren"
+    />
+    <span
+      class="childrenCollapsed focusable"
+    >
+      text
+    </span>
+    <div
+      class="children"
+    >
       <div
-        className="children"
-      />
+        class="element noChildren"
+      >
+        <span
+          class="connector"
+        >
+          <span
+            class="plusminus"
+            title="Collapse"
+          />
+          <span
+            class="draghandle"
+            draggable="true"
+          />
+        </span>
+        <span
+          class="tag opening"
+        >
+          <span
+            class="punc"
+          >
+            &lt;
+          </span>
+          <span
+            class="name"
+          >
+            child
+          </span>
+          <span
+            class="punc slash"
+          >
+            /
+          </span>
+          <span
+            class="punc"
+          >
+            &gt;
+          </span>
+        </span>
+        <span
+          class="prominentChildren"
+        />
+        <span
+          class="childrenCollapsed focusable"
+        />
+        <div
+          class="children"
+        />
+      </div>
+      <div
+        class="textnode focusable"
+      >
+        <span
+          class="value"
+        >
+          text
+        </span>
+      </div>
     </div>
-    <div
-      className="textnode focusable"
-      onClick={[Function]}
+    <span
+      class="tag closing"
     >
       <span
-        className="value"
+        class="punc"
       >
-        text
+        &lt;
       </span>
-    </div>
+      <span
+        class="punc slash"
+      >
+        /
+      </span>
+      <span
+        class="name"
+      >
+        root
+      </span>
+      <span
+        class="punc"
+      >
+        &gt;
+      </span>
+    </span>
   </div>
-  <span
-    className="tag closing"
-  >
-    <span
-      className="punc"
-    >
-      &lt;
-    </span>
-    <span
-      className="punc slash"
-    >
-      /
-    </span>
-    <span
-      className="name"
-    >
-      root
-    </span>
-    <span
-      className="punc"
-    >
-      &gt;
-    </span>
-  </span>
 </div>
 `;

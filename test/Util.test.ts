@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 
 import {
     askLongString,
@@ -102,6 +102,17 @@ describe('Modify XML functions', () => {
         };
         const newXml = duplicateElement(xml, ['item', '$$', '0']);
         expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"child1"},{"#name":"child1"}],"#name":"item"}}');
+    });
+
+    test('duplicateElement() should throw if node does not exist in xml', () => {
+        const xml = {
+            item: {
+                '#name': 'item',
+            },
+        };
+        expect(() => {
+            duplicateElement(xml, ['item', '$$', '0']);
+        }).toThrow();
     });
 
     test('duplicateElement() should throw if id is invalid', () => {
@@ -227,7 +238,7 @@ describe('Modify XML functions', () => {
             },
         };
         const newXml = deleteElement(xml, ['item', '$$', '0']);
-        expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[null],"#name":"item"}}');
+        expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[],"#name":"item"}}');
     });
 
     test('deleteAttribute() should delete attribute', () => {
@@ -244,7 +255,7 @@ describe('Modify XML functions', () => {
     });
 
     test('askString() should return <AskString /> component', () => {
-        const component = renderer.create(
+        const { container } = render(
             askString({
                 actions: {} as any,
                 defaultValue: 'defaultValue',
@@ -252,11 +263,11 @@ describe('Modify XML functions', () => {
                 xml: {},
             })
         );
-        expect(component.toJSON()).toMatchSnapshot();
+        expect(container).toMatchSnapshot();
     });
 
     test('askLongString() should return <AskString /> component', () => {
-        const component = renderer.create(
+        const { container } = render(
             askLongString({
                 actions: {} as any,
                 defaultValue: 'defaultValue',
@@ -264,11 +275,11 @@ describe('Modify XML functions', () => {
                 xml: {},
             })
         );
-        expect(component.toJSON()).toMatchSnapshot();
+        expect(container).toMatchSnapshot();
     });
 
     test('askPicklist() should return <AskPicklist /> component', () => {
-        const component = renderer.create(
+        const { container } = render(
             askPicklist([{
                 value: 'short', caption: 'short'
             },{
@@ -280,6 +291,6 @@ describe('Modify XML functions', () => {
                 xml: {},
             })
         );
-        expect(component.toJSON()).toMatchSnapshot();
+        expect(container).toMatchSnapshot();
     });
 });

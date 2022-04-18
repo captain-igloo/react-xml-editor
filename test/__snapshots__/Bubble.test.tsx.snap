@@ -1,68 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Bubble component attribute asker bubble renders properly 1`] = `
-<div
-  className="xonomyBubble nerd"
-  style={
-    Object {
-      "display": "block",
-      "left": 0,
-      "top": 0,
-    }
-  }
->
+<div>
   <div
-    className="inside"
+    class="xonomyBubble nerd"
+    style="left: 0px; top: 0px; display: block;"
   >
     <div
-      className="xonomyBubbleContent"
+      class="inside"
     >
-      <form
-        onSubmit={[Function]}
+      <div
+        class="xonomyBubbleContent"
       >
-        <input
-          className="textbox focusme"
-          name="val"
-          onChange={[Function]}
-          value="value"
-        />
-        <input
-          type="submit"
-          value="OK"
-        />
-      </form>
+        <form>
+          <input
+            aria-label="Value"
+            class="textbox focusme"
+            name="val"
+            value="value"
+          />
+          <input
+            type="submit"
+            value="OK"
+          />
+        </form>
+      </div>
     </div>
   </div>
 </div>
 `;
 
-exports[`Bubble component attribute asker bubble should be empty 1`] = `null`;
+exports[`Bubble component attribute asker bubble should be empty 1`] = `<div />`;
 
 exports[`Bubble component attribute menu bubble renders properly 1`] = `
-<div
-  className="xonomyBubble nerd"
-  style={
-    Object {
-      "display": "block",
-      "left": 0,
-      "top": 0,
-    }
-  }
->
+<div>
   <div
-    className="inside"
+    class="xonomyBubble nerd"
+    style="left: 0px; top: 0px; display: block;"
   >
     <div
-      className="xonomyBubbleContent"
+      class="inside"
     >
       <div
-        className="menu"
+        class="xonomyBubbleContent"
       >
         <div
-          className="menuItem focusme"
-          onClick={[Function]}
+          class="menu"
         >
-          Delete this attribute
+          <div
+            class="menuItem focusme"
+          >
+            Delete this attribute
+          </div>
         </div>
       </div>
     </div>
@@ -70,160 +59,153 @@ exports[`Bubble component attribute menu bubble renders properly 1`] = `
 </div>
 `;
 
-exports[`Bubble component attribute menu bubble should be empty 1`] = `null`;
+exports[`Bubble component attribute menu bubble should be empty 1`] = `<div />`;
+
+exports[`Bubble component bubble should not render if id is invalid 1`] = `<div />`;
 
 exports[`Bubble component captions should be correctly formatted 1`] = `
-<div
-  className="xonomyBubble nerd"
-  style={
-    Object {
-      "display": "block",
-      "left": 0,
-      "top": 0,
-    }
-  }
->
+<div>
   <div
-    className="inside"
+    class="xonomyBubble nerd"
+    style="left: 0px; top: 0px; display: block;"
   >
     <div
-      className="xonomyBubbleContent"
+      class="inside"
     >
       <div
-        className="menu"
+        class="xonomyBubbleContent"
       >
         <div
-          className="menuItem focusme"
-          onClick={[Function]}
+          class="menu"
         >
-          <span
-            className="icon"
-          >
-            <img
-              src="icon.png"
-            />
-          </span>
-          <span
-            className="techno"
+          <div
+            class="menuItem focusme"
           >
             <span
-              className="punc"
+              class="icon"
             >
-              &lt;
+              <img
+                src="icon.png"
+              />
             </span>
             <span
-              className="elName"
+              class="techno"
             >
-              element 
+              <span
+                class="punc"
+              >
+                &lt;
+              </span>
+              <span
+                class="elName"
+              >
+                element 
+              </span>
+              <span
+                class="punc"
+              >
+                /
+                &gt;
+              </span>
             </span>
-            <span
-              className="punc"
-            >
-              /
-              &gt;
-            </span>
-          </span>
-        </div>
-        <div
-          className="menuItem focusme"
-          onClick={[Function]}
-        >
-          <span
-            className="techno"
+          </div>
+          <div
+            class="menuItem focusme"
           >
             <span
-              className="atName"
+              class="techno"
             >
-              key
+              <span
+                class="atName"
+              >
+                key
+              </span>
+              <span
+                class="punc equals"
+              >
+                =
+              </span>
+              <span
+                class="punc"
+              >
+                "
+              </span>
+              <span
+                class="atValue"
+              >
+                value
+              </span>
+              <span
+                class="punc"
+              >
+                "
+              </span>
             </span>
-            <span
-              className="punc equals"
-            >
-              =
-            </span>
-            <span
-              className="punc"
-            >
-              "
-            </span>
-            <span
-              className="atValue"
-            >
-              value
-            </span>
-            <span
-              className="punc"
-            >
-              "
-            </span>
-          </span>
-        </div>
-        <div
-          className="menuItem focusme"
-          onClick={[Function]}
-        >
-          <span
-            className="techno"
+          </div>
+          <div
+            class="menuItem focusme"
           >
             <span
-              className="atName"
+              class="techno"
             >
-              key
+              <span
+                class="atName"
+              >
+                key
+              </span>
             </span>
-          </span>
-        </div>
-        <div
-          className="menuItem focusme"
-          onClick={[Function]}
-        >
-          <span
-            className="techno"
+          </div>
+          <div
+            class="menuItem focusme"
           >
             <span
-              className="atName"
+              class="techno"
             >
-              key
+              <span
+                class="atName"
+              >
+                key
+              </span>
+              <span
+                class="punc equals"
+              >
+                =
+              </span>
+              <span
+                class="punc"
+              >
+                "
+              </span>
+              <span
+                class="punc"
+              >
+                "
+              </span>
             </span>
-            <span
-              className="punc equals"
-            >
-              =
-            </span>
-            <span
-              className="punc"
-            >
-              "
-            </span>
-            <span
-              className="punc"
-            >
-              "
-            </span>
-          </span>
-        </div>
-        <div
-          className="menuItem focusme"
-          onClick={[Function]}
-        >
-          <span
-            className="techno"
+          </div>
+          <div
+            class="menuItem focusme"
           >
             <span
-              className="punc"
+              class="techno"
             >
-              "
+              <span
+                class="punc"
+              >
+                "
+              </span>
+              <span
+                class="atValue"
+              >
+                value
+              </span>
+              <span
+                class="punc"
+              >
+                "
+              </span>
             </span>
-            <span
-              className="atValue"
-            >
-              value
-            </span>
-            <span
-              className="punc"
-            >
-              "
-            </span>
-          </span>
+          </div>
         </div>
       </div>
     </div>
@@ -232,50 +214,25 @@ exports[`Bubble component captions should be correctly formatted 1`] = `
 `;
 
 exports[`Bubble component element bubble renders properly 1`] = `
-<div
-  className="xonomyBubble nerd"
-  style={
-    Object {
-      "display": "block",
-      "left": 0,
-      "top": 0,
-    }
-  }
->
+<div>
   <div
-    className="inside"
+    class="xonomyBubble nerd"
+    style="left: 0px; top: 0px; display: block;"
   >
     <div
-      className="xonomyBubbleContent"
+      class="inside"
     >
       <div
-        className="menu"
+        class="xonomyBubbleContent"
       >
         <div
-          className="menuItem focusme"
-          onClick={[Function]}
+          class="menu"
         >
-          Delete this 
-          <span
-            className="techno"
+          <div
+            class="menuItem focusme"
           >
-            <span
-              className="punc"
-            >
-              &lt;
-            </span>
-            <span
-              className="elName"
-            >
-              element 
-            </span>
-            <span
-              className="punc"
-            >
-              /
-              &gt;
-            </span>
-          </span>
+            Delete
+          </div>
         </div>
       </div>
     </div>
@@ -283,68 +240,60 @@ exports[`Bubble component element bubble renders properly 1`] = `
 </div>
 `;
 
-exports[`Bubble component element bubble without menu renders properly 1`] = `null`;
+exports[`Bubble component element bubble without menu renders properly 1`] = `<div />`;
 
 exports[`Bubble component menu item should be hidden if hideIf() returns true 1`] = `
-<div
-  className="xonomyBubble nerd"
-  style={
-    Object {
-      "display": "block",
-      "left": 0,
-      "top": 0,
-    }
-  }
->
+<div>
   <div
-    className="inside"
+    class="xonomyBubble nerd"
+    style="left: 0px; top: 0px; display: block;"
   >
     <div
-      className="xonomyBubbleContent"
+      class="inside"
     >
       <div
-        className="menu"
-      />
+        class="xonomyBubbleContent"
+      >
+        <div
+          class="menu"
+        />
+      </div>
     </div>
   </div>
 </div>
 `;
 
+exports[`Bubble component should not render if "show" is false 1`] = `<div />`;
+
 exports[`Bubble component text bubble renders properly 1`] = `
-<div
-  className="xonomyBubble nerd"
-  style={
-    Object {
-      "display": "block",
-      "left": 0,
-      "top": 0,
-    }
-  }
->
+<div>
   <div
-    className="inside"
+    class="xonomyBubble nerd"
+    style="left: 0px; top: 0px; display: block;"
   >
     <div
-      className="xonomyBubbleContent"
+      class="inside"
     >
-      <form
-        onSubmit={[Function]}
+      <div
+        class="xonomyBubbleContent"
       >
-        <textarea
-          className="textbox focusme"
-          name="val"
-          onChange={[Function]}
-          value="value"
-        />
-        <div
-          className="submitline"
-        >
-          <input
-            type="submit"
-            value="OK"
-          />
-        </div>
-      </form>
+        <form>
+          <textarea
+            class="textbox focusme"
+            name="val"
+          >
+            value
+          </textarea>
+          <div
+            class="submitline"
+          >
+            <input
+              type="submit"
+              value="OK"
+            />
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

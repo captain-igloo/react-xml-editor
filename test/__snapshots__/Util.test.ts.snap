@@ -1,88 +1,88 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Modify XML functions askLongString() should return <AskString /> component 1`] = `
-<form
-  onSubmit={[Function]}
->
-  <textarea
-    className="textbox focusme"
-    name="val"
-    onChange={[Function]}
-    value="defaultValue"
-  />
-  <div
-    className="submitline"
-  >
-    <input
-      type="submit"
-      value="OK"
-    />
-  </div>
-</form>
+<div>
+  <form>
+    <textarea
+      class="textbox focusme"
+      name="val"
+    >
+      defaultValue
+    </textarea>
+    <div
+      class="submitline"
+    >
+      <input
+        type="submit"
+        value="OK"
+      />
+    </div>
+  </form>
+</div>
 `;
 
 exports[`Modify XML functions askPicklist() should return <AskPicklist /> component 1`] = `
-<div
-  className="menu"
->
+<div>
   <div
-    className="menuItem focusme techno"
-    onClick={[Function]}
+    class="menu"
   >
-    <span
-      className="punc"
+    <div
+      class="menuItem focusme techno"
     >
-      "
-    </span>
-    short
-    <span
-      className="punc"
-    >
-      "
-    </span>
-    <span
-      className="explainer"
-    >
+      <span
+        class="punc"
+      >
+        "
+      </span>
       short
-    </span>
-  </div>
-  <div
-    className="menuItem focusme techno"
-    onClick={[Function]}
-  >
-    <span
-      className="punc"
+      <span
+        class="punc"
+      >
+        "
+      </span>
+      <span
+        class="explainer"
+      >
+        short
+      </span>
+    </div>
+    <div
+      class="menuItem focusme techno"
     >
-      "
-    </span>
-    long
-    <span
-      className="punc"
-    >
-      "
-    </span>
-    <span
-      className="explainer"
-    >
+      <span
+        class="punc"
+      >
+        "
+      </span>
       long
-    </span>
+      <span
+        class="punc"
+      >
+        "
+      </span>
+      <span
+        class="explainer"
+      >
+        long
+      </span>
+    </div>
   </div>
 </div>
 `;
 
 exports[`Modify XML functions askString() should return <AskString /> component 1`] = `
-<form
-  onSubmit={[Function]}
->
-  <input
-    className="textbox focusme"
-    name="val"
-    onChange={[Function]}
-    value="defaultValue"
-  />
-  <input
-    type="submit"
-    value="OK"
-  />
-</form>
+<div>
+  <form>
+    <input
+      aria-label="Value"
+      class="textbox focusme"
+      name="val"
+      value="defaultValue"
+    />
+    <input
+      type="submit"
+      value="OK"
+    />
+  </form>
+</div>
 `;

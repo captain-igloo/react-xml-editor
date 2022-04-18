@@ -1,6 +1,5 @@
 import {describe, expect, jest, test} from '@jest/globals';
-import renderer from 'react-test-renderer';
-
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import * as React from 'react';
 
 import Bubble from '../src/Bubble';
@@ -20,8 +19,7 @@ describe('Bubble component', () => {
                 },
             },
         };
-
-        const component = renderer.create(
+        const { container } = render(
             <Bubble
                 actions={{} as any}
                 attribute="attribute"
@@ -37,7 +35,7 @@ describe('Bubble component', () => {
                 xml={{}}
             />
         );
-        expect(component.toJSON()).toMatchSnapshot();
+        expect(container).toMatchSnapshot();
     });
 
     test('attribute menu bubble renders properly', async () => {
@@ -55,11 +53,9 @@ describe('Bubble component', () => {
                 },
             },
         };
-
         const setXml = jest.fn();
         const showBubble = jest.fn();
-
-        const component = renderer.create(
+        const { container } = render(
             <Bubble
                 actions={{ setXml, showBubble } as any}
                 attribute="attribute"
@@ -75,35 +71,70 @@ describe('Bubble component', () => {
                 xml={{root: {'#name': 'root', $: {'attribute': 'value'}}}}
             />
         );
-        const tree = component.toJSON();
-        expect(tree).toMatchSnapshot();
-        await tree.children[0].children[0].children[0].children[0].props.onClick();
-        expect(setXml.mock.calls[0][0]).toEqual({
+        expect(container).toMatchSnapshot();
+    });
+
+    test('Click attribute action should modify xml and close bubble', async () => {
+        const docSpec = {
+            elements: {
+                root: {
+                    attributes: {
+                        attribute: {
+                            menu: [{
+                                action: deleteAttribute,
+                                caption: 'Delete this attribute',
+                            }],
+                        },
+                    },
+                },
+            },
+        };
+        const setXml = jest.fn();
+        const showBubble = jest.fn();
+        const { getByText } = render(
+            <Bubble
+                actions={{ setXml, showBubble } as any}
+                attribute="attribute"
+                docSpec={docSpec}
+                element="root"
+                id={['root', '$', 'attribute']}
+                left={0}
+                mode="nerd"
+                show
+                top={0}
+                type={BubbleType.MENU}
+                value="value"
+                xml={{root: {'#name': 'root', $: {'attribute': 'value'}}}}
+            />
+        );
+        fireEvent.click(getByText('Delete this attribute'));
+        await waitFor(() => expect(setXml).toBeCalledWith({
             root: {
                 '#name': 'root',
-                $: {},
+                '$': {},
             },
-        });
-        expect(showBubble.mock.calls[0][0]).toEqual({
+        }));
+        expect(showBubble).toBeCalledWith({
             show: false,
         });
     });
 
-    test('element bubble renders properly', () => {
+    test('element bubble renders properly', async () => {
+        const setXml = jest.fn();
+        const showBubble = jest.fn();
         const docSpec = {
             elements: {
                 element: {
                     menu: [{
                         action: deleteElement,
-                        caption: 'Delete this <element />',
+                        caption: 'Delete',
                     }],
                 },
             },
         };
-
-        const component = renderer.create(
+        const { container } = render(
             <Bubble
-                actions={{} as any}
+                actions={{ setXml, showBubble } as any}
                 attribute="attribute"
                 docSpec={docSpec}
                 element="element"
@@ -114,14 +145,55 @@ describe('Bubble component', () => {
                 top={0}
                 type={BubbleType.ASKER}
                 value="value"
-                xml={{}}
+                xml={{root: {'#name': 'root', $$: [{'#name': 'element'}]}}}
             />
         );
-        expect(component.toJSON()).toMatchSnapshot();
+        expect(container).toMatchSnapshot();
+    });
+
+    test('Click element action should modify xml and close bubble', async () => {
+        const setXml = jest.fn();
+        const showBubble = jest.fn();
+        const docSpec = {
+            elements: {
+                element: {
+                    menu: [{
+                        action: deleteElement,
+                        caption: 'Delete',
+                    }],
+                },
+            },
+        };
+        const { getByText } = render(
+            <Bubble
+                actions={{ setXml, showBubble } as any}
+                attribute="attribute"
+                docSpec={docSpec}
+                element="element"
+                id={['root', '$$', '0']}
+                left={0}
+                mode="nerd"
+                show
+                top={0}
+                type={BubbleType.ASKER}
+                value="value"
+                xml={{root: {'#name': 'root', $$: [{'#name': 'element'}]}}}
+            />
+        );
+        fireEvent.click(getByText('Delete'));
+        await waitFor(() => expect(setXml).toBeCalledWith({
+            root: {
+                '#name': 'root',
+                '$$': [],
+            },
+        }));
+        expect(showBubble).toBeCalledWith({
+            show: false,
+        });
     });
 
     test('element bubble without menu renders properly', () => {
-        const component = renderer.create(
+        const { container } = render(
             <Bubble
                 actions={{} as any}
                 attribute="attribute"
@@ -137,11 +209,11 @@ describe('Bubble component', () => {
                 xml={{}}
             />
         );
-        expect(component.toJSON()).toMatchSnapshot();
+        expect(container).toMatchSnapshot();
     });
 
     test('text bubble renders properly', () => {
-        const component = renderer.create(
+        const { container } = render(
             <Bubble
                 actions={{} as any}
                 attribute="attribute"
@@ -157,11 +229,11 @@ describe('Bubble component', () => {
                 xml={{}}
             />
         );
-        expect(component.toJSON()).toMatchSnapshot();
+        expect(container).toMatchSnapshot();
     });
 
     test('bubble should not render if id is invalid', () => {
-        const component = renderer.create(
+        const { container } = render(
             <Bubble
                 actions={{} as any}
                 attribute="attribute"
@@ -177,11 +249,11 @@ describe('Bubble component', () => {
                 xml={{}}
             />
         );
-        expect(component.toJSON()).toBeNull();
+        expect(container).toMatchSnapshot();
     });
 
     test('should not render if "show" is false', () => {
-        const component = renderer.create(
+        const { container } = render(
             <Bubble
                 actions={{} as any}
                 attribute="attribute"
@@ -197,7 +269,7 @@ describe('Bubble component', () => {
                 xml={{}}
             />
         );
-        expect(component.toJSON()).toBeNull();
+        expect(container).toMatchSnapshot();
     });
 
     test('captions should be correctly formatted', () => {
@@ -224,7 +296,7 @@ describe('Bubble component', () => {
                 },
             },
         };
-        const component = renderer.create(
+        const { container } = render(
             <Bubble
                 actions={{} as any}
                 attribute="attribute"
@@ -240,7 +312,7 @@ describe('Bubble component', () => {
                 xml={{root: {'#name': 'root', $$: [{'#name': 'element'}]}}}
             />
         );
-        expect(component.toJSON()).toMatchSnapshot();
+        expect(container).toMatchSnapshot();
     });
 
     test('menu item should be hidden if hideIf() returns true', () => {
@@ -255,7 +327,7 @@ describe('Bubble component', () => {
                 },
             },
         };
-        const component = renderer.create(
+        const { container } = render(
             <Bubble
                 actions={{} as any}
                 attribute="attribute"
@@ -271,11 +343,11 @@ describe('Bubble component', () => {
                 xml={{root: {'#name': 'root', $$: [{'#name': 'element'}]}}}
             />
         );
-        expect(component.toJSON()).toMatchSnapshot();
+        expect(container).toMatchSnapshot();
     });
 
     test('attribute menu bubble should be empty', async () => {
-        const component = renderer.create(
+        const { container } = render(
             <Bubble
                 actions={{} as any}
                 attribute="attribute"
@@ -291,11 +363,11 @@ describe('Bubble component', () => {
                 xml={{root: {'#name': 'root', $: {'attribute': 'value'}}}}
             />
         );
-        expect(component.toJSON()).toMatchSnapshot();
+        expect(container).toMatchSnapshot();
     });
 
     test('attribute asker bubble should be empty', () => {
-        const component = renderer.create(
+        const { container } = render(
             <Bubble
                 actions={{} as any}
                 attribute="attribute"
@@ -311,6 +383,6 @@ describe('Bubble component', () => {
                 xml={{}}
             />
         );
-        expect(component.toJSON()).toMatchSnapshot();
+        expect(container).toMatchSnapshot();
     });
 });

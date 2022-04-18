@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc --build tsconfig.json",
     "build-demo": "webpack --mode=production",
-    "tslint": "tslint 'src/*.tsx' 'src/*.ts'",
+    "tslint": "tslint 'src/*.tsx' 'src/*.ts' 'test/*.tsx'",
     "test": "jest --coverage",
     "watch": "tsc --build tsconfig.json --watch ",
     "watch-demo": "webpack --mode=development --watch"
@@ -30,13 +30,13 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@testing-library/react": "^13.0.1",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@types/xml2js": "^0.4.9",
     "jest": "^27.5.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-test-renderer": "^18.0.0",
     "ts-loader": "^9.2.8",
     "ts-node": "^10.7.0",
     "tslint": "^6.1.3",

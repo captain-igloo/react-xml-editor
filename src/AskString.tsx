@@ -45,6 +45,7 @@ export default class AskString extends React.Component<Props, State> {
         return (
             <>
                 <input
+                    aria-label="Value"
                     name="val"
                     className="textbox focusme"
                     onChange={ this.onChange }

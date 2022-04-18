@@ -1,66 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AskPicklist component AskPicklist renders properly 1`] = `
-<div
-  className="menu"
->
+<div>
   <div
-    className="menuItem focusme techno"
-    onClick={[Function]}
+    class="menu"
   >
-    <span
-      className="punc"
+    <div
+      class="menuItem focusme techno"
     >
-      "
-    </span>
-    short
-    <span
-      className="punc"
-    >
-      "
-    </span>
-    <span
-      className="explainer"
-    >
+      <span
+        class="punc"
+      >
+        "
+      </span>
       short
-    </span>
-  </div>
-  <div
-    className="menuItem focusme techno"
-    onClick={[Function]}
-  >
-    <span
-      className="punc"
+      <span
+        class="punc"
+      >
+        "
+      </span>
+      <span
+        class="explainer"
+      >
+        short
+      </span>
+    </div>
+    <div
+      class="menuItem focusme techno"
     >
-      "
-    </span>
-    medium
-    <span
-      className="punc"
-    >
-      "
-    </span>
-    <span
-      className="explainer"
-    >
+      <span
+        class="punc"
+      >
+        "
+      </span>
       medium
-    </span>
-  </div>
-  <div
-    className="menuItem focusme techno"
-    onClick={[Function]}
-  >
-    <span
-      className="punc"
+      <span
+        class="punc"
+      >
+        "
+      </span>
+      <span
+        class="explainer"
+      >
+        medium
+      </span>
+    </div>
+    <div
+      class="menuItem focusme techno"
     >
-      "
-    </span>
-    long
-    <span
-      className="punc"
-    >
-      "
-    </span>
+      <span
+        class="punc"
+      >
+        "
+      </span>
+      long
+      <span
+        class="punc"
+      >
+        "
+      </span>
+    </div>
   </div>
 </div>
 `;

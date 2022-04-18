@@ -1,26 +1,26 @@
-import {describe, expect, test} from '@jest/globals';
+import { describe, expect, jest, test } from '@jest/globals';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import * as React from 'react';
-import renderer from 'react-test-renderer';
 
+import * as Util from '../src/Util';
 import XmlEditor from '../src/XmlEditor';
 
 describe('XmlEditor component', () => {
     test('xml editor renders properly', () => {
         const ref: React.RefObject<XmlEditor> = React.createRef();
-        const component = renderer.create(
+        const { container } = render(
             <XmlEditor
                 docSpec={{}}
                 ref={ref}
                 xml="<xml />"
             />
         );
-        const tree = component.toJSON();
-        expect(tree).toMatchSnapshot();
+        expect(container).toMatchSnapshot();
     });
 
     test('getXml() returns xml', () => {
         const ref: React.RefObject<XmlEditor> = React.createRef();
-        renderer.create(
+        render(
             <XmlEditor
                 docSpec={{}}
                 ref={ref}
@@ -30,15 +30,61 @@ describe('XmlEditor component', () => {
         expect(ref.current.getXml()).toBe(undefined);
     });
 
-    test('click should hide bubble', () => {
-        const component = renderer.create(
+    test('click should hide bubble', async () => {
+        const {
+            container,
+            getByLabelText,
+            getByText,
+            queryByLabelText,
+        } = render(
             <XmlEditor
-                docSpec={{}}
+                docSpec={{
+                    elements: {
+                        xml: {
+                            attributes: {
+                                foo: {
+                                    asker: Util.askString,
+                                }
+                            }
+                        }
+                    }
+                }}
                 ref={React.createRef()}
-                xml="<xml />"
+                xml='<xml foo="bar" />'
             />
         );
-        component.toJSON().props.onClick();
-        expect(component.getInstance().state.bubble.show).toBe(false);
+        await waitFor(() => getByText('bar'));
+        fireEvent.click(getByText('bar'));
+        // bubble open
+        expect(getByLabelText('Value')).toBeTruthy();
+        fireEvent.click(container.firstChild);
+        // bubble closed
+        expect(queryByLabelText('Value')).not.toBeTruthy();
+    });
+
+    test('Change xml should call onChange handler', async () => {
+        const onChange = jest.fn();
+        const { getByDisplayValue, getByText } = render(
+            <XmlEditor
+                docSpec={{
+                    elements: {
+                        xml: {
+                            attributes: {
+                                foo: {
+                                    asker: Util.askString,
+                                }
+                            }
+                        }
+                    }
+                }}
+                onChange={onChange}
+                ref={React.createRef()}
+                xml='<xml foo="bar" />'
+            />
+        );
+        await waitFor(() => getByText('bar'));
+        fireEvent.click(getByText('bar'));
+        fireEvent.click(getByDisplayValue('OK'));
+        expect(onChange).toBeCalled();
     });
 });

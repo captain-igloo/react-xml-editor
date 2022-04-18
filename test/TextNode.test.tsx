@@ -1,43 +1,39 @@
 import {describe, expect, jest, test} from '@jest/globals';
+import { fireEvent, render } from '@testing-library/react';
 import * as React from 'react';
-import renderer from 'react-test-renderer';
 
 import TextNode from '../src/TextNode';
 
 describe('TextNode component', () => {
     test('text node renders properly', () => {
+        const { container } = render(
+            <TextNode
+                actions={{} as any}
+                element="element"
+                id={['id']}
+                text="text"
+            />
+        );
+        expect(container).toMatchSnapshot();
+    });
+
+    test('Click should show bubble', () => {
         const showBubble = jest.fn();
-        const component = renderer.create(
+        const { getByText } = render(
             <TextNode
                 actions={{ showBubble } as any}
                 element="element"
                 id={['id']}
                 text="text"
-            />,{
-                createNodeMock: () => {
-                    return {
-                        getBoundingClientRect: () => ({
-                            left: 88,
-                            top: 99,
-                        }),
-                    };
-                }
-            }
+            />
         );
-        const tree = component.toJSON();
-        const stopPropagation = jest.fn();
-        tree.props.onClick({
-            stopPropagation,
-        });
-        expect(tree).toMatchSnapshot();
-        expect(stopPropagation.mock.calls.length).toBe(1);
-        expect(showBubble.mock.calls.length).toBe(1);
-        expect(showBubble.mock.calls[0][0]).toEqual({
+        fireEvent.click(getByText('text'));
+        expect(showBubble).toBeCalledWith({
             element: 'element',
             id: ['id'],
-            left: 88,
+            left: 0,
             show: true,
-            top: 99,
+            top: 0,
             value: 'text',
         });
     });

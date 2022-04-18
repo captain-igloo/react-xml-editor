@@ -21,7 +21,6 @@ const hasCaption = (menuItem: AskPicklistMenuItem): menuItem is AskPicklistCapti
 };
 
 export default class AskPicklist extends React.Component<Props> {
-
     public render(): React.ReactNode {
         const { parameter } = this.props;
 

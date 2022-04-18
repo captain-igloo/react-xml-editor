@@ -1,48 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Attributes component renders properly 1`] = `
-<span
-  className="attributes"
->
+<div>
   <span
-    className="attribute"
+    class="attributes"
   >
     <span
-      className="punc"
-    >
-       
-    </span>
-    <span
-      className="name"
-      onClick={[Function]}
-    >
-      a
-    </span>
-    <span
-      className="punc"
-    >
-      =
-    </span>
-    <span
-      className="valueContainer"
-      onClick={[Function]}
+      class="attribute"
     >
       <span
-        className="punc"
+        class="punc"
       >
-        "
+         
       </span>
       <span
-        className="value"
+        class="name"
       >
-        b
+        a
       </span>
       <span
-        className="punc"
+        class="punc"
       >
-        "
+        =
+      </span>
+      <span
+        class="valueContainer"
+      >
+        <span
+          class="punc"
+        >
+          "
+        </span>
+        <span
+          class="value"
+        >
+          b
+        </span>
+        <span
+          class="punc"
+        >
+          "
+        </span>
       </span>
     </span>
   </span>
-</span>
+</div>
 `;

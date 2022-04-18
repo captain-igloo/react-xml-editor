@@ -66,7 +66,7 @@ const modifyElement = (xml: Xml, id: string[], modifier: (xml: Element[], arrayI
             if (Array.isArray(parent)) {
                 return modifier(parent, arrayIndex);
             }
-            return parent;
+            throw new Error(`Failed to find node: ${id}`);
         });
     }
     throw new Error(`Invalid id: ${id}`);
@@ -136,7 +136,11 @@ export const deleteNode = (xml: Xml, id: string[]) => {
     const idClone = id.slice(0);
     const nodeKey = idClone.splice(-1, 1);
     return modifyXml(xml, idClone, (parent) => {
-        delete (parent as any)[nodeKey[0]];
+        if (Array.isArray(parent)) {
+            parent.splice(parseInt(nodeKey[0], 10), 1);
+        } else {
+            delete (parent as any)[nodeKey[0]];
+        }
         return parent;
     });
 };

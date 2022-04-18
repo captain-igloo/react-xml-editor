@@ -83,8 +83,10 @@ export default class Element extends React.Component<Props> {
         if (elements.length === 0) {
             elementClass = ' noChildren';
         }
+        let expandCollapseLabel = 'Collapse';
         if (collapsed) {
             elementClass += ' collapsed';
+            expandCollapseLabel = 'Expand';
         }
 
         const openingTag = (
@@ -113,7 +115,7 @@ export default class Element extends React.Component<Props> {
             <React.Fragment>
                 <div className={`element${elementClass}`}>
                     <span className="connector">
-                        <span className="plusminus" onClick={ this.onCollapse } />
+                        <span className="plusminus" onClick={ this.onCollapse } title={ expandCollapseLabel } />
                         <span className="draghandle" draggable="true" />
                     </span>
                     { openingTag }

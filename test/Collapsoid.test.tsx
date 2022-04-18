@@ -1,5 +1,5 @@
-import {describe, expect, jest, test} from '@jest/globals';
-import renderer from 'react-test-renderer';
+import {describe, expect, test} from '@jest/globals';
+import { render } from '@testing-library/react';
 
 import * as React from 'react';
 
@@ -17,12 +17,11 @@ describe('Attribute component', () => {
             }],
             '#name': 'name',
         }];
-        const component = renderer.create(
+        const { container } = render(
             <Collapsoid
                 elements={elements}
             />
         );
-        let tree = component.toJSON();
-        expect(tree).toMatchSnapshot();
+        expect(container).toMatchSnapshot();
     });
 });

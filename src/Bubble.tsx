@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { BubbleType, Actions, DocSpec, MenuItemSpec, Xml } from './types';
-import { askLongString, updateNode } from './Util';
+import { askLongString } from './Util';
 
 interface Props {
     actions: Actions;

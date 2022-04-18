@@ -1,5 +1,5 @@
-import {describe, expect, jest, test} from '@jest/globals';
-import renderer from 'react-test-renderer';
+import { describe, expect, jest, test } from '@jest/globals';
+import { render, fireEvent } from '@testing-library/react';
 import * as React from 'react';
 
 import AskString, { AskStringType } from '../src/AskString';
@@ -7,7 +7,7 @@ import { Actions, Xml } from '../src/types';
 
 describe('AskString component', () => {
     test('ask short string renders properly', () => {
-        const component = renderer.create(
+        const { container } = render(
             <AskString
                 actions={{} as Actions}
                 defaultValue="defaultValue"
@@ -16,70 +16,32 @@ describe('AskString component', () => {
                 xml={ {} as Xml }
             />
         );
-        expect(component.toJSON()).toMatchSnapshot();
+        expect(container).toMatchSnapshot();
     });
 
-    test('change', () => {
-        const component = renderer.create(
-            <AskString
-                actions={{} as any} 
-                defaultValue="defaultValue"
-                id={['id']}
-                type={ AskStringType.SHORT }
-                xml={ {} as Xml }
-            />
-        );  
-        let tree = component.toJSON();
-        tree.children[0].props.onChange({
-            target: {
-                value: 'new value',
-            }
-        });
-        tree = component.toJSON();
-        expect(tree).toMatchSnapshot();
-    });
-
-    test('submit should set value in xml', () => {
+    test('Click OK should set xml and hide bubble', () => {
         const setXml = jest.fn();
         const showBubble = jest.fn();
-        const actions = {
-            setXml,
-            showBubble,
-        };
-        const component = renderer.create(
+        const { getByDisplayValue, getByLabelText } = render(
             <AskString
-                actions={actions as any} 
+                actions={{ setXml, showBubble } as any}
                 defaultValue="defaultValue"
                 id={['id']}
                 type={ AskStringType.SHORT }
                 xml={ {} as Xml }
             />
         );
-        const tree = component.toJSON();
-        const preventDefault = jest.fn();
-        tree.props.onSubmit({
-            preventDefault,
+        fireEvent.change(getByLabelText('Value'), {
+            target: {
+                value: 'new value',
+            },
         });
-        expect(setXml.mock.calls[0][0]).toEqual({
-            id: 'defaultValue',
+        fireEvent.click(getByDisplayValue('OK'));
+        expect(setXml).toBeCalledWith({
+            id: 'new value',
         });
-        expect(showBubble.mock.calls[0][0]).toEqual({
+        expect(showBubble).toBeCalledWith({
             show: false,
         });
-        expect(preventDefault.mock.calls.length).toBe(1);
-    });
-
-    test('ask long string renders properly', () => {
-        const component = renderer.create(
-            <AskString
-                actions={{} as Actions}
-                defaultValue="defaultValue"
-                id={['id']}
-                type={ AskStringType.LONG }
-                xml={ {} as Xml }
-            />
-        );
-        let tree = component.toJSON();
-        expect(tree).toMatchSnapshot();
     });
 });
