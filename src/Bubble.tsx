@@ -45,9 +45,9 @@ const formatCaption = (caption: string) => {
                 value = (
                     <React.Fragment>
                         { equals }
-                        <span className="punc">"</span>
-                        {attrMatches[2] && <span className="atValue">{ attrMatches[2] }</span>}
-                        <span className="punc">"</span>
+                        <span className="punc">&quot;</span>
+                        { attrMatches[2] && <span className="atValue">{ attrMatches[2] }</span> }
+                        <span className="punc">&quot;</span>
                     </React.Fragment>
                 );
             }
@@ -205,12 +205,12 @@ export default class Bubble extends React.Component<Props> {
                 <div className={`xonomyBubble ${mode}`} style={{ left, top, display: 'block' }}>
                     <div className="inside">
                         <div className="xonomyBubbleContent">
-                        { asker({
-                            actions,
-                            defaultValue: value,
-                            id,
-                            xml,
-                        }) }
+                            { asker({
+                                actions,
+                                defaultValue: value,
+                                id,
+                                xml,
+                            }) }
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,7 @@ import { push } from './Util';
 
 interface Props {
     actions: Actions;
-    attributes: {[key: string]: string};
+    attributes: { [key: string]: string };
     id: string[];
     element: string;
 }

@@ -1,4 +1,9 @@
-import {describe, expect, jest, test} from '@jest/globals';
+import {
+    describe,
+    expect,
+    jest,
+    test,
+} from '@jest/globals';
 import { render, fireEvent } from '@testing-library/react';
 import * as React from 'react';
 
@@ -15,7 +20,7 @@ describe('Attribute component', () => {
                 id={['id']}
                 name="name"
                 value="value"
-            />
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -29,7 +34,7 @@ describe('Attribute component', () => {
                 id={['id']}
                 name="name"
                 value="value"
-            />
+            />,
         );
         fireEvent.click(getByText('value'));
         expect(showBubble).toBeCalledWith({
@@ -53,7 +58,7 @@ describe('Attribute component', () => {
                 id={['id']}
                 name="name"
                 value="value"
-            />
+            />,
         );
         fireEvent.click(getByText('name'));
         expect(showBubble).toBeCalledWith({
@@ -68,5 +73,3 @@ describe('Attribute component', () => {
         });
     });
 });
-
-

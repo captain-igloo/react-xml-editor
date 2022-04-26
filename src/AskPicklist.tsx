@@ -43,9 +43,9 @@ export default class AskPicklist extends React.Component<Props> {
                         e.preventDefault();
                     }}
                 >
-                    <span className="punc">"</span>
+                    <span className="punc">&quot;</span>
                     { value }
-                    <span className="punc">"</span>
+                    <span className="punc">&quot;</span>
                     { caption }
                 </div>
             );

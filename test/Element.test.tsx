@@ -1,4 +1,9 @@
-import { describe, expect, jest, test } from '@jest/globals';
+import {
+    describe,
+    expect,
+    jest,
+    test,
+} from '@jest/globals';
 import { fireEvent, render } from '@testing-library/react';
 import * as React from 'react';
 
@@ -9,12 +14,12 @@ describe('Element component', () => {
         const { container } = render(
             <Element
                 actions={{} as any}
-                childElements={[{'#name': 'child'}, {'#name': '__text__', _: 'text'}]}
+                childElements={[{ '#name': 'child' }, { '#name': '__text__', _: 'text' }]}
                 collapsed={ false }
                 name="root"
                 id={['root']}
                 xml={{ root: { '#name': 'root' } }}
-            />
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -23,12 +28,12 @@ describe('Element component', () => {
         const { container } = render(
             <Element
                 actions={{} as any}
-                childElements={[{'#name': 'child'}, {'#name': '__text__', _: 'text'}]}
+                childElements={[{ '#name': 'child' }, { '#name': '__text__', _: 'text' }]}
                 collapsed
                 name="root"
                 id={['root']}
                 xml={{ root: { '#name': 'root' } }}
-            />
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -37,12 +42,12 @@ describe('Element component', () => {
         const { container } = render(
             <Element
                 actions={{} as any}
-                attributes={{a: 'b'}}
+                attributes={{ a: 'b' }}
                 collapsed={ false }
                 name="root"
                 id={['root']}
-                xml={{ root: { $: {a: 'b'}, '#name': 'root' } }}
-            />
+                xml={{ root: { $: { a: 'b' }, '#name': 'root' } }}
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -57,7 +62,7 @@ describe('Element component', () => {
                 name="root"
                 id={['root']}
                 xml={{ root: { '#name': 'root' } }}
-            />
+            />,
         );
         fireEvent.click(getByTitle('Collapse'));
         expect(setXml.mock.calls[0][0]).toEqual({
@@ -80,7 +85,7 @@ describe('Element component', () => {
                 name="root"
                 id={['root']}
                 xml={{ root: { '#name': 'root' } }}
-            />
+            />,
         );
         fireEvent.click(getByText('root'));
         expect(showBubble.mock.calls[0][0]).toEqual({

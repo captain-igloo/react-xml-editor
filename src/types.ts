@@ -10,7 +10,7 @@ export type Asker = (options: AskerOptions) => React.ReactNode;
 export interface AskPicklistCaptionMenuItem {
     caption: string;
     value: string
-};
+}
 
 export type AskPicklistMenuItem = AskPicklistCaptionMenuItem | string;
 
@@ -22,12 +22,12 @@ export interface AttributeSpec {
 
 export interface ElementsSpec {
     asker?: Asker;
-    attributes?: {[key: string]: AttributeSpec};
+    attributes?: { [key: string]: AttributeSpec };
     menu?: MenuItemSpec[];
 }
 
 export interface DocSpec {
-    elements?: {[key: string]: ElementsSpec};
+    elements?: { [key: string]: ElementsSpec };
 }
 
 export interface Xml {
@@ -65,7 +65,7 @@ export interface AskerOptions {
 
 export interface Element {
     _?: string;
-    $?: {[key: string]: string};
+    $?: { [key: string]: string };
     $$?: Element[];
     '#collapsed'?: boolean;
     '#name': string;

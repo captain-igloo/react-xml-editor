@@ -20,15 +20,21 @@ export interface BuilderOptions {
 
 export default class Builder {
     private attrKey = '$';
+
     private charKey = '_';
+
     private childKey = '$$';
+
     private textKey = '__text__';
+
     private headless: boolean;
+
     private xmldec: {
         encoding?: string;
         standalone?: boolean;
         version?: string;
     };
+
     private doctype?: {
         pubID?: string;
         sysID?: string;

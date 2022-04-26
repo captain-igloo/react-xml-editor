@@ -29,9 +29,9 @@ export default class Attribute extends React.Component<Props> {
                 <span className="name" onClick={ this.onClickName }>{ name }</span>
                 <span className="punc">=</span>
                 <span className="valueContainer" onClick={ this.onClickValue } ref={ this.ref }>
-                    <span className="punc">"</span>
+                    <span className="punc">&quot;</span>
                     <span className="value">{ value }</span>
-                    <span className="punc">"</span>
+                    <span className="punc">&quot;</span>
                 </span>
             </span>
         );

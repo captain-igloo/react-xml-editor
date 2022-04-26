@@ -1,4 +1,4 @@
-import {describe, expect, test} from '@jest/globals';
+import { describe, expect, test } from '@jest/globals';
 import { render } from '@testing-library/react';
 
 import * as React from 'react';
@@ -10,7 +10,7 @@ describe('Attribute component', () => {
         const elements = [{
             _: 'text1',
             '#name': '__text__',
-        },{
+        }, {
             '$$': [{
                 _: 'text2',
                 '#name': '__text__',
@@ -20,7 +20,7 @@ describe('Attribute component', () => {
         const { container } = render(
             <Collapsoid
                 elements={elements}
-            />
+            />,
         );
         expect(container).toMatchSnapshot();
     });

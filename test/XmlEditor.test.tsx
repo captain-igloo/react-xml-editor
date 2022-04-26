@@ -13,7 +13,7 @@ describe('XmlEditor component', () => {
                 docSpec={{}}
                 ref={ref}
                 xml="<xml />"
-            />
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -25,9 +25,9 @@ describe('XmlEditor component', () => {
                 docSpec={{}}
                 ref={ref}
                 xml="<xml />"
-            />
+            />,
         );
-        expect(ref.current.getXml()).toBe(undefined);
+        expect(ref.current?.getXml()).toBe(undefined);
     });
 
     test('click should hide bubble', async () => {
@@ -44,20 +44,20 @@ describe('XmlEditor component', () => {
                             attributes: {
                                 foo: {
                                     asker: Util.askString,
-                                }
-                            }
-                        }
-                    }
+                                },
+                            },
+                        },
+                    },
                 }}
                 ref={React.createRef()}
                 xml='<xml foo="bar" />'
-            />
+            />,
         );
         await waitFor(() => getByText('bar'));
         fireEvent.click(getByText('bar'));
         // bubble open
         expect(getByLabelText('Value')).toBeTruthy();
-        fireEvent.click(container.firstChild);
+        fireEvent.click(container.firstChild as any);
         // bubble closed
         expect(queryByLabelText('Value')).not.toBeTruthy();
     });
@@ -72,15 +72,15 @@ describe('XmlEditor component', () => {
                             attributes: {
                                 foo: {
                                     asker: Util.askString,
-                                }
-                            }
-                        }
-                    }
+                                },
+                            },
+                        },
+                    },
                 }}
                 onChange={onChange}
                 ref={React.createRef()}
                 xml='<xml foo="bar" />'
-            />
+            />,
         );
         await waitFor(() => getByText('bar'));
         fireEvent.click(getByText('bar'));

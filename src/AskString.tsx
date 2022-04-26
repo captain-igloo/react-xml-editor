@@ -65,7 +65,7 @@ export default class AskString extends React.Component<Props, State> {
                     className="textbox focusme"
                     onChange={ this.onChange }
                     value={value}
-                 />
+                />
                 <div className="submitline">
                     <input type="submit" value="OK" />
                 </div>

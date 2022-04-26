@@ -1,4 +1,9 @@
-import {describe, expect, jest, test} from '@jest/globals';
+import {
+    describe,
+    expect,
+    jest,
+    test,
+} from '@jest/globals';
 import { fireEvent, render } from '@testing-library/react';
 import * as React from 'react';
 
@@ -12,7 +17,7 @@ describe('TextNode component', () => {
                 element="element"
                 id={['id']}
                 text="text"
-            />
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -25,7 +30,7 @@ describe('TextNode component', () => {
                 element="element"
                 id={['id']}
                 text="text"
-            />
+            />,
         );
         fireEvent.click(getByText('text'));
         expect(showBubble).toBeCalledWith({

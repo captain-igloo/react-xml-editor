@@ -3,11 +3,17 @@ import * as React from 'react';
 import Bubble from './Bubble';
 import Element from './Element';
 import Parser from './Parser';
-import { BubbleType, Actions, BubbleOptions, DocSpec, Xml } from './types';
+import {
+    BubbleType,
+    Actions,
+    BubbleOptions,
+    DocSpec,
+    Xml,
+} from './types';
 
 type DefaultProps = {
     mode: 'laic' | 'nerd';
-}
+};
 
 type Props = {
     docSpec: DocSpec;
@@ -55,20 +61,9 @@ export default class XmlEditor extends React.Component<Props & DefaultProps, Sta
         });
     }
 
-    public render(): React.ReactNode {
-        const { mode } = this.props;
-        return (
-            <React.Fragment>
-                <div className={`xonomy ${mode}`} onClick={ this.onClick }>
-                    { this.getRootNode() }
-                </div>
-                { this.getBubble() }
-            </React.Fragment>
-        );
-    }
-
     public getXml() {
-        return this.state.xml;
+        const { xml } = this.state;
+        return xml;
     }
 
     private onClick() {
@@ -95,6 +90,18 @@ export default class XmlEditor extends React.Component<Props & DefaultProps, Sta
         }));
     }
 
+    public render(): React.ReactNode {
+        const { mode } = this.props;
+        return (
+            <>
+                <div className={`xonomy ${mode}`} onClick={this.onClick}>
+                    { this.getRootNode() }
+                </div>
+                { this.getBubble() }
+            </>
+        );
+    }
+
     private getActions(): Actions {
         return {
             setXml: this.setXml,
@@ -104,22 +111,22 @@ export default class XmlEditor extends React.Component<Props & DefaultProps, Sta
 
     private getBubble(): React.ReactNode {
         const { docSpec, mode } = this.props;
-        const { bubble, xml} = this.state;
+        const { bubble, xml } = this.state;
         if (xml) {
             return (
                 <Bubble
-                    actions={ this.getActions() }
-                    attribute={ bubble.attribute }
-                    docSpec={ docSpec }
-                    element={ bubble.element }
-                    id={ bubble.id }
-                    left={ bubble.left }
-                    mode={ mode }
-                    show={ bubble.show }
-                    top={ bubble.top }
-                    type={ bubble.type }
-                    value={ bubble.value }
-                    xml={ xml }
+                    actions={this.getActions()}
+                    attribute={bubble.attribute}
+                    docSpec={docSpec}
+                    element={bubble.element}
+                    id={bubble.id}
+                    left={bubble.left}
+                    mode={mode}
+                    show={bubble.show}
+                    top={bubble.top}
+                    type={bubble.type}
+                    value={bubble.value}
+                    xml={xml}
                 />
             );
         }
@@ -132,13 +139,13 @@ export default class XmlEditor extends React.Component<Props & DefaultProps, Sta
             const key = Object.keys(xml)[0];
             return (
                 <Element
-                    actions={ this.getActions() }
-                    attributes={ xml[key].$ }
-                    childElements={ xml[key].$$ }
-                    collapsed={ xml[key]['#collapsed'] }
-                    id={ [key] }
-                    name={ key }
-                    xml={ xml }
+                    actions={this.getActions()}
+                    attributes={xml[key].$}
+                    childElements={xml[key].$$}
+                    collapsed={xml[key]['#collapsed']}
+                    id={[key]}
+                    name={key}
+                    xml={xml}
                 />
             );
         }

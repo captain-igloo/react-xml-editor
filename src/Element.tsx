@@ -8,7 +8,7 @@ import { push, updateNode } from './Util';
 
 interface Props {
     actions: Actions;
-    attributes?: {[key: string]: string};
+    attributes?: { [key: string]: string };
     childElements?: ElementConfig[];
     collapsed?: boolean;
     id: string[];
@@ -50,7 +50,7 @@ export default class Element extends React.Component<Props> {
                             key={index}
                             name={childElement['#name']}
                             xml={xml}
-                        />
+                        />,
                     );
                 } else if (childElement._) {
                     elements.push(
@@ -60,7 +60,7 @@ export default class Element extends React.Component<Props> {
                             id={push(id, '$$', `${index}`, '_')}
                             key={index}
                             text={childElement._}
-                        />
+                        />,
                     );
                 }
             });

@@ -74,7 +74,7 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml= await newElementBefore('<sibling />')(xml, ['item', '$$', '0']);
+        const newXml = await newElementBefore('<sibling />')(xml, ['item', '$$', '0']);
         expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"sibling"},{"#name":"child1"}],"#name":"item"}}');
     });
 
@@ -87,7 +87,7 @@ describe('Modify XML functions', () => {
                 '#name': 'item',
             },
         };
-        const newXml= await newElementAfter('<sibling />')(xml, ['item', '$$', '0']);
+        const newXml = await newElementAfter('<sibling />')(xml, ['item', '$$', '0']);
         expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"child1"},{"#name":"sibling"}],"#name":"item"}}');
     });
 
@@ -134,7 +134,7 @@ describe('Modify XML functions', () => {
             item: {
                 $$: [{
                     '#name': 'child1',
-                },{
+                }, {
                     '#name': 'child2',
                 }],
                 '#name': 'item',
@@ -149,7 +149,7 @@ describe('Modify XML functions', () => {
             item: {
                 $$: [{
                     '#name': 'child1',
-                },{
+                }, {
                     '#name': 'child2',
                 }],
                 '#name': 'item',
@@ -176,7 +176,7 @@ describe('Modify XML functions', () => {
             item: {
                 $$: [{
                     '#name': 'child1',
-                },{
+                }, {
                     '#name': 'child2',
                 }],
                 '#name': 'item',
@@ -190,7 +190,7 @@ describe('Modify XML functions', () => {
             item: {
                 $$: [{
                     '#name': 'child1',
-                },{
+                }, {
                     '#name': 'child2',
                 }],
                 '#name': 'item',
@@ -226,7 +226,7 @@ describe('Modify XML functions', () => {
             value: 'value',
         })(xml, ['item', '$$', '0']);
         expect(JSON.stringify(newXml)).toEqual('{"item":{"$$":[{"#name":"child1","$":{"name":"value"}}],"#name":"item"}}');
-    })
+    });
 
     test('deleteElement() should delete element', () => {
         const xml = {
@@ -261,7 +261,7 @@ describe('Modify XML functions', () => {
                 defaultValue: 'defaultValue',
                 id: ['id'],
                 xml: {},
-            })
+            }),
         );
         expect(container).toMatchSnapshot();
     });
@@ -273,7 +273,7 @@ describe('Modify XML functions', () => {
                 defaultValue: 'defaultValue',
                 id: ['id'],
                 xml: {},
-            })
+            }),
         );
         expect(container).toMatchSnapshot();
     });
@@ -281,15 +281,17 @@ describe('Modify XML functions', () => {
     test('askPicklist() should return <AskPicklist /> component', () => {
         const { container } = render(
             askPicklist([{
-                value: 'short', caption: 'short'
-            },{
-                value: 'long', caption: 'long',
+                value: 'short',
+                caption: 'short',
+            }, {
+                value: 'long',
+                caption: 'long',
             }])({
                 actions: {} as any,
                 defaultValue: '',
                 id: ['id'],
                 xml: {},
-            })
+            }),
         );
         expect(container).toMatchSnapshot();
     });

@@ -8,8 +8,8 @@ import { Actions } from '../src/types';
 describe('AskPicklist component', () => {
     test('AskPicklist renders properly', () => {
         const parameter = [{
-            value: 'short', caption: 'short'
-        },{
+            value: 'short', caption: 'short',
+        }, {
             value: 'medium', caption: 'medium',
         }, 'long'];
         const { container } = render(
@@ -18,7 +18,7 @@ describe('AskPicklist component', () => {
                 id={['id']}
                 parameter={parameter}
                 xml={{}}
-            />
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -27,8 +27,8 @@ describe('AskPicklist component', () => {
         const setXml = jest.fn();
         const showBubble = jest.fn();
         const parameter = [{
-            value: 'short', caption: 'short'
-        },{
+            value: 'short', caption: 'short',
+        }, {
             value: 'medium', caption: 'medium',
         }, 'long'];
         const { getAllByText } = render(
@@ -37,7 +37,7 @@ describe('AskPicklist component', () => {
                 id={['id']}
                 parameter={parameter}
                 xml={{}}
-            />
+            />,
         );
         fireEvent.click(getAllByText('short')[0]);
         expect(setXml).toBeCalledWith({
@@ -45,6 +45,6 @@ describe('AskPicklist component', () => {
         });
         expect(showBubble).toBeCalledWith({
             show: false,
-        })
+        });
     });
 });

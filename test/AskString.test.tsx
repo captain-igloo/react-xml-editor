@@ -14,7 +14,7 @@ describe('AskString component', () => {
                 id={['id']}
                 type={ AskStringType.SHORT }
                 xml={ {} as Xml }
-            />
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -29,7 +29,7 @@ describe('AskString component', () => {
                 id={['id']}
                 type={ AskStringType.SHORT }
                 xml={ {} as Xml }
-            />
+            />,
         );
         fireEvent.change(getByLabelText('Value'), {
             target: {

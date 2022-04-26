@@ -1,4 +1,9 @@
-import {describe, expect, jest, test} from '@jest/globals';
+import {
+    describe,
+    expect,
+    jest,
+    test,
+} from '@jest/globals';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import * as React from 'react';
 
@@ -33,7 +38,7 @@ describe('Bubble component', () => {
                 type={BubbleType.ASKER}
                 value="value"
                 xml={{}}
-            />
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -68,8 +73,8 @@ describe('Bubble component', () => {
                 top={0}
                 type={BubbleType.MENU}
                 value="value"
-                xml={{root: {'#name': 'root', $: {'attribute': 'value'}}}}
-            />
+                xml={{ root: { '#name': 'root', $: { 'attribute': 'value' } } }}
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -104,8 +109,8 @@ describe('Bubble component', () => {
                 top={0}
                 type={BubbleType.MENU}
                 value="value"
-                xml={{root: {'#name': 'root', $: {'attribute': 'value'}}}}
-            />
+                xml={{ root: { '#name': 'root', $: { 'attribute': 'value' } } }}
+            />,
         );
         fireEvent.click(getByText('Delete this attribute'));
         await waitFor(() => expect(setXml).toBeCalledWith({
@@ -145,8 +150,8 @@ describe('Bubble component', () => {
                 top={0}
                 type={BubbleType.ASKER}
                 value="value"
-                xml={{root: {'#name': 'root', $$: [{'#name': 'element'}]}}}
-            />
+                xml={{ root: { '#name': 'root', $$: [{ '#name': 'element' }] } }}
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -177,8 +182,8 @@ describe('Bubble component', () => {
                 top={0}
                 type={BubbleType.ASKER}
                 value="value"
-                xml={{root: {'#name': 'root', $$: [{'#name': 'element'}]}}}
-            />
+                xml={{ root: { '#name': 'root', $$: [{ '#name': 'element' }] } }}
+            />,
         );
         fireEvent.click(getByText('Delete'));
         await waitFor(() => expect(setXml).toBeCalledWith({
@@ -207,7 +212,7 @@ describe('Bubble component', () => {
                 type={BubbleType.ASKER}
                 value="value"
                 xml={{}}
-            />
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -227,7 +232,7 @@ describe('Bubble component', () => {
                 type={BubbleType.ASKER}
                 value="value"
                 xml={{}}
-            />
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -247,7 +252,7 @@ describe('Bubble component', () => {
                 type={BubbleType.ASKER}
                 value="value"
                 xml={{}}
-            />
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -267,7 +272,7 @@ describe('Bubble component', () => {
                 type={BubbleType.ASKER}
                 value=""
                 xml={{}}
-            />
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -280,16 +285,16 @@ describe('Bubble component', () => {
                         action: deleteElement,
                         caption: '<element />',
                         icon: 'icon.png',
-                    },{
+                    }, {
                         action: deleteElement,
                         caption: '@key="value"',
-                    },{
+                    }, {
                         action: deleteElement,
                         caption: '@key',
-                    },{
+                    }, {
                         action: deleteElement,
                         caption: '@key=""',
-                    },{
+                    }, {
                         action: deleteElement,
                         caption: '@"value"',
                     }],
@@ -309,8 +314,8 @@ describe('Bubble component', () => {
                 top={0}
                 type={BubbleType.MENU}
                 value="value"
-                xml={{root: {'#name': 'root', $$: [{'#name': 'element'}]}}}
-            />
+                xml={{ root: { '#name': 'root', $$: [{ '#name': 'element' }] } }}
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -340,8 +345,8 @@ describe('Bubble component', () => {
                 top={0}
                 type={BubbleType.MENU}
                 value="value"
-                xml={{root: {'#name': 'root', $$: [{'#name': 'element'}]}}}
-            />
+                xml={{ root: { '#name': 'root', $$: [{ '#name': 'element' }] } }}
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -360,8 +365,8 @@ describe('Bubble component', () => {
                 top={0}
                 type={BubbleType.MENU}
                 value="value"
-                xml={{root: {'#name': 'root', $: {'attribute': 'value'}}}}
-            />
+                xml={{ root: { '#name': 'root', $: { 'attribute': 'value' } } }}
+            />,
         );
         expect(container).toMatchSnapshot();
     });
@@ -381,7 +386,7 @@ describe('Bubble component', () => {
                 type={BubbleType.ASKER}
                 value="value"
                 xml={{}}
-            />
+            />,
         );
         expect(container).toMatchSnapshot();
     });
