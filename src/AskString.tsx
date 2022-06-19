@@ -30,6 +30,14 @@ export default class AskString extends React.Component<Props, State> {
         };
     }
 
+    componentDidUpdate(prevProps: Props) {
+        if (prevProps.defaultValue !== this.props.defaultValue) {
+            this.setState({
+                value: this.props.defaultValue,
+            });
+        }
+    }
+
     public render(): React.ReactNode {
         const { type } = this.props;
         return (
