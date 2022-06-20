@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AskString component asdf 1`] = `
+<div>
+  <form>
+    <textarea
+      class="textbox focusme"
+      name="val"
+    >
+      newValue
+    </textarea>
+    <div
+      class="submitline"
+    >
+      <input
+        type="submit"
+        value="OK"
+      />
+    </div>
+  </form>
+</div>
+`;
+
 exports[`AskString component ask short string renders properly 1`] = `
 <div>
   <form>

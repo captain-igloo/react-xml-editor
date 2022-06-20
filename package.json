@@ -35,6 +35,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@types/xml2js": "^0.4.9",
+    "@typescript-eslint/parser": "^5.28.0",
     "eslint": "^8.14.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-react": "^7.29.4",

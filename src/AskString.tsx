@@ -30,6 +30,15 @@ export default class AskString extends React.Component<Props, State> {
         };
     }
 
+    public componentDidUpdate(prevProps: Props) {
+        const { defaultValue } = this.props;
+        if (prevProps.defaultValue !== defaultValue) {
+            this.setState({
+                value: this.props.defaultValue,
+            });
+        }
+    }
+
     public render(): React.ReactNode {
         const { type } = this.props;
         return (
@@ -38,6 +47,8 @@ export default class AskString extends React.Component<Props, State> {
             </form>
         );
     }
+
+
 
     private getShortString(): React.ReactNode {
         const { value } = this.state;

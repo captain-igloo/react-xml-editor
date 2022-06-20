@@ -44,4 +44,27 @@ describe('AskString component', () => {
             show: false,
         });
     });
+
+    test('asdf', () => {
+        const { container, rerender } = render(
+            <AskString
+                actions={{ } as any}
+                defaultValue="defaultValue"
+                id={['id']}
+                type={ AskStringType.LONG }
+                xml={ {} as Xml }
+            />,
+        );
+        rerender(
+            <AskString
+                actions={{ } as any}
+                defaultValue="newValue"
+                id={['id']}
+                type={ AskStringType.LONG }
+                xml={ {} as Xml }
+            />,
+        );
+        expect(container).toMatchSnapshot();
+        expect(true).toBe(true);
+    });
 });
