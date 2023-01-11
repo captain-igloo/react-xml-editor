@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import XmlEditor from '../lib/XmlEditor';
-import * as Util from '../lib/Util';
-import Builder from '../lib/Builder';
-import { DocSpec } from '../lib/types';
+import XmlEditor from '../lib/src/XmlEditor';
+import * as Util from '../lib/src/Util';
+import Builder from '../lib/src/Builder';
+import { DocSpec } from '../lib/src/types';
 
 const docSpec: DocSpec = {
     elements: {

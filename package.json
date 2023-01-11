@@ -3,7 +3,7 @@
   "version": "0.10.1",
   "description": "React XML Editor",
   "repository": "https://github.com/captain-igloo/react-xml-editor",
-  "main": "lib/index.js",
+  "main": "lib/src/index.js",
   "scripts": {
     "build": "tsc --build tsconfig.json",
     "build-demo": "webpack --mode=production",
