@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default class TextNode extends React.Component<Props> {
-    private ref: React.RefObject<HTMLDivElement>;
+    private ref: React.RefObject<HTMLDivElement | null>;
 
     public constructor(props: Props) {
         super(props);

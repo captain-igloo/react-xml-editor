@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default class Attribute extends React.Component<Props> {
-    private ref: React.RefObject<HTMLSpanElement>;
+    private ref: React.RefObject<HTMLSpanElement | null>;
 
     public constructor(props: Props) {
         super(props);

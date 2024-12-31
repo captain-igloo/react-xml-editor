@@ -7,7 +7,7 @@ import XmlEditor from '../src/XmlEditor';
 
 describe('XmlEditor component', () => {
     test('xml editor renders properly', () => {
-        const ref: React.RefObject<XmlEditor> = React.createRef();
+        const ref: React.RefObject<XmlEditor | null> = React.createRef();
         const { container } = render(
             <XmlEditor
                 docSpec={{}}
@@ -19,7 +19,7 @@ describe('XmlEditor component', () => {
     });
 
     test('getXml() returns xml', () => {
-        const ref: React.RefObject<XmlEditor> = React.createRef();
+        const ref: React.RefObject<XmlEditor | null> = React.createRef();
         render(
             <XmlEditor
                 docSpec={{}}

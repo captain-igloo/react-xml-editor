@@ -66,7 +66,7 @@ const docSpec: DocSpec = {
 const xml = '<list><item label="one" type="short">text 1</item><item label="two">text 2</item><!-- ABC --></list>';
 
 export default class App extends React.Component<{}, {xml: string}> {
-    private ref: React.RefObject<XmlEditor>;
+    private ref: React.RefObject<XmlEditor | null>;
 
     public constructor(props: {}) {
         super(props);

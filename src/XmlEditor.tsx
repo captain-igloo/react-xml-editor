@@ -18,7 +18,7 @@ type DefaultProps = {
 type Props = {
     docSpec: DocSpec;
     onChange?: () => void;
-    ref: React.RefObject<XmlEditor>;
+    ref: React.RefObject<XmlEditor | null>;
     xml: string;
 } & Partial<DefaultProps>;
 

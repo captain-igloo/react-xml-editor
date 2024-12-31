@@ -17,7 +17,7 @@ interface Props {
 }
 
 export default class Element extends React.Component<Props> {
-    private ref: React.RefObject<HTMLDivElement>;
+    private ref: React.RefObject<HTMLDivElement | null>;
 
     public constructor(props: Props) {
         super(props);
