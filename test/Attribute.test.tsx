@@ -37,7 +37,7 @@ describe('Attribute component', () => {
             />,
         );
         fireEvent.click(getByText('value'));
-        expect(showBubble).toBeCalledWith({
+        expect(showBubble).toHaveBeenCalledWith({
             attribute: 'name',
             element: 'element',
             id: ['id'],
@@ -61,7 +61,7 @@ describe('Attribute component', () => {
             />,
         );
         fireEvent.click(getByText('name'));
-        expect(showBubble).toBeCalledWith({
+        expect(showBubble).toHaveBeenCalledWith({
             attribute: 'name',
             element: 'element',
             id: ['id'],

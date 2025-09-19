@@ -8,9 +8,6 @@ export interface BuilderOptions {
         sysID?: string;
     };
     headless?: boolean;
-    renderOpts?: {
-
-    };
     xmldec?: {
         encoding?: string;
         standalone?: boolean;
@@ -70,7 +67,8 @@ export default class Builder {
         });
     }
 
-    private render(element: any, obj: any) {
+    private render(element: builder.XMLElement, obj: any) {
+        console.log('OBJ', obj);
         if (Array.isArray(obj)) {
             obj.forEach((child) => {
                 if ('#name' in child) {

@@ -66,8 +66,7 @@ export default class Element extends React.Component<Props> {
             });
         }
 
-        let childrenContainer;
-        childrenContainer = (
+        const childrenContainer = (
             <React.Fragment>
                 <span className="prominentChildren"/>
                 <span className="childrenCollapsed focusable">

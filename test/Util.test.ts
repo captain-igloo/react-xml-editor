@@ -251,7 +251,7 @@ describe('Modify XML functions', () => {
             },
         };
         const newXml = deleteAttribute(xml, ['item', '$', 'name']);
-        expect(JSON.stringify(newXml)).toEqual('{\"item\":{\"$\":{},\"#name\":\"item\"}}');
+        expect(JSON.stringify(newXml)).toEqual('{"item":{"$":{},"#name":"item"}}');
     });
 
     test('askString() should return <AskString /> component', () => {

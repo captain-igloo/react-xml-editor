@@ -4,7 +4,9 @@
     "outDir": "lib",
     "strict": true,
     "sourceMap":  true,
-    "jsx": "react"
+    "jsx": "react",
+    "target": "es6",
+    "moduleResolution": "node"
   },
   "include": [ "src/*", "test/*" ]
 }

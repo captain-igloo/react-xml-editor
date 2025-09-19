@@ -113,13 +113,13 @@ describe('Bubble component', () => {
             />,
         );
         fireEvent.click(getByText('Delete this attribute'));
-        await waitFor(() => expect(setXml).toBeCalledWith({
+        await waitFor(() => expect(setXml).toHaveBeenCalledWith({
             root: {
                 '#name': 'root',
                 '$': {},
             },
         }));
-        expect(showBubble).toBeCalledWith({
+        expect(showBubble).toHaveBeenCalledWith({
             show: false,
         });
     });
@@ -186,13 +186,13 @@ describe('Bubble component', () => {
             />,
         );
         fireEvent.click(getByText('Delete'));
-        await waitFor(() => expect(setXml).toBeCalledWith({
+        await waitFor(() => expect(setXml).toHaveBeenCalledWith({
             root: {
                 '#name': 'root',
                 '$$': [],
             },
         }));
-        expect(showBubble).toBeCalledWith({
+        expect(showBubble).toHaveBeenCalledWith({
             show: false,
         });
     });

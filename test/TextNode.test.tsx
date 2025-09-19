@@ -33,7 +33,7 @@ describe('TextNode component', () => {
             />,
         );
         fireEvent.click(getByText('text'));
-        expect(showBubble).toBeCalledWith({
+        expect(showBubble).toHaveBeenCalledWith({
             element: 'element',
             id: ['id'],
             left: 0,

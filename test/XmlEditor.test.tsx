@@ -85,6 +85,6 @@ describe('XmlEditor component', () => {
         await waitFor(() => getByText('bar'));
         fireEvent.click(getByText('bar'));
         fireEvent.click(getByDisplayValue('OK'));
-        expect(onChange).toBeCalled();
+        expect(onChange).toHaveBeenCalled();
     });
 });

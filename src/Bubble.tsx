@@ -21,7 +21,7 @@ interface Props {
 const formatCaption = (caption: string) => {
     let key = 1;
     return caption.split(/((?:<\/?[^>]+\/?>)|(?:@[^ =]+(?:="[^"]*")?))/).map((piece) => {
-        const elementMatches = piece.match(/<(\/?)([^>\/]+)(\/?)>/);
+        const elementMatches = piece.match(/<(\/?)([^>/]+)(\/?)>/);
         const attrMatches = piece.match(/@(?:([^ ="]+))?=?(?:"([^"]*)")?/);
         if (elementMatches) {
             return (

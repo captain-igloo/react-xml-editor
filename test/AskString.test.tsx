@@ -37,10 +37,10 @@ describe('AskString component', () => {
             },
         });
         fireEvent.click(getByDisplayValue('OK'));
-        expect(setXml).toBeCalledWith({
+        expect(setXml).toHaveBeenCalledWith({
             id: 'new value',
         });
-        expect(showBubble).toBeCalledWith({
+        expect(showBubble).toHaveBeenCalledWith({
             show: false,
         });
     });

@@ -40,10 +40,10 @@ describe('AskPicklist component', () => {
             />,
         );
         fireEvent.click(getAllByText('short')[0]);
-        expect(setXml).toBeCalledWith({
+        expect(setXml).toHaveBeenCalledWith({
             id: 'short',
         });
-        expect(showBubble).toBeCalledWith({
+        expect(showBubble).toHaveBeenCalledWith({
             show: false,
         });
     });
