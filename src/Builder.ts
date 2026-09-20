@@ -1,6 +1,6 @@
 import * as builder from 'xmlbuilder';
 
-import { Xml } from './types';
+import { Element, Xml } from './types';
 
 export interface BuilderOptions {
     doctype?: {
@@ -67,28 +67,31 @@ export default class Builder {
         });
     }
 
-    private render(element: builder.XMLElement, obj: any) {
-        console.log('OBJ', obj);
+    private render(element: builder.XMLElement, obj: Element | Element[]) {
         if (Array.isArray(obj)) {
             obj.forEach((child) => {
                 if ('#name' in child) {
                     if (child['#name'] === this.textKey) {
-                        element = element.txt(child[this.charKey]);
+                        if (child._ !== undefined) {
+                            element = element.txt(child._);
+                        }
                     } else {
                         element = this.render(element.ele(child['#name']), child).up();
                     }
                 }
             });
         } else {
-            if (this.attrKey in obj) {
-                const child = obj[this.attrKey];
-                Object.keys(child).forEach((attr) => {
-                    const value = child[attr];
-                    element = element.att(attr, value);
-                });
+            if ('$' in obj) {
+                const child = obj.$;
+                if (child !== undefined) {
+                    Object.keys(child).forEach((attr) => {
+                        const value = child[attr];
+                        element = element.att(attr, value);
+                    });
+                }
             }
-            if (this.childKey in obj) {
-                const child = obj[this.childKey];
+            if ('$$' in obj) {
+                const child = obj.$$;
                 if (Array.isArray(child)) {
                     element = this.render(element, child);
                 }

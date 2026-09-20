@@ -37,9 +37,8 @@ const modifyElement = (xml: Xml, id: string[], modifier: (xml: Element[], arrayI
 
 export const getXmlNode = (xml: any, id: string[]): any => {
     if (id.length > 1) {
-        const idClone = id.slice(0);
-        const first = idClone.splice(0, 1);
-        return getXmlNode(xml[first[0]], idClone);
+        const [first, ...rest] = id;
+        return getXmlNode(xml[first], rest);
     }
     return xml[id[0]];
 };
@@ -51,7 +50,7 @@ export const deleteNode = (xml: Xml, id: string[]) => {
         if (Array.isArray(parent)) {
             parent.splice(parseInt(nodeKey[0], 10), 1);
         } else {
-            delete (parent as any)[nodeKey[0]];
+            delete parent[nodeKey[0] as keyof Element];
         }
         return parent;
     });
@@ -159,9 +158,7 @@ export const newAttribute = (parameter: { name: string; value: string }) =>
             return parent;
         });
 
-export const deleteElement = (xml: Xml, id: string[]) => {
-    return deleteNode(xml, id);
-};
+export const deleteElement = (xml: Xml, id: string[]) => deleteNode(xml, id);
 
 export const deleteAttribute = (xml: Xml, id: string[]) => deleteNode(xml, id);
 
